@@ -1,6 +1,6 @@
 #include <Windows.h>
 
-#pragma region C++/CLI での Windows アプリケーションのエントリポイント。
+#pragma region C++/CLI Windows アプリケーションのエントリポイント
 /// <summary>
 /// C++/CLI での Windows アプリケーションのエントリポイント。
 /// </summary>
@@ -15,5 +15,3 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	return 0;
 }
 #pragma endregion
-
-
