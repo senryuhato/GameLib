@@ -25,17 +25,110 @@
     <Filter Include="GameXLib\System\Private">
       <UniqueIdentifier>{46239d13-4045-4ebd-b079-a3860e410a3c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameXLib\ImGui">
+      <UniqueIdentifier>{09c8d9c9-f8ac-4557-97f8-e711545e17a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameXLib\ImGui\imgui-docking">
+      <UniqueIdentifier>{f07f1f1b-131d-4f72-9b1b-96bc0b2b43ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameXLib\ImGui\Classes">
+      <UniqueIdentifier>{2879df50-5c96-4b5e-be4f-af9be30cf0d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameXLib\ImGui\Private">
+      <UniqueIdentifier>{de15ea3f-ca82-4846-91df-23e6779591d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameXLib\Graphics">
+      <UniqueIdentifier>{b4da4ee3-332e-431f-8621-2f1e340c5542}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameXLib\Graphics\Private">
+      <UniqueIdentifier>{801ba2da-263c-4ba6-83dc-5cb0cdac3bd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameXLib\Graphics\Classes">
+      <UniqueIdentifier>{5e0c8f87-a7e6-428f-9601-3bfa09a65928}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameXLib\WinMain.cpp">
+    <ClCompile Include="Source\WinMain.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\System\Private\Framework.cpp">
+      <Filter>GameXLib\System\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\ImGui\imgui-docking\imgui.cpp">
+      <Filter>GameXLib\ImGui\imgui-docking</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\ImGui\imgui-docking\imgui_draw.cpp">
+      <Filter>GameXLib\ImGui\imgui-docking</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\ImGui\imgui-docking\imgui_impl_dx11.cpp">
+      <Filter>GameXLib\ImGui\imgui-docking</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\ImGui\imgui-docking\imgui_impl_win32.cpp">
+      <Filter>GameXLib\ImGui\imgui-docking</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\ImGui\imgui-docking\imgui_ja_gryph_ranges.cpp">
+      <Filter>GameXLib\ImGui\imgui-docking</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\ImGui\imgui-docking\imgui_widgets.cpp">
+      <Filter>GameXLib\ImGui\imgui-docking</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\ImGui\Private\ImGuiManager.cpp">
+      <Filter>GameXLib\ImGui\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\Graphics\Private\GraphicsManager.cpp">
+      <Filter>GameXLib\Graphics\Private</Filter>
     </ClCompile>
     <ClCompile Include="GameXLib\System\Private\GameXLib.cpp">
       <Filter>GameXLib\System\Private</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameXLib\System\Classes\Framework.h">
+      <Filter>GameXLib\System\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ImGui\imgui-docking\imconfig.h">
+      <Filter>GameXLib\ImGui\imgui-docking</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ImGui\imgui-docking\imgui.h">
+      <Filter>GameXLib\ImGui\imgui-docking</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ImGui\imgui-docking\imgui_impl_dx11.h">
+      <Filter>GameXLib\ImGui\imgui-docking</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ImGui\imgui-docking\imgui_impl_win32.h">
+      <Filter>GameXLib\ImGui\imgui-docking</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ImGui\imgui-docking\imgui_internal.h">
+      <Filter>GameXLib\ImGui\imgui-docking</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ImGui\imgui-docking\imstb_rectpack.h">
+      <Filter>GameXLib\ImGui\imgui-docking</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ImGui\imgui-docking\imstb_textedit.h">
+      <Filter>GameXLib\ImGui\imgui-docking</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ImGui\imgui-docking\imstb_truetype.h">
+      <Filter>GameXLib\ImGui\imgui-docking</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ImGui\imGuiDX11.h">
+      <Filter>GameXLib\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ImGui\Classes\ImGuiManager.h">
+      <Filter>GameXLib\ImGui\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\Graphics\Classes\GraphicsManager.h">
+      <Filter>GameXLib\Graphics\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\System\Private\Misc.h">
+      <Filter>GameXLib\System\Private</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\System\Classes\HighResolutionTimer.h">
+      <Filter>GameXLib\System\Classes</Filter>
+    </ClInclude>
     <ClInclude Include="GameXLib\System\Classes\GameXLib.h">
+      <Filter>GameXLib\System\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\System\Classes\ServiceLocator.h">
       <Filter>GameXLib\System\Classes</Filter>
     </ClInclude>
   </ItemGroup>

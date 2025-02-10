@@ -19,11 +19,35 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GameXLib\Graphics\Private\GraphicsManager.cpp" />
+    <ClCompile Include="GameXLib\ImGui\imgui-docking\imgui.cpp" />
+    <ClCompile Include="GameXLib\ImGui\imgui-docking\imgui_draw.cpp" />
+    <ClCompile Include="GameXLib\ImGui\imgui-docking\imgui_impl_dx11.cpp" />
+    <ClCompile Include="GameXLib\ImGui\imgui-docking\imgui_impl_win32.cpp" />
+    <ClCompile Include="GameXLib\ImGui\imgui-docking\imgui_ja_gryph_ranges.cpp" />
+    <ClCompile Include="GameXLib\ImGui\imgui-docking\imgui_widgets.cpp" />
+    <ClCompile Include="GameXLib\ImGui\Private\ImGuiManager.cpp" />
+    <ClCompile Include="GameXLib\System\Private\Framework.cpp" />
     <ClCompile Include="GameXLib\System\Private\GameXLib.cpp" />
-    <ClCompile Include="GameXLib\WinMain.cpp" />
+    <ClCompile Include="Source\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameXLib\Graphics\Classes\GraphicsManager.h" />
+    <ClInclude Include="GameXLib\ImGui\Classes\ImGuiManager.h" />
+    <ClInclude Include="GameXLib\ImGui\imgui-docking\imconfig.h" />
+    <ClInclude Include="GameXLib\ImGui\imgui-docking\imgui.h" />
+    <ClInclude Include="GameXLib\ImGui\imgui-docking\imgui_impl_dx11.h" />
+    <ClInclude Include="GameXLib\ImGui\imgui-docking\imgui_impl_win32.h" />
+    <ClInclude Include="GameXLib\ImGui\imgui-docking\imgui_internal.h" />
+    <ClInclude Include="GameXLib\ImGui\imgui-docking\imstb_rectpack.h" />
+    <ClInclude Include="GameXLib\ImGui\imgui-docking\imstb_textedit.h" />
+    <ClInclude Include="GameXLib\ImGui\imgui-docking\imstb_truetype.h" />
+    <ClInclude Include="GameXLib\ImGui\imGuiDX11.h" />
+    <ClInclude Include="GameXLib\System\Classes\Framework.h" />
     <ClInclude Include="GameXLib\System\Classes\GameXLib.h" />
+    <ClInclude Include="GameXLib\System\Classes\HighResolutionTimer.h" />
+    <ClInclude Include="GameXLib\System\Classes\ServiceLocator.h" />
+    <ClInclude Include="GameXLib\System\Private\Misc.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -100,6 +124,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>d3d11.lib;dxgi.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -116,6 +141,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>d3d11.lib;dxgi.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -128,6 +154,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>d3d11.lib;dxgi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -144,6 +171,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>d3d11.lib;dxgi.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
