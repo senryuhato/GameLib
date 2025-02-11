@@ -29,6 +29,9 @@
     <ClCompile Include="GameXLib\ImGui\Private\ImGuiManager.cpp" />
     <ClCompile Include="GameXLib\System\Private\Framework.cpp" />
     <ClCompile Include="GameXLib\System\Private\GameXLib.cpp" />
+    <ClCompile Include="GameXLib\System\Private\System.cpp" />
+    <ClCompile Include="Source\GameFramework.cpp" />
+    <ClCompile Include="Source\TimeManager.cpp" />
     <ClCompile Include="Source\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -46,9 +49,11 @@
     <ClInclude Include="GameXLib\System\Classes\Framework.h" />
     <ClInclude Include="GameXLib\System\Classes\GameXLib.h" />
     <ClInclude Include="GameXLib\System\Classes\HighResolutionTimer.h" />
-    <ClInclude Include="GameXLib\System\Classes\ServiceLocator.h" />
+    <ClInclude Include="GameXLib\System\Classes\SystemServiceLocator.h" />
     <ClInclude Include="GameXLib\System\Private\Misc.h" />
     <ClInclude Include="Source\GameFramework.h" />
+    <ClInclude Include="Source\GameServiceLocator.h" />
+    <ClInclude Include="Source\TimeManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

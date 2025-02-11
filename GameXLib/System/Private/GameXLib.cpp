@@ -1,10 +1,10 @@
 #include <sstream>
-
 #include "../Classes/GameXLib.h"
-#include "../Classes/ServiceLocator.h"
-
-// クラス外部で定義
-std::unordered_map<std::type_index, std::shared_ptr<void>> ServiceLocator::services;
+#include "../Classes/SystemServiceLocator.h"
+#include "../Classes/Framework.h"
+#include "../Classes/HighResolutionTimer.h"
+#include "../../ImGui/Classes/ImGuiManager.h"
+#include "../../Graphics/Classes/GraphicsManager.h"
 
 #pragma region コンストラクタ
 /// <summary>
@@ -70,14 +70,14 @@ bool GameXLib::Initialize(
 	}
 
 	// DirectXの初期化
-	std::shared_ptr<GraphicsManager> graphicsManager = ServiceLocator::GetService<GraphicsManager>();
-	if (!isSuccess || !graphicsManager || !graphicsManager->Initialize(hwnd))
+	std::shared_ptr<GraphicsManager> graphicsManager = SystemServiceLocator::GetService<GraphicsManager>();
+	if (!isSuccess || !graphicsManager || !graphicsManager->Initialize(hwnd, DEFAULT_FRAMERATE, FULSCREEN_NO))
 	{
 		isSuccess = false;
 	}
 
 	// ImGuiの初期化
-	std::shared_ptr<ImGuiManager> imguiManager = ServiceLocator::GetService<ImGuiManager>();
+	std::shared_ptr<ImGuiManager> imguiManager = SystemServiceLocator::GetService<ImGuiManager>();
 	if (!isSuccess || !imguiManager || !imguiManager->Initialize(hwnd, graphicsManager->GetDevice(), graphicsManager->GetDeviceContext()))
 	{
 		isSuccess = false;
@@ -102,13 +102,13 @@ void GameXLib::Uninitialize(
 	_In_ HINSTANCE instance)
 {
 	// ImGuiの終了処理
-	std::shared_ptr<ImGuiManager> imguiManager = ServiceLocator::GetService<ImGuiManager>();
+	std::shared_ptr<ImGuiManager> imguiManager = SystemServiceLocator::GetService<ImGuiManager>();
 	if (imguiManager)
 	{
 		imguiManager->Uninitialize();
 	}
 	// DirectXの解放
-	std::shared_ptr<GraphicsManager> graphicsManager = ServiceLocator::GetService<GraphicsManager>();
+	std::shared_ptr<GraphicsManager> graphicsManager = SystemServiceLocator::GetService<GraphicsManager>();
 	if (graphicsManager)
 	{
 		graphicsManager->Uninitialize();
@@ -125,15 +125,90 @@ void GameXLib::Uninitialize(
 /// <summary>
 /// ゲームループ
 /// </summary>
-/// <returns></returns>
+/// <returns>結果</returns>
 int GameXLib::Run()
 {
-	std::shared_ptr<Framework> framework = ServiceLocator::GetService<Framework>();
-	if (framework)
+	std::shared_ptr<Framework> framework = SystemServiceLocator::GetService<Framework>();
+	std::shared_ptr<HighResolutionTimer> highResolutionTimer = SystemServiceLocator::GetService<HighResolutionTimer>();
+
+	if (framework && highResolutionTimer)
 	{
-		return framework->Run(hwnd);
+		// タイマーリセット
+		highResolutionTimer->Reset();
+		// ゲーム初期化処理
+		framework->Initialize();
+		// ゲームループ
+		while (DispatchWindowMessage())
+		{
+			// タイマー更新
+			highResolutionTimer->Tick();
+			// ヘッダーにFPSを表示するか
+			if (isShowFrameRate)
+			{
+				// ヘッダーにFPSを表示する
+				CalculateFrameStats(highResolutionTimer->TimeStamp());
+			}
+			// ゲーム処理
+			framework->Run();
+		}
+		// ゲーム終了処理
+		framework->Uninitialize();
+		return 0;
 	}
 	return -1;
+}
+#pragma endregion
+
+#pragma region ウィンドウメッセージをディスパッチ
+/// <summary>
+/// ウィンドウメッセージをディスパッチ。
+/// falseが返ってきたら、ゲーム終了。
+/// </summary>
+/// <returns>結果</returns>
+bool GameXLib::DispatchWindowMessage()
+{
+	MSG msg = { 0 };
+	//ウィンドウからのメッセージを受け取る。
+	while (PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE))
+	{
+		if (msg.message == WM_QUIT) return false;
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+
+	//ウィンドウメッセージが空になった。
+	return true;
+}
+#pragma endregion
+
+#pragma region FPS計算
+/// <summary>
+/// FPS計算
+/// </summary>
+/// <param name="timeStamp">経過した合計時間</param>
+void GameXLib::CalculateFrameStats(float timeStamp)
+{
+	// CalculateFrameStats フレームレート計算
+	// 1秒当たりの平均のフレーム数を計算し、
+	// これらの結果はウィンドウのキャプションバーに追加されます。
+	// 1フレームをレンダリングするのにかかる平均時間を算出します。
+	static int frames = 0;
+	static float time_tlapsed = 0.0f;
+
+	// 1秒間のFPSを算出
+	if ((++frames, timeStamp - time_tlapsed) >= 1.0f)
+	{
+		float fps = static_cast<float>(frames); // fps = frameCnt / 1
+		float mspf = 1000.0f / fps;
+		std::ostringstream outs;
+		outs.precision(6);
+		outs << "FPS : " << fps << " / " << "Frame Time : " << mspf << " (ms)";
+		SetWindowTextA(hwnd, outs.str().c_str());
+
+		// 次の平均にリセットします。
+		frames = 0;
+		time_tlapsed += 1.0f;
+	}
 }
 #pragma endregion
 
@@ -145,21 +220,14 @@ void GameXLib::RegisterServices()
 {
 	// 各種マネージャーの登録
 	// すでに登録されている場合は登録しない
-	std::shared_ptr<Framework> framework = ServiceLocator::GetService<Framework>();
-	if (!framework)
-	{
-		ServiceLocator::RegisterService(std::make_shared<Framework>());
-	}
-	std::shared_ptr<GraphicsManager> graphicsManager = ServiceLocator::GetService<GraphicsManager>();
-	if (!graphicsManager)
-	{
-		ServiceLocator::RegisterService(std::make_shared<GraphicsManager>());
-	}
-	std::shared_ptr<ImGuiManager> imguiManager = ServiceLocator::GetService<ImGuiManager>();
-	if (!imguiManager)
-	{
-		ServiceLocator::RegisterService(std::make_shared<ImGuiManager>());
-	}
+	// ゲームループ
+	SystemServiceLocator::RegisterServiceIfNotExists(std::make_shared<Framework>());
+	// DirectX
+	SystemServiceLocator::RegisterServiceIfNotExists(std::make_shared<GraphicsManager>());
+	// ImGui
+	SystemServiceLocator::RegisterServiceIfNotExists(std::make_shared<ImGuiManager>());
+	// タイマー
+	SystemServiceLocator::RegisterServiceIfNotExists(std::make_shared<HighResolutionTimer>());
 }
 #pragma endregion
 
@@ -179,8 +247,8 @@ LRESULT CALLBACK GameXLib::WindowProcedure(
 	_In_ LPARAM lParam)
 {
 	// サービスロケータから imguiManager と framework を取得
-	std::shared_ptr<ImGuiManager> imguiManager = ServiceLocator::GetService<ImGuiManager>();
-	std::shared_ptr<Framework> framework = ServiceLocator::GetService<Framework>();
+	std::shared_ptr<ImGuiManager> imguiManager = SystemServiceLocator::GetService<ImGuiManager>();
+	std::shared_ptr<Framework> framework = SystemServiceLocator::GetService<Framework>();
 
 	if (imguiManager)
 	{

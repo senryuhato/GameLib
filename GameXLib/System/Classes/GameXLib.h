@@ -1,7 +1,5 @@
 #pragma once
-#include "Framework.h"
-#include "../../ImGui/Classes/ImGuiManager.h"
-#include "../../Graphics/Classes/GraphicsManager.h"
+#include <Windows.h>
 
 /// <summary>
 /// ゲーム全体を管理するライブラリクラス。
@@ -49,9 +47,6 @@ public:
 	/// <returns></returns>
 	int Run();
 
-public:
-	HWND hwnd = nullptr;
-
 private:
 	/// <summary>
 	/// コンストラクタ
@@ -67,6 +62,19 @@ private:
 	/// マネージャーの登録
 	/// </summary>
 	void RegisterServices();
+
+	/// <summary>
+	/// ウィンドウメッセージをディスパッチ。
+	/// falseが返ってきたら、ゲーム終了。
+	/// </summary>
+	/// <returns></returns>
+	bool DispatchWindowMessage();
+
+	/// <summary>
+	/// FPS計算
+	/// </summary>
+    /// <param name="timeStamp">経過した合計時間</param>
+	void CalculateFrameStats(float timeStamp);
 
 	/// <summary>
 	/// ウィンドウメッセージを処理するコールバック関数（Win32 API 用）
@@ -116,5 +124,9 @@ private:
 		_In_ LPCWSTR windowTitle,
 		_In_ DWORD windowStyle = WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME | WS_VISIBLE);
 private:
+	HWND hwnd = nullptr; // ウィンドウハンドル
+	bool isShowFrameRate = true; // フレームレートを表示させるか
 	const LPCWSTR CLASS_NAME = L"GameProject"; // window名
+	const UINT DEFAULT_FRAMERATE = 60; // リフレッシュレート
+	const BOOL FULSCREEN_NO = false;
 };

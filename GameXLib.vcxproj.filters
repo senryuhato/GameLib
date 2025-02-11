@@ -46,6 +46,9 @@
     <Filter Include="GameXLib\Graphics\Classes">
       <UniqueIdentifier>{5e0c8f87-a7e6-428f-9601-3bfa09a65928}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameXLib\DirectX">
+      <UniqueIdentifier>{4dcc1cda-6b55-42ac-b738-0299a613be9c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\WinMain.cpp">
@@ -80,6 +83,15 @@
     </ClCompile>
     <ClCompile Include="GameXLib\System\Private\GameXLib.cpp">
       <Filter>GameXLib\System\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameFramework.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\System\Private\System.cpp">
+      <Filter>GameXLib\System\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TimeManager.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -128,10 +140,16 @@
     <ClInclude Include="GameXLib\System\Classes\GameXLib.h">
       <Filter>GameXLib\System\Classes</Filter>
     </ClInclude>
-    <ClInclude Include="GameXLib\System\Classes\ServiceLocator.h">
+    <ClInclude Include="GameXLib\System\Classes\SystemServiceLocator.h">
       <Filter>GameXLib\System\Classes</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameFramework.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameServiceLocator.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TimeManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

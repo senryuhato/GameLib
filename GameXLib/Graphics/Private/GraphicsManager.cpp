@@ -7,11 +7,15 @@
 /// </summary>
 /// <param name="hwnd">ウィンドウハンドル</param>
 /// <param name="defultFramerate">目標フレームレート（デフォルト: 60）</param>
+/// <param name="isFullscreen">フルスクリーンの設定。true:フルスクリーン、false:通常</param>
 /// <returns>結果</returns>
 bool GraphicsManager::Initialize(
-	HWND hwnd, 
-	UINT defaultFramerate)
+	HWND hwnd,
+	UINT defaultFramerate,
+	BOOL isFullscreen)
 {
+	// フレームレートの設定
+	this->defaultFramerate = defaultFramerate;
 	// 画面のサイズを取得する。
 	RECT rc;
 	GetClientRect(hwnd, &rc);
@@ -19,25 +23,27 @@ bool GraphicsManager::Initialize(
 	frameBufferHeight = rc.bottom - rc.top;
 
 	// デバイス＆スワップチェインの作成
-	CreateDeviceAndSwapChain(hwnd, frameBufferWidth, frameBufferHeight, defaultFramerate);
+	CreateDeviceAndSwapChain(hwnd, frameBufferWidth, frameBufferHeight, defaultFramerate, isFullscreen);
 	// フレームバッファ用RTVの作成
 	CreateRTVForFrameBuffer();
 	// フレームバッファ用DSVの作成
 	CreateDSVForFrameBuffer(frameBufferWidth, frameBufferHeight);
 
 	// ビューポートの設定
+	D3D11_VIEWPORT viewport = {};
 	viewport.TopLeftX = 0;
 	viewport.TopLeftY = 0;
 	viewport.Width = static_cast<FLOAT>(frameBufferWidth);
 	viewport.Height = static_cast<FLOAT>(frameBufferHeight);
 	viewport.MinDepth = 0.0f;
 	viewport.MaxDepth = 1.0f;
+	immediateContext->RSSetViewports(1, &viewport);
 
 	return true;
 }
 #pragma endregion
 
-#pragma region MyRegion
+#pragma region DirectX のリソースを解放
 /// <summary>
 /// DirectX のリソースを解放
 /// </summary>
@@ -64,11 +70,13 @@ void GraphicsManager::Uninitialize()
 /// <param name="frameBufferWidth">フレームバッファの幅</param>
 /// <param name="frameBufferHeight">フレームバッファの高さ</param>
 /// <param name="defaultFramerate">目標フレームレート</param>
+/// <param name="isFullscreen">フルスクリーンの設定。true:フルスクリーン、false:通常</param>
 void GraphicsManager::CreateDeviceAndSwapChain(
-	HWND hwnd, 
-	UINT frameBufferWidth, 
-	UINT frameBufferHeight, 
-	UINT defaultFramerate)
+	HWND hwnd,
+	UINT frameBufferWidth,
+	UINT frameBufferHeight,
+	UINT defaultFramerate,
+	BOOL isFullscreen)
 {
 	HRESULT hr = S_OK;
 
@@ -99,7 +107,7 @@ void GraphicsManager::CreateDeviceAndSwapChain(
 		swapChainDesc.BufferCount = 1; // バックバッファの数
 		swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT; // レンダリングターゲットとして使う
 		swapChainDesc.OutputWindow = hwnd; // DirectXで書いた画を表示するウィンドウ
-		swapChainDesc.Windowed = true; // ウィンドウモードか、フルスクリーンにするか。
+		swapChainDesc.Windowed = !isFullscreen; // ウィンドウモードか、フルスクリーンにするか。
 	}
 
 	D3D_FEATURE_LEVEL featureLevel{};
@@ -130,7 +138,7 @@ void GraphicsManager::CreateDeviceAndSwapChain(
 /// </summary>
 void GraphicsManager::CreateRTVForFrameBuffer()
 {
-	HRESULT hr= S_OK;
+	HRESULT hr = S_OK;
 
 	// スワップチェーンからバックバッファテクスチャを取得する。
 	// ※スワップチェーンに内包されているバックバッファテクスチャは'色'を書き込むテクスチャ。
@@ -152,7 +160,7 @@ void GraphicsManager::CreateRTVForFrameBuffer()
 /// <param name="frameBufferWidth">フレームバッファの幅</param>
 /// <param name="frameBufferHeight">フレームバッファの高さ</param>
 void GraphicsManager::CreateDSVForFrameBuffer(
-	UINT frameBufferWidth, 
+	UINT frameBufferWidth,
 	UINT frameBufferHeight)
 {
 	HRESULT hr = S_OK;

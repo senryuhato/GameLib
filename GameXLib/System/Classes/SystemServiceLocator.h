@@ -6,7 +6,7 @@
 /// <summary>
 /// サービスロケーターパターンを実装したクラス
 /// </summary>
-class ServiceLocator
+class SystemServiceLocator
 {
 public:
     /// <summary>
@@ -21,6 +21,24 @@ public:
     }
 
     /// <summary>
+    /// 新しいサービスを登録（既に登録されている場合は登録しない）
+    /// </summary>
+    /// <typeparam name="T">登録するサービスの型</typeparam>
+    /// <param name="service">登録するサービスのインスタンス（shared_ptr）</param>
+    /// <returns>結果</returns>
+    template<typename T>
+    static bool RegisterServiceIfNotExists(std::shared_ptr<T> service)
+    {
+        std::shared_ptr<T> obj = GetService<T>();
+        if (obj)
+        {
+            return false;
+        }
+        RegisterService<T>(service);
+        return true;
+    }
+
+    /// <summary>
     /// 登録されたサービスを取得する。(基底クラス型で取得してダウンキャスト)
     /// </summary>
     /// <typeparam name="T">取得するサービスの型</typeparam>
@@ -31,9 +49,7 @@ public:
         return std::static_pointer_cast<T>(services[std::type_index(typeid(T))]);
     }
 
-    static std::unordered_map<std::type_index, std::shared_ptr<void>> services;
-
 private:
     // 登録されたサービスを保持するコンテナ。
-    
+    static std::unordered_map<std::type_index, std::shared_ptr<void>> services;
 };

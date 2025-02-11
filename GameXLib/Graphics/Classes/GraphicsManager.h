@@ -23,10 +23,12 @@ public:
 	/// </summary>
 	/// <param name="hwnd">ウィンドウハンドル</param>
 	/// <param name="defaultFramerate">目標フレームレート（デフォルト: 60）</param>
+	/// <param name="isFullscreen">フルスクリーンの設定。（デフォルト: false）true:フルスクリーン、false:通常</param>
 	/// <returns>結果</returns>
 	bool Initialize(
 		HWND hwnd, 
-		UINT defaultFramerate = 60);
+		UINT defaultFramerate = 60,
+		BOOL isFullscreen = false);
 
 	/// <summary>
 	/// DirectX のリソースを解放
@@ -46,6 +48,24 @@ public:
 	/// <returns>ID3D11DeviceContext のポインタ</returns>
 	ID3D11DeviceContext* GetDeviceContext() const { return immediateContext.Get(); }
 
+	/// <summary>
+    /// スワップチェインを取得
+    /// </summary>
+    /// <returns>IDXGISwapChain のポインタ</returns>
+	IDXGISwapChain* GetSwapChain() const { return swapChain.Get(); }
+
+	/// <summary>
+	/// フレームバッファ用レンダーターゲットビューを取得
+	/// </summary>
+	/// <returns>ID3D11RenderTargetView のポインタ</returns>
+	ID3D11RenderTargetView* GetRenderTargetView() const { return renderTargetView.Get(); }
+
+	/// <summary>
+	/// フレームバッファ用デプスステンシルビューを取得
+	/// </summary>
+	/// <returns>ID3D11DepthStencilView のポインタ</returns>
+	ID3D11DepthStencilView* GetDepthStencilView() const { return depthStencilView.Get(); }
+
 private:
 	/// <summary>
 	/// デバイス＆スワップチェインの作成
@@ -53,12 +73,13 @@ private:
 	/// <param name="hwnd">ウィンドウハンドル</param>
 	/// <param name="frameBufferWidth">フレームバッファの幅</param>
 	/// <param name="frameBufferHeight">フレームバッファの高さ</param>
-	/// <param name="defaultFramerate">目標フレームレート</param>
+	/// <param name="isFullscreen">フルスクリーンの設定。true:フルスクリーン、false:通常</param>
 	void CreateDeviceAndSwapChain(
 		HWND hwnd, 
 		UINT frameBufferWidth, 
 		UINT frameBufferHeight, 
-		UINT defaultFramerate);
+		UINT defaultFramerate,
+		BOOL isFullscreen);
 
 	/// <summary>
 	/// レームバッファ用のレンダーターゲットビュー（RTV）を作成
@@ -86,14 +107,10 @@ private:
 	// フレームバッファ用デプスステンシルビュー
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilView>  depthStencilView = nullptr;
 
-	// 垂直同期設定（0: 無効, 1: 有効）
-	UINT syncInterval = 0; 
 	//フレームバッファの幅
 	UINT frameBufferWidth = 0; 
 	//フレームバッファの高さ
 	UINT frameBufferHeight = 0;
-	// 全画面ビューポート
-	D3D11_VIEWPORT viewport;
-	// クリアカラー
-	FLOAT refreshColor[4] = { 0.2f, 0.2f, 0.2f, 1.0f };
+	// 初期フレームレート
+	UINT defaultFramerate = 60;
 };

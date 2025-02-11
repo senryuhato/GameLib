@@ -1,7 +1,5 @@
 #pragma once
-#include "HighResolutionTimer.h"
-#include "../../ImGui/Classes/ImGuiManager.h"
-#include "../../Graphics/Classes/GraphicsManager.h"
+#include <Windows.h>
 
 /// <summary>
 /// ゲームの基盤を提供するフレームワーククラス
@@ -15,10 +13,19 @@ public:
 	virtual ~Framework() = default;
 
 	/// <summary>
+	/// 初期化処理
+	/// </summary>
+	virtual void Initialize() {}
+
+	/// <summary>
+	/// 終了処理
+	/// </summary>
+	virtual void Uninitialize() {}
+
+	/// <summary>
 	/// ゲームループ
 	/// </summary>
-	/// <returns></returns>
-	int Run(HWND hwnd);
+	virtual void Run() {}
 
 	/// <summary>
 	/// ウィンドウメッセージを処理するメンバ関数（クラス内のメッセージ処理）
@@ -33,13 +40,4 @@ public:
 		_In_ UINT msg,
 		_In_ WPARAM wparam,
 		_In_ LPARAM lParam);
-
-private:
-	/// <summary>
-    /// FPS計算
-    /// </summary>
-	void CalculateFrameStats(HWND hwnd);
-
-private:
-	HighResolutionTimer highResolutionTimer; // // フレームワーク用タイマー
 };
