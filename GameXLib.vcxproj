@@ -48,6 +48,7 @@
     <ClInclude Include="GameXLib\System\Classes\HighResolutionTimer.h" />
     <ClInclude Include="GameXLib\System\Classes\ServiceLocator.h" />
     <ClInclude Include="GameXLib\System\Private\Misc.h" />
+    <ClInclude Include="Source\GameFramework.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

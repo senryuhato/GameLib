@@ -10,6 +10,11 @@ class Framework
 {
 public:
 	/// <summary>
+	/// デストラクタ
+	/// </summary>
+	virtual ~Framework() = default;
+
+	/// <summary>
 	/// ゲームループ
 	/// </summary>
 	/// <returns></returns>

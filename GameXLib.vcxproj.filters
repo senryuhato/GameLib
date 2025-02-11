@@ -131,5 +131,8 @@
     <ClInclude Include="GameXLib\System\Classes\ServiceLocator.h">
       <Filter>GameXLib\System\Classes</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameFramework.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,4 +1,6 @@
 #include "..\GameXLib\System\Classes\GameXLib.h"
+#include "../GameXLib/System/Classes/ServiceLocator.h"
+#include "../Source/GameFramework.h"
 
 #pragma region C++/CLI Windows アプリケーションのエントリポイント
 /// <summary>
@@ -12,7 +14,11 @@
 int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
 {
 	GameXLib& gameXLib = GameXLib::GetInstance();
-	if (gameXLib.Initialize(hInstance, nShowCmd, 1280, 720, L"ゲームプロジェクト"))
+	// ゲームフレームワークの登録
+	std::shared_ptr<GameFramework> framework = std::make_shared<GameFramework>();
+	ServiceLocator::RegisterService<Framework>(framework);
+
+	if (!gameXLib.Initialize(hInstance, nShowCmd, 1280, 720, L"ゲームプロジェクト"))
 	{
 		return -1;
 	}

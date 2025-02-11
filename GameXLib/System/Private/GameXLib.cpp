@@ -3,6 +3,9 @@
 #include "../Classes/GameXLib.h"
 #include "../Classes/ServiceLocator.h"
 
+// クラス外部で定義
+std::unordered_map<std::type_index, std::shared_ptr<void>> ServiceLocator::services;
+
 #pragma region コンストラクタ
 /// <summary>
 /// コンストラクタ
@@ -126,7 +129,7 @@ void GameXLib::Uninitialize(
 int GameXLib::Run()
 {
 	std::shared_ptr<Framework> framework = ServiceLocator::GetService<Framework>();
-	if (!framework)
+	if (framework)
 	{
 		return framework->Run(hwnd);
 	}
@@ -141,9 +144,22 @@ int GameXLib::Run()
 void GameXLib::RegisterServices()
 {
 	// 各種マネージャーの登録
-	ServiceLocator::RegisterService(std::make_shared<Framework>());
-	ServiceLocator::RegisterService(std::make_shared<GraphicsManager>());
-	ServiceLocator::RegisterService(std::make_shared<ImGuiManager>());
+	// すでに登録されている場合は登録しない
+	std::shared_ptr<Framework> framework = ServiceLocator::GetService<Framework>();
+	if (!framework)
+	{
+		ServiceLocator::RegisterService(std::make_shared<Framework>());
+	}
+	std::shared_ptr<GraphicsManager> graphicsManager = ServiceLocator::GetService<GraphicsManager>();
+	if (!graphicsManager)
+	{
+		ServiceLocator::RegisterService(std::make_shared<GraphicsManager>());
+	}
+	std::shared_ptr<ImGuiManager> imguiManager = ServiceLocator::GetService<ImGuiManager>();
+	if (!imguiManager)
+	{
+		ServiceLocator::RegisterService(std::make_shared<ImGuiManager>());
+	}
 }
 #pragma endregion
 

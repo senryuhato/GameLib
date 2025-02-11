@@ -21,7 +21,7 @@ public:
     }
 
     /// <summary>
-    /// 登録されたサービスを取得する。
+    /// 登録されたサービスを取得する。(基底クラス型で取得してダウンキャスト)
     /// </summary>
     /// <typeparam name="T">取得するサービスの型</typeparam>
     /// <returns>指定した型のサービスインスタンス（shared_ptr）</returns>
@@ -31,10 +31,9 @@ public:
         return std::static_pointer_cast<T>(services[std::type_index(typeid(T))]);
     }
 
+    static std::unordered_map<std::type_index, std::shared_ptr<void>> services;
+
 private:
     // 登録されたサービスを保持するコンテナ。
-    static std::unordered_map<std::type_index, std::shared_ptr<void>> services;
+    
 };
-
-// クラス外部で定義
-std::unordered_map<std::type_index, std::shared_ptr<void>> ServiceLocator::services;
