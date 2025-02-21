@@ -1,10 +1,8 @@
-#include "../GameXLib/System/Classes\GameXLib.h"
-#include "../GameXLib/System/Classes/SystemServiceLocator.h"
-#include "GameServiceLocator.h"
-#include "GameFramework.h"
-
-// クラス外部で定義
-std::unordered_map<std::type_index, std::shared_ptr<void>> GameServiceLocator::services;
+#include "../GameXLib/Runtime/System/GameXLib.h"
+#include "../GameXLib/Runtime/System/ServiceLocator.h"
+#include "../GameXLib/Runtime/Scene/SceneManager.h"
+#include "../Source/TitleScene.h"
+#include "../Source/MainScene.h"
 
 #pragma region C++/CLI Windows アプリケーションのエントリポイント
 /// <summary>
@@ -17,16 +15,20 @@ std::unordered_map<std::type_index, std::shared_ptr<void>> GameServiceLocator::s
 /// <returns>プログラムの終了コード（通常は 0）</returns>
 int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
 {
+	// シーンの登録
+	ServiceLocator::RegisterService<SceneManager>(std::make_shared<SceneManager>());
+	std::shared_ptr<SceneManager> sceneManager = ServiceLocator::GetService<SceneManager>();
+	// シーン登録
+	sceneManager->RegisterSceneIfNotExists<TitleScene>("TitleScene");
+	sceneManager->RegisterSceneIfNotExists<MainScene>("MainScene");
+	// 最初のシーン設定
+	sceneManager->LoadScene("TitleScene");
+	// カーソル設定
+	sceneManager->SetShowMouseCursor(true);
+	
+	// ゲーム実行
 	GameXLib& gameXLib = GameXLib::GetInstance();
-	// ゲームフレームワークの登録
-	SystemServiceLocator::RegisterService<Framework>(std::make_shared<GameFramework>());
-
-	if (!gameXLib.Initialize(hInstance, nShowCmd, 1280, 720, L"ゲームプロジェクト"))
-	{
-		return -1;
-	}
-	gameXLib.Run();
-	gameXLib.Uninitialize(hInstance);
+	gameXLib.Execute(hInstance, nShowCmd, 1280, 720, L"ゲームプロジェクト");
 	// 正常終了
 	return 0;
 }
