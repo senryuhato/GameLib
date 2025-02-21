@@ -23,6 +23,7 @@
     <ClInclude Include="GameXLib\Runtime\Graphics\GraphicsManager.h" />
     <ClInclude Include="GameXLib\Runtime\Scene\Scene.h" />
     <ClInclude Include="GameXLib\Runtime\Scene\SceneManager.h" />
+    <ClInclude Include="GameXLib\Runtime\Serialization\Cereal.h" />
     <ClInclude Include="GameXLib\Runtime\System\GameXLib.h" />
     <ClInclude Include="GameXLib\Runtime\System\Misc.h" />
     <ClInclude Include="GameXLib\Runtime\System\ServiceLocator.h" />
@@ -38,6 +39,18 @@
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imstb_rectpack.h" />
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imstb_textedit.h" />
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imstb_truetype.h" />
+    <ClInclude Include="GameXLib\ThirdParty\Sample\Audio.h" />
+    <ClInclude Include="GameXLib\ThirdParty\Sample\AudioResource.h" />
+    <ClInclude Include="GameXLib\ThirdParty\Sample\AudioSource.h" />
+    <ClInclude Include="GameXLib\ThirdParty\Sample\Buffer.h" />
+    <ClInclude Include="GameXLib\ThirdParty\Sample\GamePad.h" />
+    <ClInclude Include="GameXLib\ThirdParty\Sample\Input.h" />
+    <ClInclude Include="GameXLib\ThirdParty\Sample\Mouse.h" />
+    <ClInclude Include="GameXLib\ThirdParty\Sample\RenderState.h" />
+    <ClInclude Include="GameXLib\ThirdParty\Sample\Shader.h" />
+    <ClInclude Include="GameXLib\ThirdParty\Sample\TextureResource.h" />
+    <ClInclude Include="GameXLib\ThirdParty\Sample\Transform.h" />
+    <ClInclude Include="GameXLib\ThirdParty\Sample\WICTextureLoader11.h" />
     <ClInclude Include="Source\MainScene.h" />
     <ClInclude Include="Source\TitleScene.h" />
   </ItemGroup>
@@ -55,6 +68,16 @@
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_impl_win32.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_ja_gryph_ranges.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_widgets.cpp" />
+    <ClCompile Include="GameXLib\ThirdParty\Sample\Audio.cpp" />
+    <ClCompile Include="GameXLib\ThirdParty\Sample\AudioResource.cpp" />
+    <ClCompile Include="GameXLib\ThirdParty\Sample\AudioSource.cpp" />
+    <ClCompile Include="GameXLib\ThirdParty\Sample\GamePad.cpp" />
+    <ClCompile Include="GameXLib\ThirdParty\Sample\Input.cpp" />
+    <ClCompile Include="GameXLib\ThirdParty\Sample\Mouse.cpp" />
+    <ClCompile Include="GameXLib\ThirdParty\Sample\RenderState.cpp" />
+    <ClCompile Include="GameXLib\ThirdParty\Sample\Shader.cpp" />
+    <ClCompile Include="GameXLib\ThirdParty\Sample\TextureResource.cpp" />
+    <ClCompile Include="GameXLib\ThirdParty\Sample\WICTextureLoader11.cpp" />
     <ClCompile Include="Source\TitleScene.cpp" />
     <ClCompile Include="Source\WinMain.cpp" />
   </ItemGroup>
@@ -129,6 +152,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>.\GameXLib\ThirdParty\Cereal\cereal-master\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -144,6 +168,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>.\GameXLib\ThirdParty\Cereal\cereal-master\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -159,6 +184,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>.\GameXLib\ThirdParty\Cereal\cereal-master\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -174,6 +200,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>.\GameXLib\ThirdParty\Cereal\cereal-master\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

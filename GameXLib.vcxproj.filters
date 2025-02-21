@@ -66,12 +66,6 @@
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui.h">
       <Filter>GameXLib\ThirdParty\ImGui\imgui-docking</Filter>
     </ClInclude>
-    <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_impl_dx11.h">
-      <Filter>GameXLib\ThirdParty\ImGui\imgui-docking</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_impl_win32.h">
-      <Filter>GameXLib\ThirdParty\ImGui\imgui-docking</Filter>
-    </ClInclude>
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_internal.h">
       <Filter>GameXLib\ThirdParty\ImGui\imgui-docking</Filter>
     </ClInclude>
@@ -123,21 +117,57 @@
     <ClInclude Include="Source\MainScene.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="GameXLib\Runtime\Serialization\Cereal.h">
+      <Filter>GameXLib\Runtime\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ThirdParty\Sample\Audio.h">
+      <Filter>GameXLib\ThirdParty\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ThirdParty\Sample\AudioResource.h">
+      <Filter>GameXLib\ThirdParty\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ThirdParty\Sample\AudioSource.h">
+      <Filter>GameXLib\ThirdParty\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ThirdParty\Sample\Buffer.h">
+      <Filter>GameXLib\ThirdParty\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ThirdParty\Sample\GamePad.h">
+      <Filter>GameXLib\ThirdParty\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ThirdParty\Sample\Input.h">
+      <Filter>GameXLib\ThirdParty\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ThirdParty\Sample\Mouse.h">
+      <Filter>GameXLib\ThirdParty\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ThirdParty\Sample\RenderState.h">
+      <Filter>GameXLib\ThirdParty\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ThirdParty\Sample\Shader.h">
+      <Filter>GameXLib\ThirdParty\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ThirdParty\Sample\TextureResource.h">
+      <Filter>GameXLib\ThirdParty\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ThirdParty\Sample\Transform.h">
+      <Filter>GameXLib\ThirdParty\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ThirdParty\Sample\WICTextureLoader11.h">
+      <Filter>GameXLib\ThirdParty\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_impl_dx11.h">
+      <Filter>GameXLib\ThirdParty\ImGui\imgui-docking</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_impl_win32.h">
+      <Filter>GameXLib\ThirdParty\ImGui\imgui-docking</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui.cpp">
       <Filter>GameXLib\ThirdParty\ImGui\imgui-docking</Filter>
     </ClCompile>
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_draw.cpp">
-      <Filter>GameXLib\ThirdParty\ImGui\imgui-docking</Filter>
-    </ClCompile>
-    <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_impl_dx11.cpp">
-      <Filter>GameXLib\ThirdParty\ImGui\imgui-docking</Filter>
-    </ClCompile>
-    <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_impl_win32.cpp">
-      <Filter>GameXLib\ThirdParty\ImGui\imgui-docking</Filter>
-    </ClCompile>
-    <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_ja_gryph_ranges.cpp">
       <Filter>GameXLib\ThirdParty\ImGui\imgui-docking</Filter>
     </ClCompile>
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_widgets.cpp">
@@ -169,6 +199,45 @@
     </ClCompile>
     <ClCompile Include="Source\TitleScene.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\ThirdParty\Sample\Audio.cpp">
+      <Filter>GameXLib\ThirdParty\Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\ThirdParty\Sample\AudioResource.cpp">
+      <Filter>GameXLib\ThirdParty\Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\ThirdParty\Sample\AudioSource.cpp">
+      <Filter>GameXLib\ThirdParty\Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\ThirdParty\Sample\GamePad.cpp">
+      <Filter>GameXLib\ThirdParty\Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\ThirdParty\Sample\Input.cpp">
+      <Filter>GameXLib\ThirdParty\Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\ThirdParty\Sample\Mouse.cpp">
+      <Filter>GameXLib\ThirdParty\Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\ThirdParty\Sample\RenderState.cpp">
+      <Filter>GameXLib\ThirdParty\Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\ThirdParty\Sample\Shader.cpp">
+      <Filter>GameXLib\ThirdParty\Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\ThirdParty\Sample\TextureResource.cpp">
+      <Filter>GameXLib\ThirdParty\Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\ThirdParty\Sample\WICTextureLoader11.cpp">
+      <Filter>GameXLib\ThirdParty\Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_impl_dx11.cpp">
+      <Filter>GameXLib\ThirdParty\ImGui\imgui-docking</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_impl_win32.cpp">
+      <Filter>GameXLib\ThirdParty\ImGui\imgui-docking</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_ja_gryph_ranges.cpp">
+      <Filter>GameXLib\ThirdParty\ImGui\imgui-docking</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
