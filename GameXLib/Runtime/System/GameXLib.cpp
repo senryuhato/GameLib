@@ -37,17 +37,19 @@ GameXLib::GameXLib()
 /// <param name="screenWidth">クライアント領域の幅（ピクセル）</param>
 /// <param name="screenHeight">クライアント領域の高さ（ピクセル）</param>
 /// <param name="windowTitle">ウィンドウのタイトル</param>
+/// <param name="defaultFramerate">垂直同期時の目標フレームレート（デフォルト: 60）</param>
 /// <returns>結果</returns>
 bool GameXLib::Execute(
 	_In_ HINSTANCE instance,
 	_In_ int nShowCmd,
 	_In_ LONG screenWidth,
 	_In_ LONG screenHeight,
-	_In_ LPCWSTR windowTitle
+	_In_ LPCWSTR windowTitle,
+	_In_ UINT defaultFramerate
 )
 {
 	// 初期化
-	if (!Initialize(instance, nShowCmd, 1280, 720, L"ゲームプロジェクト"))
+	if (!Initialize(instance, nShowCmd, screenWidth, screenHeight, windowTitle, defaultFramerate))
 	{
 		return false;
 	}
@@ -68,13 +70,15 @@ bool GameXLib::Execute(
 /// <param name="screenWidth">クライアント領域の幅（ピクセル）</param>
 /// <param name="screenHeight">クライアント領域の高さ（ピクセル）</param>
 /// <param name="windowTitle">ウィンドウのタイトル</param>
+/// <param name="defaultFramerate">垂直同期時の目標フレームレート</param>
 /// <returns>結果</returns>
 bool GameXLib::Initialize(
 	_In_ HINSTANCE instance,
 	_In_ int nShowCmd,
 	_In_ LONG screenWidth,
 	_In_ LONG screenHeight,
-	_In_ LPCWSTR windowTitle
+	_In_ LPCWSTR windowTitle,
+	_In_ UINT defaultFramerate
 )
 {
 	// 初期化
@@ -103,15 +107,15 @@ bool GameXLib::Initialize(
 	}
 
 	// DirectXの初期化
-	std::shared_ptr<GraphicsManager> graphicsManager = ServiceLocator::GetService<GraphicsManager>();
+	std::shared_ptr<GraphicsManager> graphicsManager = ServiceLocator::GetService<GraphicsManager>("GraphicsManager");
 	if (!isSuccess || !graphicsManager || !graphicsManager->Initialize(hwnd, DEFAULT_FRAMERATE, FULSCREEN_NO))
 	{
 		isSuccess = false;
 	}
 
 	// ImGuiの初期化
-	std::shared_ptr<ImGuiManager> imguiManager = ServiceLocator::GetService<ImGuiManager>();
-	if (!isSuccess || !imguiManager || !imguiManager->Initialize(hwnd, graphicsManager->GetDevice(), graphicsManager->GetDeviceContext()))
+	std::shared_ptr<BaseImGuiManager> baseImguiManager = ServiceLocator::GetService<BaseImGuiManager>(ServiceNames::BASE_IMGUI_MANAGER);
+	if (!isSuccess || !baseImguiManager || !baseImguiManager->Initialize(hwnd, graphicsManager->GetDevice(), graphicsManager->GetDeviceContext()))
 	{
 		isSuccess = false;
 	}
@@ -135,13 +139,13 @@ void GameXLib::Uninitialize(
 	_In_ HINSTANCE instance)
 {
 	// ImGuiの終了処理
-	std::shared_ptr<ImGuiManager> imguiManager = ServiceLocator::GetService<ImGuiManager>();
-	if (imguiManager)
+	std::shared_ptr<ImGuiManager> baseImguiManager = ServiceLocator::GetService<ImGuiManager>(ServiceNames::BASE_IMGUI_MANAGER);
+	if (baseImguiManager)
 	{
-		imguiManager->Uninitialize();
+		baseImguiManager->Uninitialize();
 	}
 	// DirectXの解放
-	std::shared_ptr<GraphicsManager> graphicsManager = ServiceLocator::GetService<GraphicsManager>();
+	std::shared_ptr<GraphicsManager> graphicsManager = ServiceLocator::GetService<GraphicsManager>(ServiceNames::GRAPHICS_MANAGER);
 	if (graphicsManager)
 	{
 		graphicsManager->Uninitialize();
@@ -161,8 +165,8 @@ void GameXLib::Uninitialize(
 /// <returns>結果</returns>
 int GameXLib::Run()
 {
-	std::shared_ptr<Framework> framework = ServiceLocator::GetService<Framework>();
-	std::shared_ptr<HighResolutionTimer> highResolutionTimer = ServiceLocator::GetService<HighResolutionTimer>();
+	std::shared_ptr<Framework> framework = ServiceLocator::GetService<Framework>(ServiceNames::FRAMEWORK);
+	std::shared_ptr<HighResolutionTimer> highResolutionTimer = ServiceLocator::GetService<HighResolutionTimer>(ServiceNames::HIGH_RESOLUTION_TIMER);
 
 	if (framework && highResolutionTimer)
 	{
@@ -254,13 +258,13 @@ void GameXLib::RegisterServices()
 	// 各種マネージャーの登録
 	// すでに登録されている場合は登録しない
 	// ゲームループ
-	ServiceLocator::RegisterServiceIfNotExists(std::make_shared<Framework>());
+	ServiceLocator::RegisterServiceIfNotExists<Framework>(ServiceNames::FRAMEWORK);
 	// DirectX
-	ServiceLocator::RegisterServiceIfNotExists(std::make_shared<GraphicsManager>());
+	ServiceLocator::RegisterServiceIfNotExists<GraphicsManager>(ServiceNames::GRAPHICS_MANAGER);
 	// ImGui
-	ServiceLocator::RegisterServiceIfNotExists(std::make_shared<ImGuiManager>());
+	ServiceLocator::RegisterServiceIfNotExists<BaseImGuiManager>(ServiceNames::BASE_IMGUI_MANAGER);
 	// タイマー
-	ServiceLocator::RegisterServiceIfNotExists(std::make_shared<HighResolutionTimer>());
+	ServiceLocator::RegisterServiceIfNotExists<HighResolutionTimer>(ServiceNames::HIGH_RESOLUTION_TIMER);
 }
 #pragma endregion
 
@@ -280,12 +284,12 @@ LRESULT CALLBACK GameXLib::WindowProcedure(
 	_In_ LPARAM lParam)
 {
 	// サービスロケータから imguiManager と framework を取得
-	std::shared_ptr<ImGuiManager> imguiManager = ServiceLocator::GetService<ImGuiManager>();
-	std::shared_ptr<Framework> framework = ServiceLocator::GetService<Framework>();
+	std::shared_ptr<BaseImGuiManager> baseImguiManager = ServiceLocator::GetService<BaseImGuiManager>(ServiceNames::BASE_IMGUI_MANAGER);
+	std::shared_ptr<Framework> framework = ServiceLocator::GetService<Framework>(ServiceNames::FRAMEWORK);
 
-	if (imguiManager)
+	if (baseImguiManager)
 	{
-		imguiManager->WndProcHandler(hwnd, msg, wParam, lParam);
+		baseImguiManager->WndProcHandler(hwnd, msg, wParam, lParam);
 	}
 
 	if (framework)

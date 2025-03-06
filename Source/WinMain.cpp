@@ -1,5 +1,6 @@
 #include "../GameXLib/Runtime/System/GameXLib.h"
 #include "../GameXLib/Runtime/System/ServiceLocator.h"
+#include "../GameXLib/Runtime/UI/ImGuiManager.h"
 #include "../GameXLib/Runtime/Scene/SceneManager.h"
 #include "../Source/TitleScene.h"
 #include "../Source/MainScene.h"
@@ -15,9 +16,13 @@
 /// <returns>プログラムの終了コード（通常は 0）</returns>
 int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
 {
+#if 1 // ImGuiが不要の場合、削除することで表示されなくなる
+	// ImGuiの登録
+	ServiceLocator::RegisterService<ImGuiManager>(ServiceNames::BASE_IMGUI_MANAGER);
+#endif
 	// シーンの登録
-	ServiceLocator::RegisterService<SceneManager>(std::make_shared<SceneManager>());
-	std::shared_ptr<SceneManager> sceneManager = ServiceLocator::GetService<SceneManager>();
+	ServiceLocator::RegisterService<SceneManager>(ServiceNames::SCENE_MANAGER);
+	std::shared_ptr<SceneManager> sceneManager = ServiceLocator::GetService<SceneManager>(ServiceNames::SCENE_MANAGER);
 	// シーン登録
 	sceneManager->RegisterSceneIfNotExists<TitleScene>("TitleScene");
 	sceneManager->RegisterSceneIfNotExists<MainScene>("MainScene");
@@ -28,7 +33,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	
 	// ゲーム実行
 	GameXLib& gameXLib = GameXLib::GetInstance();
-	gameXLib.Execute(hInstance, nShowCmd, 1280, 720, L"ゲームプロジェクト");
+	gameXLib.Execute(hInstance, nShowCmd, 1280, 720, L"ゲームプロジェクト", 60);
 	// 正常終了
 	return 0;
 }

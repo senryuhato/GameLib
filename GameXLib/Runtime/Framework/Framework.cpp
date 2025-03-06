@@ -22,13 +22,20 @@ Framework::Framework()
 void Framework::Run()
 {
 	// タイマー更新
-	std::shared_ptr<TimeManager> timeManager = ServiceLocator::GetService<TimeManager>();
-	timeManager->Update();
-
+	std::shared_ptr<TimeManager> timeManager = ServiceLocator::GetService<TimeManager>(ServiceNames::TIME_MANAGER);
+	if (timeManager)
+	{
+		timeManager->Update();
+	}
+	
 	// シーン更新
-	std::shared_ptr<SceneManager> sceneManager = ServiceLocator::GetService<SceneManager>();
-	sceneManager->Update();
-	sceneManager->Render();
+	std::shared_ptr<SceneManager> sceneManager = ServiceLocator::GetService<SceneManager>(ServiceNames::SCENE_MANAGER);
+	if (sceneManager)
+	{
+		sceneManager->Update();
+		sceneManager->Render();
+	}
+
 }
 #pragma endregion
 
@@ -48,7 +55,7 @@ LRESULT CALLBACK Framework::HandleMessage(
 	_In_ LPARAM lParam)
 {
 	// タイマー
-	std::shared_ptr<HighResolutionTimer> highResolutionTimer = ServiceLocator::GetService<HighResolutionTimer>();
+	std::shared_ptr<HighResolutionTimer> highResolutionTimer = ServiceLocator::GetService<HighResolutionTimer>(ServiceNames::HIGH_RESOLUTION_TIMER);
 
 	switch (msg)
 	{
@@ -92,8 +99,8 @@ void Framework::RegisterServices()
 	// 各種マネージャーの登録
 	// すでに登録されている場合は登録しない
 	// タイマー
-	ServiceLocator::RegisterServiceIfNotExists(std::make_shared<TimeManager>());
+	ServiceLocator::RegisterServiceIfNotExists<TimeManager>(ServiceNames::TIME_MANAGER);
 	// シーン管理
-	ServiceLocator::RegisterServiceIfNotExists(std::make_shared<SceneManager>());
+	ServiceLocator::RegisterServiceIfNotExists<SceneManager>(ServiceNames::SCENE_MANAGER);
 }
 #pragma endregion

@@ -26,13 +26,15 @@ public:
 	/// <param name="screenWidth">クライアント領域の幅（ピクセル）</param>
 	/// <param name="screenHeight">クライアント領域の高さ（ピクセル）</param>
 	/// <param name="windowTitle">ウィンドウのタイトル</param>
+	/// <param name="defaultFramerate">垂直同期時の目標フレームレート（デフォルト: 60）</param>
 	/// <returns>結果</returns>
 	bool Execute(
 		_In_ HINSTANCE instance,
 		_In_ int nShowCmd,
 		_In_ LONG screenWidth,
 		_In_ LONG screenHeight,
-		_In_ LPCWSTR windowTitle
+		_In_ LPCWSTR windowTitle,
+		_In_ UINT defaultFramerate = 60
 	);
 
 	/// <summary>
@@ -43,13 +45,15 @@ public:
 	/// <param name="screenWidth">クライアント領域の幅（ピクセル）</param>
 	/// <param name="screenHeight">クライアント領域の高さ（ピクセル）</param>
 	/// <param name="windowTitle">ウィンドウのタイトル</param>
+	/// <param name="defaultFramerate">垂直同期時の目標フレームレート</param>
 	/// <returns>結果</returns>
 	bool Initialize(
 		_In_ HINSTANCE instance,
 		_In_ int nShowCmd,
 		_In_ LONG screenWidth,
 		_In_ LONG screenHeight,
-		_In_ LPCWSTR windowTitle
+		_In_ LPCWSTR windowTitle,
+		_In_ UINT defaultFramerate
 	);
 
 	/// <summary>

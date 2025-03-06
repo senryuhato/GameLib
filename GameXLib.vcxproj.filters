@@ -58,6 +58,21 @@
     <Filter Include="GameXLib\ThirdParty\Cereal">
       <UniqueIdentifier>{ab9738be-01b9-4429-b3b0-bf2fd7dfe62a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameXLib\ThirdParty\Sample\FbxSdk">
+      <UniqueIdentifier>{071c9fb2-072f-460c-90a6-ad1db9607caf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameXLib\ThirdParty\Sample\Math">
+      <UniqueIdentifier>{832ea0ad-0c3a-49c4-82eb-0d6ca955b611}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameXLib\ThirdParty\Sample\Shaders">
+      <UniqueIdentifier>{831cf960-eb32-4929-804e-40fc67373dd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameXLib\ThirdParty\Sample\Sources">
+      <UniqueIdentifier>{d65ffc31-6048-439d-b8ef-639eeddfa4a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameXLib\Runtime\Component">
+      <UniqueIdentifier>{2024c796-0c4e-4207-82d2-8b78a33cfb84}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imconfig.h">
@@ -162,6 +177,30 @@
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_impl_win32.h">
       <Filter>GameXLib\ThirdParty\ImGui\imgui-docking</Filter>
     </ClInclude>
+    <ClInclude Include="GameXLib\ThirdParty\Sample\Sources\skinned_mesh.h">
+      <Filter>GameXLib\ThirdParty\Sample\Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ThirdParty\Sample\Sources\skinned_mesh_model.h">
+      <Filter>GameXLib\ThirdParty\Sample\Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ThirdParty\Sample\Sources\SkinnedMesh.h">
+      <Filter>GameXLib\ThirdParty\Sample\Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ThirdParty\Sample\Sources\texture.h">
+      <Filter>GameXLib\ThirdParty\Sample\Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ThirdParty\Sample\Math\BanchworkTimer.h">
+      <Filter>GameXLib\ThirdParty\Sample\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ThirdParty\Sample\Math\ViewProjection.h">
+      <Filter>GameXLib\ThirdParty\Sample\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ThirdParty\Sample\FbxSdk\FbxFileImporter.h">
+      <Filter>GameXLib\ThirdParty\Sample\FbxSdk</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\ThirdParty\Sample\FbxSdk\FbxSdk.h">
+      <Filter>GameXLib\ThirdParty\Sample\FbxSdk</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui.cpp">
@@ -239,5 +278,36 @@
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_ja_gryph_ranges.cpp">
       <Filter>GameXLib\ThirdParty\ImGui\imgui-docking</Filter>
     </ClCompile>
+    <ClCompile Include="GameXLib\ThirdParty\Sample\Sources\skinned_mesh.cpp">
+      <Filter>GameXLib\ThirdParty\Sample\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\ThirdParty\Sample\Sources\skinned_mesh_model.cpp">
+      <Filter>GameXLib\ThirdParty\Sample\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\ThirdParty\Sample\Sources\SkinnedMesh.cpp">
+      <Filter>GameXLib\ThirdParty\Sample\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\ThirdParty\Sample\Sources\texture.cpp">
+      <Filter>GameXLib\ThirdParty\Sample\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\ThirdParty\Sample\FbxSdk\FbxFileImporter.cpp">
+      <Filter>GameXLib\ThirdParty\Sample\FbxSdk</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\ThirdParty\Sample\Sample.cpp">
+      <Filter>GameXLib\ThirdParty\Sample</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GameXLib\ThirdParty\Sample\Shaders\skinned_mesh.hlsli">
+      <Filter>GameXLib\ThirdParty\Sample\Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="GameXLib\ThirdParty\Sample\Shaders\skinned_mesh_ps.hlsl">
+      <Filter>GameXLib\ThirdParty\Sample\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="GameXLib\ThirdParty\Sample\Shaders\skinned_mesh_vs.hlsl">
+      <Filter>GameXLib\ThirdParty\Sample\Shaders</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

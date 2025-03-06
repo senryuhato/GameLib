@@ -90,8 +90,10 @@ void GraphicsManager::CreateDeviceAndSwapChain(
 	// シェーダーモデル5.0は_11_1以上でないといけない。
 	D3D_FEATURE_LEVEL featureLevels[] =
 	{
-		D3D_FEATURE_LEVEL_11_1,
-		D3D_FEATURE_LEVEL_11_0,
+		D3D_FEATURE_LEVEL_12_1, // DirectX 12.1
+	    D3D_FEATURE_LEVEL_12_0, // DirectX 12.0
+	    D3D_FEATURE_LEVEL_11_1, // DirectX 11.1
+	    D3D_FEATURE_LEVEL_11_0, // DirectX 11.0
 	};
 
 	// スワップチェインを作成するための設定

@@ -62,6 +62,42 @@ void ImGuiManager::Uninitialize()
 }
 #pragma endregion
 
+#pragma region Imguiの全般処理
+/// <summary>
+/// Imguiの全般処理
+/// </summary>
+void ImGuiManager::RenderImGuiFrame()
+{
+	// 描画準備
+	NewFrame();
+	// ImGui表示処理
+	for(auto& func : drawFunctions)
+	{
+		// 関数ポインタ実行
+		func();
+	}
+	// 描画処理
+	Render();
+	// クリア処理
+	drawFunctions.clear();
+}
+#pragma endregion
+
+#pragma region ImGuiのウィンドウメッセージを処理するメンバ関数
+/// <summary>
+/// ImGuiのウィンドウメッセージを処理するメンバ関数
+/// </summary>
+/// <param name="hwnd">ウィンドウハンドル</param>
+/// <param name="msg">受け取ったメッセージ</param>
+/// <param name="wParam">メッセージの追加情報（1つ目のパラメータ）</param>
+/// <param name="lParam">メッセージの追加情報（2つ目のパラメータ）</param>
+/// <returns>メッセージを処理した結果（通常は `DefWindowProc` の戻り値を返す）</returns>
+LRESULT ImGuiManager::WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+	return ImGui_ImplWin32_WndProcHandler(hwnd, msg, wParam, lParam);
+}
+#pragma endregion
+
 #pragma region 新しいフレームの開始
 /// <summary>
 /// 新しいフレームの開始
@@ -80,7 +116,7 @@ void ImGuiManager::NewFrame()
 /// <summary>
 /// ImGui の描画処理
 /// </summary>
-void ImGuiManager:: Render()
+void ImGuiManager::Render()
 {
 	if (!initialized) return;
 	ImGui::Render();
@@ -92,20 +128,5 @@ void ImGuiManager:: Render()
 		ImGui::UpdatePlatformWindows();
 		ImGui::RenderPlatformWindowsDefault();
 	}
-}
-#pragma endregion
-
-#pragma region ImGuiのウィンドウメッセージを処理するメンバ関数
-/// <summary>
-/// ImGuiのウィンドウメッセージを処理するメンバ関数
-/// </summary>
-/// <param name="hwnd">ウィンドウハンドル</param>
-/// <param name="msg">受け取ったメッセージ</param>
-/// <param name="wParam">メッセージの追加情報（1つ目のパラメータ）</param>
-/// <param name="lParam">メッセージの追加情報（2つ目のパラメータ）</param>
-/// <returns>メッセージを処理した結果（通常は `DefWindowProc` の戻り値を返す）</returns>
-LRESULT ImGuiManager::WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
-{
-	return ImGui_ImplWin32_WndProcHandler(hwnd, msg, wParam, lParam);
 }
 #pragma endregion

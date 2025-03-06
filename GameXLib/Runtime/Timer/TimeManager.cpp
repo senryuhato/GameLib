@@ -8,7 +8,7 @@
 /// </summary>
 void TimeManager::Update()
 {
-	std::shared_ptr<HighResolutionTimer> highResolutionTimer = ServiceLocator::GetService<HighResolutionTimer>();
+	std::shared_ptr<HighResolutionTimer> highResolutionTimer = ServiceLocator::GetService<HighResolutionTimer>(ServiceNames::HIGH_RESOLUTION_TIMER);
 	float elapsedTime = highResolutionTimer->TimeInterval();
 	// 1ƒtƒŒ[ƒ€“–‚½‚è‚ÌÅ‘å•b”w’è
 	const float limitElapsedTime = 1.0f / 5;

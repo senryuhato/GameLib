@@ -43,11 +43,19 @@
     <ClInclude Include="GameXLib\ThirdParty\Sample\AudioResource.h" />
     <ClInclude Include="GameXLib\ThirdParty\Sample\AudioSource.h" />
     <ClInclude Include="GameXLib\ThirdParty\Sample\Buffer.h" />
+    <ClInclude Include="GameXLib\ThirdParty\Sample\FbxSdk\FbxFileImporter.h" />
+    <ClInclude Include="GameXLib\ThirdParty\Sample\FbxSdk\FbxSdk.h" />
     <ClInclude Include="GameXLib\ThirdParty\Sample\GamePad.h" />
     <ClInclude Include="GameXLib\ThirdParty\Sample\Input.h" />
+    <ClInclude Include="GameXLib\ThirdParty\Sample\Math\BanchworkTimer.h" />
+    <ClInclude Include="GameXLib\ThirdParty\Sample\Math\ViewProjection.h" />
     <ClInclude Include="GameXLib\ThirdParty\Sample\Mouse.h" />
     <ClInclude Include="GameXLib\ThirdParty\Sample\RenderState.h" />
     <ClInclude Include="GameXLib\ThirdParty\Sample\Shader.h" />
+    <ClInclude Include="GameXLib\ThirdParty\Sample\Sources\SkinnedMesh.h" />
+    <ClInclude Include="GameXLib\ThirdParty\Sample\Sources\skinned_mesh.h" />
+    <ClInclude Include="GameXLib\ThirdParty\Sample\Sources\skinned_mesh_model.h" />
+    <ClInclude Include="GameXLib\ThirdParty\Sample\Sources\texture.h" />
     <ClInclude Include="GameXLib\ThirdParty\Sample\TextureResource.h" />
     <ClInclude Include="GameXLib\ThirdParty\Sample\Transform.h" />
     <ClInclude Include="GameXLib\ThirdParty\Sample\WICTextureLoader11.h" />
@@ -71,15 +79,38 @@
     <ClCompile Include="GameXLib\ThirdParty\Sample\Audio.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\Sample\AudioResource.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\Sample\AudioSource.cpp" />
+    <ClCompile Include="GameXLib\ThirdParty\Sample\FbxSdk\FbxFileImporter.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\Sample\GamePad.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\Sample\Input.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\Sample\Mouse.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\Sample\RenderState.cpp" />
+    <ClCompile Include="GameXLib\ThirdParty\Sample\Sample.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\Sample\Shader.cpp" />
+    <ClCompile Include="GameXLib\ThirdParty\Sample\Sources\SkinnedMesh.cpp" />
+    <ClCompile Include="GameXLib\ThirdParty\Sample\Sources\skinned_mesh.cpp" />
+    <ClCompile Include="GameXLib\ThirdParty\Sample\Sources\skinned_mesh_model.cpp" />
+    <ClCompile Include="GameXLib\ThirdParty\Sample\Sources\texture.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\Sample\TextureResource.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\Sample\WICTextureLoader11.cpp" />
     <ClCompile Include="Source\TitleScene.cpp" />
     <ClCompile Include="Source\WinMain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GameXLib\ThirdParty\Sample\Shaders\skinned_mesh.hlsli" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="GameXLib\ThirdParty\Sample\Shaders\skinned_mesh_ps.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="GameXLib\ThirdParty\Sample\Shaders\skinned_mesh_vs.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -159,6 +190,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>d3d11.lib;dxgi.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <FxCompile>
+      <ShaderModel>5.1</ShaderModel>
+    </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -177,6 +211,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>d3d11.lib;dxgi.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <FxCompile>
+      <ShaderModel>5.1</ShaderModel>
+    </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -191,6 +228,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>d3d11.lib;dxgi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <FxCompile>
+      <ShaderModel>5.1</ShaderModel>
+    </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -209,6 +249,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>d3d11.lib;dxgi.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <FxCompile>
+      <ShaderModel>5.1</ShaderModel>
+    </FxCompile>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

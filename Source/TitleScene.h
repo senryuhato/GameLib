@@ -8,7 +8,24 @@ class TitleScene : public Scene
 {
 public:
 	/// <summary>
+	/// ‰Šú‰»ˆ—
+	/// </summary>
+	void Initialize() override;
+
+	/// <summary>
 	/// XVˆ—
 	/// </summary>
-	void Update();
+	void Update() override;
+
+	/// <summary>
+    /// •`‰æˆ—
+    /// </summary>
+	void Render() override;
+
+
+private:
+	/// <summary>
+    /// GUI•`‰æ
+    /// </summary>
+	void ShowGUI();
 };

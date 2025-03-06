@@ -33,7 +33,8 @@ void SceneManager::Render()
 	// シーンが設定されているか
 	if (currentSceneKey.empty()) return;
 
-	std::shared_ptr<GraphicsManager> graphicsManager = ServiceLocator::GetService<GraphicsManager>();
+	std::shared_ptr<GraphicsManager> graphicsManager = ServiceLocator::GetService<GraphicsManager>(ServiceNames::GRAPHICS_MANAGER);
+	if (!graphicsManager) return;
 	ID3D11DeviceContext* immediateContext = graphicsManager->GetDeviceContext();
 	ID3D11RenderTargetView* renderTargetView = graphicsManager->GetRenderTargetView();
 	ID3D11DepthStencilView* depthStencilView = graphicsManager->GetDepthStencilView();
@@ -44,15 +45,16 @@ void SceneManager::Render()
 	immediateContext->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	immediateContext->OMSetRenderTargets(1, &renderTargetView, depthStencilView);
 
-	std::shared_ptr<ImGuiManager> imGuiManager = ServiceLocator::GetService<ImGuiManager>();
-	// UI表示処理
-	imGuiManager->NewFrame();
-
 	// ゲーム処理
 	scenes[currentSceneKey]->Render();
 
-	// UI表示
-	imGuiManager->Render();
+	std::shared_ptr<BaseImGuiManager> baseImGuiManager = ServiceLocator::GetService<BaseImGuiManager>(ServiceNames::BASE_IMGUI_MANAGER);
+	// UI表示処理
+	if (baseImGuiManager)
+	{
+		baseImGuiManager->RenderImGuiFrame();
+	}
+	
 	// バックバッファに描画した画を画面に表示する。
 	swapChain->Present(SYNC_INTERVAL_VALID, 0);
 }
