@@ -1,7 +1,8 @@
 #include <windows.h>
 #include "TitleScene.h"
+#include "../GameXLib/Runtime/Scene/SceneManager.h"
+#include "../GameXLib/Runtime/UI/ImGui.h"
 #include "..\GameXLib\Runtime\UI\ImGuiManager.h"
-#include "..\GameXLib\Runtime\UI\imGuiDX11.h"
 #include "..\GameXLib\Runtime\System\ServiceLocator.h"
 
 #pragma region ‰Šú‰»ˆ—
@@ -28,8 +29,11 @@ void TitleScene::Update()
 	}
 	if (GetAsyncKeyState('1') & 1)
 	{
-		int a = 0;
-		a++;
+		std::shared_ptr<SceneManager> sceneManager = ServiceLocator::GetService<SceneManager>(ServiceNames::SCENE_MANAGER);
+		if (sceneManager)
+		{
+			sceneManager->LoadScene("MainScene");
+		}
 	}
 }
 #pragma endregion

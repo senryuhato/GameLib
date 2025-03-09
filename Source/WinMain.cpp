@@ -4,6 +4,7 @@
 #include "../GameXLib/Runtime/Scene/SceneManager.h"
 #include "../Source/TitleScene.h"
 #include "../Source/MainScene.h"
+#include "ConfigConstant.h"
 
 #pragma region C++/CLI Windows アプリケーションのエントリポイント
 /// <summary>
@@ -24,16 +25,21 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	ServiceLocator::RegisterService<SceneManager>(ServiceNames::SCENE_MANAGER);
 	std::shared_ptr<SceneManager> sceneManager = ServiceLocator::GetService<SceneManager>(ServiceNames::SCENE_MANAGER);
 	// シーン登録
-	sceneManager->RegisterSceneIfNotExists<TitleScene>("TitleScene");
-	sceneManager->RegisterSceneIfNotExists<MainScene>("MainScene");
+	sceneManager->RegisterSceneIfNotExists<TitleScene>(SceneNames::TITLE);
+	sceneManager->RegisterSceneIfNotExists<MainScene>(SceneNames::MAIN);
 	// 最初のシーン設定
-	sceneManager->LoadScene("TitleScene");
+	sceneManager->LoadScene(SceneNames::FIRST_SCENE);
+
+#if 1 // 個別設定
 	// カーソル設定
 	sceneManager->SetShowMouseCursor(true);
+#endif
 	
 	// ゲーム実行
 	GameXLib& gameXLib = GameXLib::GetInstance();
-	gameXLib.Execute(hInstance, nShowCmd, 1280, 720, L"ゲームプロジェクト", 60);
+	gameXLib.Execute(hInstance, nShowCmd,
+		Config::SCREEN_WIDTH, Config::SCREEN_HEIGHT, 
+		Config::WINDOW_TITLE, Config::FRAMERATE);
 	// 正常終了
 	return 0;
 }

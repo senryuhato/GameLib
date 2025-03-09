@@ -29,8 +29,10 @@
     <ClInclude Include="GameXLib\Runtime\System\ServiceLocator.h" />
     <ClInclude Include="GameXLib\Runtime\Timer\HighResolutionTimer.h" />
     <ClInclude Include="GameXLib\Runtime\Timer\TimeManager.h" />
+    <ClInclude Include="GameXLib\Runtime\UI\ImGui.h" />
     <ClInclude Include="GameXLib\Runtime\UI\imGuiDX11.h" />
     <ClInclude Include="GameXLib\Runtime\UI\ImGuiManager.h" />
+    <ClInclude Include="GameXLib\ThirdParty\DirectXTex\WICTextureLoader11.h" />
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imconfig.h" />
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui.h" />
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_impl_dx11.h" />
@@ -58,7 +60,7 @@
     <ClInclude Include="GameXLib\ThirdParty\Sample\Sources\texture.h" />
     <ClInclude Include="GameXLib\ThirdParty\Sample\TextureResource.h" />
     <ClInclude Include="GameXLib\ThirdParty\Sample\Transform.h" />
-    <ClInclude Include="GameXLib\ThirdParty\Sample\WICTextureLoader11.h" />
+    <ClInclude Include="Source\ConfigConstant.h" />
     <ClInclude Include="Source\MainScene.h" />
     <ClInclude Include="Source\TitleScene.h" />
   </ItemGroup>
@@ -70,6 +72,7 @@
     <ClCompile Include="GameXLib\Runtime\System\ServiceLocator.cpp" />
     <ClCompile Include="GameXLib\Runtime\Timer\TimeManager.cpp" />
     <ClCompile Include="GameXLib\Runtime\UI\ImGuiManager.cpp" />
+    <ClCompile Include="GameXLib\ThirdParty\DirectXTex\WICTextureLoader11.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_draw.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_impl_dx11.cpp" />
@@ -91,7 +94,6 @@
     <ClCompile Include="GameXLib\ThirdParty\Sample\Sources\skinned_mesh_model.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\Sample\Sources\texture.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\Sample\TextureResource.cpp" />
-    <ClCompile Include="GameXLib\ThirdParty\Sample\WICTextureLoader11.cpp" />
     <ClCompile Include="Source\TitleScene.cpp" />
     <ClCompile Include="Source\WinMain.cpp" />
   </ItemGroup>
