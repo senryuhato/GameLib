@@ -45,10 +45,4 @@ public:
 		_In_ UINT msg,
 		_In_ WPARAM wparam,
 		_In_ LPARAM lParam);
-
-private:
-	/// <summary>
-    /// マネージャーの登録
-    /// </summary>
-	void RegisterServices();
 };

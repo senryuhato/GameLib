@@ -25,4 +25,9 @@ public:
 	/// •`‰æˆ—
 	/// </summary>
 	virtual void Render() {}
+
+	/// <summary>
+    /// GUI•`‰æ
+    /// </summary>
+	virtual void ShowGUI() {}
 };

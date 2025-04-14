@@ -34,7 +34,8 @@ public:
 		_In_ LONG screenWidth,
 		_In_ LONG screenHeight,
 		_In_ LPCWSTR windowTitle,
-		_In_ UINT defaultFramerate = 60
+		_In_ UINT defaultFramerate = 60,
+		_In_ BOOL isUseImGui = false
 	);
 
 	/// <summary>
@@ -79,11 +80,6 @@ private:
 	/// デストラクタ
 	/// </summary>
 	~GameXLib() = default;
-
-	/// <summary>
-	/// マネージャーの登録
-	/// </summary>
-	void RegisterServices();
 
 	/// <summary>
 	/// ウィンドウメッセージをディスパッチ。
@@ -146,6 +142,9 @@ private:
 		_In_ LPCWSTR windowTitle,
 		_In_ DWORD windowStyle = WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME | WS_VISIBLE);
 private:
+	GameXLibConfig config; // 設定用
+
+
 	HWND hwnd = nullptr; // ウィンドウハンドル
 	bool isShowFrameRate = true; // フレームレートを表示させるか
 	const LPCWSTR CLASS_NAME = L"GameProject"; // window名

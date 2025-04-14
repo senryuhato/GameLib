@@ -10,8 +10,12 @@
 /// </summary>
 Framework::Framework()
 {
-	// マネージャーの登録
-	RegisterServices();
+	//// 各種マネージャーの登録
+	//// すでに登録されている場合は登録しない
+	//// タイマー
+	//ServiceLocator::RegisterServiceIfNotExists<TimeManager>(ServiceNames::TIME_MANAGER);
+	//// シーン管理
+	//ServiceLocator::RegisterServiceIfNotExists<SceneManager>(ServiceNames::SCENE_MANAGER);
 }
 #pragma endregion
 
@@ -21,21 +25,20 @@ Framework::Framework()
 /// </summary>
 void Framework::Run()
 {
-	// タイマー更新
-	std::shared_ptr<TimeManager> timeManager = ServiceLocator::GetService<TimeManager>(ServiceNames::TIME_MANAGER);
-	if (timeManager)
-	{
-		timeManager->Update();
-	}
-	
-	// シーン更新
-	std::shared_ptr<SceneManager> sceneManager = ServiceLocator::GetService<SceneManager>(ServiceNames::SCENE_MANAGER);
-	if (sceneManager)
-	{
-		sceneManager->Update();
-		sceneManager->Render();
-	}
-
+	//// タイマー更新
+	//std::shared_ptr<TimeManager> timeManager = ServiceLocator::GetService<TimeManager>(ServiceNames::TIME_MANAGER);
+	//if (timeManager)
+	//{
+	//	timeManager->Update();
+	//}
+	//
+	//// シーン更新
+	//std::shared_ptr<SceneManager> sceneManager = ServiceLocator::GetService<SceneManager>(ServiceNames::SCENE_MANAGER);
+	//if (sceneManager)
+	//{
+	//	sceneManager->Update();
+	//	sceneManager->Render();
+	//}
 }
 #pragma endregion
 
@@ -87,20 +90,5 @@ LRESULT CALLBACK Framework::HandleMessage(
 		return DefWindowProc(hwnd, msg, wParam, lParam);
 	}
 	return 0;
-}
-#pragma endregion
-
-#pragma region マネージャーの登録
-/// <summary>
-/// マネージャーの登録
-/// </summary>
-void Framework::RegisterServices()
-{
-	// 各種マネージャーの登録
-	// すでに登録されている場合は登録しない
-	// タイマー
-	ServiceLocator::RegisterServiceIfNotExists<TimeManager>(ServiceNames::TIME_MANAGER);
-	// シーン管理
-	ServiceLocator::RegisterServiceIfNotExists<SceneManager>(ServiceNames::SCENE_MANAGER);
 }
 #pragma endregion

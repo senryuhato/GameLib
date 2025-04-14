@@ -22,10 +22,8 @@ public:
     /// </summary>
 	void Render() override;
 
-
-private:
 	/// <summary>
     /// GUI•`‰æ
     /// </summary>
-	void ShowGUI();
+	void ShowGUI() override;
 };
