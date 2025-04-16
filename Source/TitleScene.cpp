@@ -33,7 +33,7 @@ void TitleScene::Update()
 		std::shared_ptr<SceneManager> sceneManager = ServiceLocator::GetService<SceneManager>(ServiceNames::SCENE_MANAGER);
 		if (sceneManager)
 		{
-			sceneManager->LoadScene(SceneNames::MAIN);
+			sceneManager->LoadScene(SceneNames::MAIN_SCENE);
 		}
 	}
 }

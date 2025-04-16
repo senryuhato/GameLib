@@ -1,9 +1,9 @@
 #include "../GameXLib/Runtime/System/GameXLib.h"
-#include "../GameXLib/Runtime/System/ServiceLocator.h"
-#include "../GameXLib/Runtime/UI/ImGuiManager.h"
-#include "../GameXLib/Runtime/Scene/SceneManager.h"
-#include "../Source/TitleScene.h"
-#include "../Source/MainScene.h"
+//#include "../GameXLib/Runtime/System/ServiceLocator.h"
+//#include "../GameXLib/Runtime/UI/ImGuiManager.h"
+//#include "../GameXLib/Runtime/Scene/SceneManager.h"
+//#include "../Source/TitleScene.h"
+//#include "../Source/MainScene.h"
 #include "ConfigConstant.h"
 
 #pragma region C++/CLI Windows アプリケーションのエントリポイント
@@ -18,18 +18,16 @@
 int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
 {
 	// ゲーム実行
-	GameXLib& gameXLib = GameXLib::GetInstance();
+	GameXLib gameXLib;
+
+
+	gameXLib.Execute(hInstance, nShowCmd,
+		Config::SCREEN_WIDTH, Config::SCREEN_HEIGHT,
+		Config::WINDOW_TITLE, Config::FRAMERATE);
 
 
 
 
-
-//	
-//	
-//
-//
-//
-//
 //#if 1 // ImGuiが不要の場合、削除することで表示されなくなる
 //	// ImGuiの登録
 //	ServiceLocator::RegisterService<ImGuiManager>(ServiceNames::BASE_IMGUI_MANAGER);
@@ -57,6 +55,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 //	gameXLib.Execute(hInstance, nShowCmd,
 //		Config::SCREEN_WIDTH, Config::SCREEN_HEIGHT, 
 //		Config::WINDOW_TITLE, Config::FRAMERATE);
+
 	// 正常終了
 	return 0;
 }

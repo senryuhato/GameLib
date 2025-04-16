@@ -8,6 +8,16 @@ class Framework
 {
 public:
 	/// <summary>
+	/// インスタンス取得
+	/// </summary>
+	/// <returns></returns>
+	static Framework& GetInstance()
+	{
+		static Framework instance;
+		return instance;
+	}
+
+	/// <summary>
 	/// コンストラクタ
 	/// </summary>
 	Framework();

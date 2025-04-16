@@ -24,10 +24,10 @@ GameXLib::GameXLib()
 	srand(static_cast<unsigned int>(time(nullptr)));
 
 
-	// マネージャーの登録
-	// すでに登録されている場合は登録しない
-	// フレームワーク
-	ServiceLocator::RegisterServiceIfNotExists<Framework>(ServiceNames::FRAMEWORK);
+	//// マネージャーの登録
+	//// すでに登録されている場合は登録しない
+	//// フレームワーク
+	//ServiceLocator::RegisterServiceIfNotExists<Framework>(ServiceNames::FRAMEWORK);
 
 	//// 各種マネージャーの登録
 	//// すでに登録されている場合は登録しない
@@ -63,11 +63,11 @@ bool GameXLib::Execute(
 	_In_ BOOL isUseImGui
 )
 {
-	// 初期化
-	if (!Initialize(instance, nShowCmd, screenWidth, screenHeight, windowTitle, defaultFramerate))
-	{
-		return false;
-	}
+	//// 初期化
+	//if (!Initialize(instance, nShowCmd, screenWidth, screenHeight, windowTitle, defaultFramerate))
+	//{
+	//	return false;
+	//}
 	//// ゲーム処理
 	//Run();
 	//// 終了処理

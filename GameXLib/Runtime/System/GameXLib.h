@@ -4,19 +4,20 @@
 /// <summary>
 /// ゲーム全体を管理するライブラリクラス。
 /// ゲームのエントリーポイントとして機能
+/// バージョン:v1.00
 /// </summary>
 class GameXLib
 {
 public:
 	/// <summary>
-	/// インスタンス取得
+	/// コンストラクタ
 	/// </summary>
-	/// <returns></returns>
-	static GameXLib& GetInstance()
-	{
-		static GameXLib instance;
-		return instance;
-	}
+	GameXLib();
+
+	/// <summary>
+	/// デストラクタ
+	/// </summary>
+	~GameXLib() = default;
 
 	/// <summary>
 	/// 実行処理
@@ -37,6 +38,16 @@ public:
 		_In_ UINT defaultFramerate = 60,
 		_In_ BOOL isUseImGui = false
 	);
+
+
+
+
+
+
+
+
+
+
 
 	/// <summary>
 	/// フレームワークの初期化（ウィンドウと DirectX のセットアップ）
@@ -71,15 +82,7 @@ public:
 	int Run();
 
 private:
-	/// <summary>
-	/// コンストラクタ
-	/// </summary>
-	GameXLib();
-
-	/// <summary>
-	/// デストラクタ
-	/// </summary>
-	~GameXLib() = default;
+	
 
 	/// <summary>
 	/// ウィンドウメッセージをディスパッチ。
@@ -142,9 +145,6 @@ private:
 		_In_ LPCWSTR windowTitle,
 		_In_ DWORD windowStyle = WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME | WS_VISIBLE);
 private:
-	GameXLibConfig config; // 設定用
-
-
 	HWND hwnd = nullptr; // ウィンドウハンドル
 	bool isShowFrameRate = true; // フレームレートを表示させるか
 	const LPCWSTR CLASS_NAME = L"GameProject"; // window名
