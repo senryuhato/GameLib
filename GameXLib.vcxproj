@@ -19,16 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameXLib\Runtime\Framework\Framework.h" />
     <ClInclude Include="GameXLib\Runtime\Graphics\GraphicsManager.h" />
     <ClInclude Include="GameXLib\Runtime\Scene\Scene.h" />
-    <ClInclude Include="GameXLib\Runtime\Scene\SceneManager.h" />
     <ClInclude Include="GameXLib\Runtime\Serialization\Cereal.h" />
-    <ClInclude Include="GameXLib\Runtime\System\GameXLib.h" />
     <ClInclude Include="GameXLib\Runtime\System\Misc.h" />
-    <ClInclude Include="GameXLib\Runtime\System\ServiceLocator.h" />
     <ClInclude Include="GameXLib\Runtime\Timer\HighResolutionTimer.h" />
-    <ClInclude Include="GameXLib\Runtime\Timer\TimeManager.h" />
     <ClInclude Include="GameXLib\Runtime\UI\ImGui.h" />
     <ClInclude Include="GameXLib\Runtime\UI\imGuiDX11.h" />
     <ClInclude Include="GameXLib\Runtime\UI\ImGuiManager.h" />
@@ -60,17 +55,13 @@
     <ClInclude Include="GameXLib\ThirdParty\Sample\Sources\texture.h" />
     <ClInclude Include="GameXLib\ThirdParty\Sample\TextureResource.h" />
     <ClInclude Include="GameXLib\ThirdParty\Sample\Transform.h" />
-    <ClInclude Include="Source\ConfigConstant.h" />
     <ClInclude Include="Source\MainScene.h" />
+    <ClInclude Include="Source\SystemInstance.h" />
     <ClInclude Include="Source\TitleScene.h" />
+    <ClInclude Include="Source\WinMain.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameXLib\Runtime\Framework\Framework.cpp" />
     <ClCompile Include="GameXLib\Runtime\Graphics\GraphicsManager.cpp" />
-    <ClCompile Include="GameXLib\Runtime\Scene\SceneManager.cpp" />
-    <ClCompile Include="GameXLib\Runtime\System\GameXLib.cpp" />
-    <ClCompile Include="GameXLib\Runtime\System\ServiceLocator.cpp" />
-    <ClCompile Include="GameXLib\Runtime\Timer\TimeManager.cpp" />
     <ClCompile Include="GameXLib\Runtime\UI\ImGuiManager.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\DirectXTex\WICTextureLoader11.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui.cpp" />
@@ -127,26 +118,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>

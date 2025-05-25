@@ -1,10 +1,7 @@
 #include <windows.h>
 #include "TitleScene.h"
-#include "ConfigConstant.h"
-#include "../GameXLib/Runtime/Scene/SceneManager.h"
 #include "../GameXLib/Runtime/UI/ImGui.h"
 #include "..\GameXLib\Runtime\UI\ImGuiManager.h"
-#include "..\GameXLib\Runtime\System\ServiceLocator.h"
 
 #pragma region èâä˙âªèàóù
 /// <summary>
@@ -22,20 +19,20 @@ void TitleScene::Initialize()
 /// </summary>
 void TitleScene::Update()
 {
-	std::shared_ptr<BaseImGuiManager> baseImGuiManager = ServiceLocator::GetService<BaseImGuiManager>(ServiceNames::BASE_IMGUI_MANAGER);
-	// UIï\é¶èàóù
-	if (baseImGuiManager)
-	{
-		baseImGuiManager->RegisterImGuiFunction(std::bind(&TitleScene::ShowGUI, this));
-	}
-	if (GetAsyncKeyState('1') & 1)
-	{
-		std::shared_ptr<SceneManager> sceneManager = ServiceLocator::GetService<SceneManager>(ServiceNames::SCENE_MANAGER);
-		if (sceneManager)
-		{
-			sceneManager->LoadScene(SceneNames::MAIN_SCENE);
-		}
-	}
+	//std::shared_ptr<BaseImGuiManager> baseImGuiManager = ServiceLocator::GetService<BaseImGuiManager>(ServiceNames::BASE_IMGUI_MANAGER);
+	//// UIï\é¶èàóù
+	//if (baseImGuiManager)
+	//{
+	//	baseImGuiManager->RegisterImGuiFunction(std::bind(&TitleScene::ShowGUI, this));
+	//}
+	//if (GetAsyncKeyState('1') & 1)
+	//{
+	//	std::shared_ptr<SceneManager> sceneManager = ServiceLocator::GetService<SceneManager>(ServiceNames::SCENE_MANAGER);
+	//	if (sceneManager)
+	//	{
+	//		sceneManager->LoadScene(SceneNames::MAIN_SCENE);
+	//	}
+	//}
 }
 #pragma endregion
 

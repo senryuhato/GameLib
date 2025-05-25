@@ -108,26 +108,11 @@
     <ClInclude Include="GameXLib\Runtime\UI\ImGuiManager.h">
       <Filter>GameXLib\Runtime\UI</Filter>
     </ClInclude>
-    <ClInclude Include="GameXLib\Runtime\Timer\TimeManager.h">
-      <Filter>GameXLib\Runtime\Timer</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\Runtime\System\ServiceLocator.h">
-      <Filter>GameXLib\Runtime\System</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\Runtime\Framework\Framework.h">
-      <Filter>GameXLib\Runtime\Framework</Filter>
-    </ClInclude>
     <ClInclude Include="GameXLib\Runtime\System\Misc.h">
       <Filter>GameXLib\Runtime\System</Filter>
     </ClInclude>
     <ClInclude Include="GameXLib\Runtime\Graphics\GraphicsManager.h">
       <Filter>GameXLib\Runtime\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\Runtime\System\GameXLib.h">
-      <Filter>GameXLib\Runtime\System</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\Runtime\Scene\SceneManager.h">
-      <Filter>GameXLib\Runtime\Scene</Filter>
     </ClInclude>
     <ClInclude Include="GameXLib\Runtime\Scene\Scene.h">
       <Filter>GameXLib\Runtime\Scene</Filter>
@@ -210,7 +195,10 @@
     <ClInclude Include="GameXLib\Runtime\UI\ImGui.h">
       <Filter>GameXLib\Runtime\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ConfigConstant.h">
+    <ClInclude Include="Source\WinMain.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SystemInstance.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
@@ -227,26 +215,11 @@
     <ClCompile Include="GameXLib\Runtime\UI\ImGuiManager.cpp">
       <Filter>GameXLib\Runtime\UI</Filter>
     </ClCompile>
-    <ClCompile Include="GameXLib\Runtime\Timer\TimeManager.cpp">
-      <Filter>GameXLib\Runtime\Timer</Filter>
-    </ClCompile>
-    <ClCompile Include="GameXLib\Runtime\Framework\Framework.cpp">
-      <Filter>GameXLib\Runtime\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="GameXLib\Runtime\System\ServiceLocator.cpp">
-      <Filter>GameXLib\Runtime\System</Filter>
-    </ClCompile>
     <ClCompile Include="GameXLib\Runtime\Graphics\GraphicsManager.cpp">
       <Filter>GameXLib\Runtime\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="GameXLib\Runtime\System\GameXLib.cpp">
-      <Filter>GameXLib\Runtime\System</Filter>
-    </ClCompile>
     <ClCompile Include="Source\WinMain.cpp">
       <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="GameXLib\Runtime\Scene\SceneManager.cpp">
-      <Filter>GameXLib\Runtime\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Source\TitleScene.cpp">
       <Filter>ソース ファイル</Filter>

@@ -68,6 +68,7 @@ void ImGuiManager::Uninitialize()
 /// </summary>
 void ImGuiManager::RenderImGuiFrame()
 {
+	if (!initialized) return;
 	// 描画準備
 	NewFrame();
 	// ImGui表示処理
@@ -94,6 +95,7 @@ void ImGuiManager::RenderImGuiFrame()
 /// <returns>メッセージを処理した結果（通常は `DefWindowProc` の戻り値を返す）</returns>
 LRESULT ImGuiManager::WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+	if (!initialized) return 0;
 	return ImGui_ImplWin32_WndProcHandler(hwnd, msg, wParam, lParam);
 }
 #pragma endregion
@@ -104,7 +106,6 @@ LRESULT ImGuiManager::WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM 
 /// </summary>
 void ImGuiManager::NewFrame()
 {
-	if (!initialized) return;
 	// 現在の状況だとウィンドウサイズを変更したとき位置がずれる
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
@@ -118,7 +119,6 @@ void ImGuiManager::NewFrame()
 /// </summary>
 void ImGuiManager::Render()
 {
-	if (!initialized) return;
 	ImGui::Render();
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
