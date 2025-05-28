@@ -3,6 +3,21 @@
 #include <string>
 
 /// <summary>
+/// ワールド座標設定
+/// </summary>
+void CreateWorldTransform();
+
+/// <summary>
+/// カメラ作成
+/// </summary>
+void CreateCamera();
+
+/// <summary>
+/// ステートの作成
+/// </summary>
+void CreateState();
+
+/// <summary>
 /// デフォルト設定でウィンドウを作成します。
 /// 指定されたウィンドウクラスを使用し、標準的な設定のウィンドウを作成します。
 /// クライアント領域のサイズを指定し、それに合うウィンドウサイズを自動調整します。

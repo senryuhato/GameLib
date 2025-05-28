@@ -2,8 +2,10 @@
 #include <time.h>
 #include <sstream>
 #include <map>
+#include <DirectXMath.h>
 #include "WinMain.h"
 #include "..\GameXLib\Runtime\Scene\Scene.h"
+#include "../GameXLib/Runtime/System/Misc.h"
 #include "SystemInstance.h"
 #include "TitleScene.h"
 #include "MainScene.h"
@@ -106,10 +108,45 @@ std::map<std::string, std::unique_ptr<Scene>> scenes;
 /// </summary>
 const UINT syncInterval = SYNC_INTERVAL_VALID;
 
+/// <summary>
+/// 深度ステンシルステート
+/// </summary>
 Microsoft::WRL::ComPtr<ID3D11DepthStencilState> defaultDepthStencilState;
+
+/// <summary>
+/// ラスタライザーステート
+/// </summary>
 Microsoft::WRL::ComPtr<ID3D11RasterizerState> defaultRasterizerState[2];
+
+/// <summary>
+/// ブレンドステート
+/// </summary>
 Microsoft::WRL::ComPtr<ID3D11BlendState> defaultBlendState;
+
+/// <summary>
+/// サンプラーステート
+/// </summary>
 Microsoft::WRL::ComPtr<ID3D11SamplerState> defaultSamplerState[3];
+
+/// <summary>
+/// ViewProjection
+/// </summary>
+DirectX::XMFLOAT4X4 viewProjection;
+
+/// <summary>
+/// ライト位置
+/// </summary>
+DirectX::XMFLOAT4 lightDirection;
+
+/// <summary>
+/// カメラ位置
+/// </summary>
+DirectX::XMFLOAT4 cameraPosition;
+
+/// <summary>
+/// 座標
+/// </summary>
+DirectX::XMFLOAT4X4 worldTransform;
 #pragma endregion
 
 #pragma region C++/CLI Windows アプリケーションのエントリポイント
@@ -162,103 +199,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 				// タイマーリセット
 				systemInstace.highResolutionTimer.Reset();
 
-				//{
-				//	D3D11_DEPTH_STENCIL_DESC depth_stencil_desc;
-				//	depth_stencil_desc.DepthEnable = TRUE;
-				//	depth_stencil_desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-				//	depth_stencil_desc.DepthFunc = D3D11_COMPARISON_LESS_EQUAL;
-				//	depth_stencil_desc.StencilEnable = FALSE;
-				//	depth_stencil_desc.StencilReadMask = 0xFF;
-				//	depth_stencil_desc.StencilWriteMask = 0xFF;
-				//	depth_stencil_desc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
-				//	depth_stencil_desc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_INCR;
-				//	depth_stencil_desc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
-				//	depth_stencil_desc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
-				//	depth_stencil_desc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
-				//	depth_stencil_desc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_DECR;
-				//	depth_stencil_desc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
-				//	depth_stencil_desc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
-				//	hr = device->CreateDepthStencilState(&depth_stencil_desc, default_depth_stencil_state.GetAddressOf());
-				//	_ASSERT_EXPR(SUCCEEDED(hr), hr_trace(hr));
-				//}
-
-				//{
-				//	D3D11_RASTERIZER_DESC rasterizer_desc = {};
-				//	rasterizer_desc.FillMode = D3D11_FILL_SOLID;
-				//	rasterizer_desc.CullMode = D3D11_CULL_BACK;
-				//	rasterizer_desc.FrontCounterClockwise = FALSE;
-				//	rasterizer_desc.DepthBias = 0;
-				//	rasterizer_desc.DepthBiasClamp = 0;
-				//	rasterizer_desc.SlopeScaledDepthBias = 0;
-				//	rasterizer_desc.DepthClipEnable = TRUE;
-				//	rasterizer_desc.ScissorEnable = FALSE;
-				//	rasterizer_desc.MultisampleEnable = TRUE;
-				//	rasterizer_desc.AntialiasedLineEnable = FALSE;
-				//	hr = device->CreateRasterizerState(&rasterizer_desc, default_rasterizer_state[0].GetAddressOf());
-				//	_ASSERT_EXPR(SUCCEEDED(hr), hr_trace(hr));
-
-				//	rasterizer_desc.FrontCounterClockwise = TRUE;
-				//	hr = device->CreateRasterizerState(&rasterizer_desc, default_rasterizer_state[1].GetAddressOf());
-				//	_ASSERT_EXPR(SUCCEEDED(hr), hr_trace(hr));
-				//}
-
-				//{
-				//	D3D11_BLEND_DESC blend_desc = {};
-				//	blend_desc.AlphaToCoverageEnable = FALSE;
-				//	blend_desc.IndependentBlendEnable = FALSE;
-				//	blend_desc.RenderTarget[0].BlendEnable = TRUE;
-				//	blend_desc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
-				//	blend_desc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
-				//	blend_desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
-				//	blend_desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
-				//	blend_desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_INV_SRC_ALPHA;
-				//	blend_desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
-				//	blend_desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-				//	hr = device->CreateBlendState(&blend_desc, default_blend_state.GetAddressOf());
-				//	_ASSERT_EXPR(SUCCEEDED(hr), hr_trace(hr));
-				//}
-
-				//{
-				//	D3D11_SAMPLER_DESC sampler_desc;
-				//	sampler_desc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
-				//	sampler_desc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
-				//	sampler_desc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
-				//	sampler_desc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
-				//	sampler_desc.MipLODBias = 0;
-				//	sampler_desc.MaxAnisotropy = 16;
-				//	sampler_desc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
-				//	sampler_desc.BorderColor[0] = 0.0f;
-				//	sampler_desc.BorderColor[1] = 0.0f;
-				//	sampler_desc.BorderColor[2] = 0.0f;
-				//	sampler_desc.BorderColor[3] = 0.0f;
-				//	sampler_desc.MinLOD = 0;
-				//	sampler_desc.MaxLOD = D3D11_FLOAT32_MAX;
-				//	hr = device->CreateSamplerState(&sampler_desc, default_sampler_state[0].GetAddressOf());
-				//	_ASSERT_EXPR(SUCCEEDED(hr), hr_trace(hr));
-
-				//	sampler_desc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
-				//	hr = device->CreateSamplerState(&sampler_desc, default_sampler_state[1].GetAddressOf());
-				//	_ASSERT_EXPR(SUCCEEDED(hr), hr_trace(hr));
-
-				//	sampler_desc.Filter = D3D11_FILTER_ANISOTROPIC;
-				//	hr = device->CreateSamplerState(&sampler_desc, default_sampler_state[2].GetAddressOf());
-				//	_ASSERT_EXPR(SUCCEEDED(hr), hr_trace(hr));
-				//}
-
-				//{
-				//	D3D11_BUFFER_DESC buffer_desc{};
-				//	buffer_desc.ByteWidth = sizeof(scene_constants);
-				//	buffer_desc.Usage = D3D11_USAGE_DEFAULT;
-				//	buffer_desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-				//	buffer_desc.CPUAccessFlags = 0;
-				//	buffer_desc.MiscFlags = 0;
-				//	buffer_desc.StructureByteStride = 0;
-				//	hr = device->CreateBuffer(&buffer_desc, nullptr, constant_buffers[0].GetAddressOf());
-				//	_ASSERT_EXPR(SUCCEEDED(hr), hr_trace(hr));
-				//}
-
-
-
+				// ステートの作成
+				CreateState();
 
 				// ゲームループ
 				while (DispatchWindowMessage())
@@ -292,7 +234,6 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 						// シーン更新
 						scenes[currentSceneKey]->Update();
 					}
-
 					// ゲーム描画
 					ID3D11DeviceContext* immediateContext = systemInstace.graphicsManager.GetDeviceContext();
 					ID3D11RenderTargetView* renderTargetView = systemInstace.graphicsManager.GetRenderTargetView();
@@ -304,8 +245,19 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 					immediateContext->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 					immediateContext->OMSetRenderTargets(1, &renderTargetView, depthStencilView);
 
+					// ステート設定
+					immediateContext->PSSetSamplers(0, 3, defaultSamplerState[0].GetAddressOf());
+					immediateContext->OMSetBlendState(defaultBlendState.Get(), nullptr, 0xFFFFFFFF);
+					immediateContext->RSSetState(defaultRasterizerState[0].Get());
+					immediateContext->OMSetDepthStencilState(defaultDepthStencilState.Get(), 1);
+					immediateContext->RSSetState(defaultRasterizerState[0].Get());
 
+					// カメラ作成
+					CreateCamera();
 
+					// ワールド座標設定
+					CreateWorldTransform();
+						
 					// ゲーム処理
 					scenes[currentSceneKey]->Render();
 
@@ -331,6 +283,159 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 
 	// 正常終了
 	return 0;
+}
+#pragma endregion
+
+#pragma region ワールド座標設定
+/// <summary>
+/// ワールド座標設定
+/// </summary>
+void CreateWorldTransform()
+{
+	// 軸変換
+	const DirectX::XMFLOAT4X4 coordinateSystemTransforms[]{
+	  { -1, 0, 0, 0, 0, 1,  0, 0, 0, 0, 1, 0, 0, 0, 0, 1 }, // 0:RHS Y-UP 
+	  {  1, 0, 0, 0, 0, 1,  0, 0, 0, 0, 1, 0, 0, 0, 0, 1 }, // 1:LHS Y-UP 
+	  { -1, 0, 0, 0, 0, 0, -1, 0, 0, 1, 0, 0, 0, 0, 0, 1 }, // 2:RHS Z-UP 
+	  {  1, 0, 0, 0, 0, 0,  1, 0, 0, 1, 0, 0, 0, 0, 0, 1 },  // 3:LHS Z-UP 
+	};
+
+	// 軸
+	const float scale_factor = 1.0f;
+	DirectX::XMMATRIX coordinate{ DirectX::XMLoadFloat4x4(&coordinateSystemTransforms[1]) * DirectX::XMMatrixScaling(scale_factor, scale_factor, scale_factor) };
+
+	// XYZの回転設定
+	constexpr float roll = DirectX::XMConvertToRadians(360);
+	constexpr float pitch = DirectX::XMConvertToRadians(360);
+	constexpr float yaw = DirectX::XMConvertToRadians(360);
+
+	// スケーリング行列
+	DirectX::XMMATRIX scale{ DirectX::XMMatrixScaling(0.1f, 0.1f, 0.1f) };
+	// 回転行列
+	DirectX::XMMATRIX rotation{ DirectX::XMMatrixRotationRollPitchYaw(roll, pitch, yaw) };
+	// 平行移動行列
+	DirectX::XMMATRIX translation{ DirectX::XMMatrixTranslation(0,0,0) };
+	
+	// ワールド行列
+	DirectX::XMStoreFloat4x4(&worldTransform, coordinate * scale * rotation * translation);
+}
+#pragma endregion
+
+#pragma region カメラ作成
+/// <summary>
+/// カメラ作成
+/// </summary>
+void CreateCamera()
+{
+	// 画面サイズ取得
+	D3D11_VIEWPORT viewport;
+	UINT numViewports{ 1 };
+	systemInstace.graphicsManager.GetDeviceContext()->RSGetViewports(&numViewports, &viewport);
+
+	// アスペクト比
+	float aspectRatio{ viewport.Width / viewport.Height };
+	// 透視投影作成
+	DirectX::XMMATRIX projection{ DirectX::XMMatrixPerspectiveFovLH(DirectX::XMConvertToRadians(30), aspectRatio, 0.1f, 1000.0f) };
+
+	// カメラ情報設定
+	DirectX::XMVECTOR eye{ DirectX::XMVectorSet(0.0f, 0.0f, -250.0f, 1.0f) };
+	DirectX::XMVECTOR focus{ DirectX::XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f) };
+	DirectX::XMVECTOR up{ DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f) };
+	DirectX::XMMATRIX view{ DirectX::XMMatrixLookAtLH(eye, focus, up) };
+
+	// ViewProjection作成
+	DirectX::XMStoreFloat4x4(&viewProjection, view * projection);
+}
+#pragma endregion
+
+#pragma region ステートの作成
+/// <summary>
+/// ステートの作成
+/// </summary>
+void CreateState()
+{
+	HRESULT hr = S_OK;
+
+	// 深度ステンシルステートの作成
+	D3D11_DEPTH_STENCIL_DESC depthStencilDesc;
+	depthStencilDesc.DepthEnable = TRUE;
+	depthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+	depthStencilDesc.DepthFunc = D3D11_COMPARISON_LESS_EQUAL;
+	depthStencilDesc.StencilEnable = FALSE;
+	depthStencilDesc.StencilReadMask = 0xFF;
+	depthStencilDesc.StencilWriteMask = 0xFF;
+	depthStencilDesc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+	depthStencilDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_INCR;
+	depthStencilDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+	depthStencilDesc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+	depthStencilDesc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+	depthStencilDesc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_DECR;
+	depthStencilDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+	depthStencilDesc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+	hr = systemInstace.graphicsManager.GetDevice()->CreateDepthStencilState(&depthStencilDesc, defaultDepthStencilState.GetAddressOf());
+	_ASSERT_EXPR(SUCCEEDED(hr), HRTrace(hr));
+
+	// ラスタライザーステート
+	D3D11_RASTERIZER_DESC rasterizerDesc = {};
+	rasterizerDesc.FillMode = D3D11_FILL_SOLID;
+	rasterizerDesc.CullMode = D3D11_CULL_BACK;
+	rasterizerDesc.DepthBias = 0;
+	rasterizerDesc.DepthBiasClamp = 0;
+	rasterizerDesc.SlopeScaledDepthBias = 0;
+	rasterizerDesc.DepthClipEnable = TRUE;
+	rasterizerDesc.ScissorEnable = FALSE;
+	rasterizerDesc.MultisampleEnable = TRUE;
+	rasterizerDesc.AntialiasedLineEnable = FALSE;
+	// DirectX軸
+	rasterizerDesc.FrontCounterClockwise = FALSE;
+	hr = systemInstace.graphicsManager.GetDevice()->CreateRasterizerState(&rasterizerDesc, defaultRasterizerState[0].GetAddressOf());
+	_ASSERT_EXPR(SUCCEEDED(hr), HRTrace(hr));
+	// OpenGL軸
+	rasterizerDesc.FrontCounterClockwise = TRUE;
+	hr = systemInstace.graphicsManager.GetDevice()->CreateRasterizerState(&rasterizerDesc, defaultRasterizerState[1].GetAddressOf());
+	_ASSERT_EXPR(SUCCEEDED(hr), HRTrace(hr));
+
+	// ブレンドステート
+	D3D11_BLEND_DESC blendDesc = {};
+	blendDesc.AlphaToCoverageEnable = FALSE;
+	blendDesc.IndependentBlendEnable = FALSE;
+	blendDesc.RenderTarget[0].BlendEnable = TRUE;
+	blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+	blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+	blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+	blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+	blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_INV_SRC_ALPHA;
+	blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+	blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+	hr = systemInstace.graphicsManager.GetDevice()->CreateBlendState(&blendDesc, defaultBlendState.GetAddressOf());
+	_ASSERT_EXPR(SUCCEEDED(hr), HRTrace(hr));
+
+	// サンプラーステート
+	D3D11_SAMPLER_DESC samplerDesc;
+	samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+	samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+	samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+	samplerDesc.MipLODBias = 0;
+	samplerDesc.MaxAnisotropy = 16;
+	samplerDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
+	samplerDesc.BorderColor[0] = 0.0f;
+	samplerDesc.BorderColor[1] = 0.0f;
+	samplerDesc.BorderColor[2] = 0.0f;
+	samplerDesc.BorderColor[3] = 0.0f;
+	samplerDesc.MinLOD = 0;
+	samplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
+	// 
+	samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
+	hr = systemInstace.graphicsManager.GetDevice()->CreateSamplerState(&samplerDesc, defaultSamplerState[0].GetAddressOf());
+	_ASSERT_EXPR(SUCCEEDED(hr), HRTrace(hr));
+	// 
+	samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+	hr = systemInstace.graphicsManager.GetDevice()->CreateSamplerState(&samplerDesc, defaultSamplerState[1].GetAddressOf());
+	_ASSERT_EXPR(SUCCEEDED(hr), HRTrace(hr));
+	// 
+	samplerDesc.Filter = D3D11_FILTER_ANISOTROPIC;
+	hr = systemInstace.graphicsManager.GetDevice()->CreateSamplerState(&samplerDesc, defaultSamplerState[2].GetAddressOf());
+	_ASSERT_EXPR(SUCCEEDED(hr), HRTrace(hr));
 }
 #pragma endregion
 
