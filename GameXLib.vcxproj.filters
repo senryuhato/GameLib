@@ -79,6 +79,15 @@
     <Filter Include="GameXLib\ThirdParty\DirectXTex">
       <UniqueIdentifier>{8889ce2a-5bf7-475f-8024-6c10446a2b0e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Scene">
+      <UniqueIdentifier>{750bc87b-1dcf-4e18-b6bd-fdf0ab9e5473}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scene">
+      <UniqueIdentifier>{c7677cc8-eb3b-4ff5-8517-01c12f128999}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameXLib\Runtime\Resource">
+      <UniqueIdentifier>{191cf99f-080d-44bb-93a2-b78c317154a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imconfig.h">
@@ -116,12 +125,6 @@
     </ClInclude>
     <ClInclude Include="GameXLib\Runtime\Scene\Scene.h">
       <Filter>GameXLib\Runtime\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\TitleScene.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\MainScene.h">
-      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="GameXLib\Runtime\Serialization\Cereal.h">
       <Filter>GameXLib\Runtime\Serialization</Filter>
@@ -201,6 +204,24 @@
     <ClInclude Include="Source\SystemInstance.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Sprite2D.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resources.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\TitleScene.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\MainScene.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\Runtime\Resource\ResourceManager.h">
+      <Filter>GameXLib\Runtime\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\Runtime\Component\SpriteComponent.h">
+      <Filter>GameXLib\Runtime\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui.cpp">
@@ -219,9 +240,6 @@
       <Filter>GameXLib\Runtime\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Source\WinMain.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\TitleScene.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="GameXLib\ThirdParty\Sample\Audio.cpp">
@@ -281,8 +299,23 @@
     <ClCompile Include="GameXLib\ThirdParty\DirectXTex\WICTextureLoader11.cpp">
       <Filter>GameXLib\ThirdParty\DirectXTex</Filter>
     </ClCompile>
-    <ClCompile Include="Source\MainScene.cpp">
+    <ClCompile Include="Source\Sprite2D.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Resources.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\MainScene.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\TitleScene.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\Runtime\Resource\ResourceManager.cpp">
+      <Filter>GameXLib\Runtime\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\Runtime\Component\SpriteComponent.cpp">
+      <Filter>GameXLib\Runtime\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

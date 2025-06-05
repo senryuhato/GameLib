@@ -1,116 +1,104 @@
-#pragma once
+ï»¿#pragma once
 #include <wrl.h>
 #include <d3d11.h>
 
-/// <summary>
-/// DirectX 11 ‚ğ—p‚¢‚½ƒOƒ‰ƒtƒBƒbƒNƒXŠÇ—ƒNƒ‰ƒX
-/// </summary>
+/// @brief DirectX 11 ã‚’ç”¨ã„ãŸã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ã‚¹ç®¡ç†ã‚¯ãƒ©ã‚¹
 class GraphicsManager
 {
 public:
-	/// <summary>
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	/// </summary>
+	/// @brief ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	GraphicsManager() = default;
 
-	/// <summary>
-	/// ƒfƒXƒgƒ‰ƒNƒ^
-	/// </summary>
-	~GraphicsManager() { Uninitialize(); }
+	/// @brief ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	~GraphicsManager() 
+	{
+		Uninitialize();
+	}
 
-	/// <summary>
-	/// DirectX ‚Ì‰Šú‰»
-	/// </summary>
-	/// <param name="hwnd">ƒEƒBƒ“ƒhƒEƒnƒ“ƒhƒ‹</param>
-	/// <param name="defaultFramerate">–Ú•WƒtƒŒ[ƒ€ƒŒ[ƒgiƒfƒtƒHƒ‹ƒg: 60j</param>
-	/// <param name="isFullscreen">ƒtƒ‹ƒXƒNƒŠ[ƒ“‚Ìİ’èBiƒfƒtƒHƒ‹ƒg: falsejtrue:ƒtƒ‹ƒXƒNƒŠ[ƒ“Afalse:’Êí</param>
-	/// <returns>Œ‹‰Ê</returns>
+	/// @brief DirectX ã®åˆæœŸåŒ–
+    /// @param hwnd ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
+    /// @param defaultFramerate ç›®æ¨™ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¬ãƒ¼ãƒˆ(ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ: 60)
+    /// @param isFullscreen ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®è¨­å®šã€‚true:ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã€false:é€šå¸¸
+    /// @return çµæœ
 	bool Initialize(
-		HWND hwnd, 
+		HWND hwnd,
 		UINT defaultFramerate = 60,
 		BOOL isFullscreen = false);
 
-	/// <summary>
-	/// DirectX ‚ÌƒŠƒ\[ƒX‚ğ‰ğ•ú
-	/// </summary>
+	/// @brief DirectX ã®ãƒªã‚½ãƒ¼ã‚¹ã‚’è§£æ”¾
 	void Uninitialize();
 
 public:
-	/// <summary>
-	/// Direct3D ƒfƒoƒCƒX‚ğæ“¾
-	/// </summary>
-	/// <returns>ID3D11Device ‚Ìƒ|ƒCƒ“ƒ^</returns>
-	ID3D11Device* GetDevice() const { return device.Get(); }
+	/// @brief Direct3D ãƒ‡ãƒã‚¤ã‚¹ã‚’å–å¾—
+	/// @return ID3D11Device ã®ãƒã‚¤ãƒ³ã‚¿
+	ID3D11Device* GetDevice() const {
+		return device.Get();
+	}
 
-	/// <summary>
-	/// ƒfƒoƒCƒXƒRƒ“ƒeƒLƒXƒg‚ğæ“¾
-	/// </summary>
-	/// <returns>ID3D11DeviceContext ‚Ìƒ|ƒCƒ“ƒ^</returns>
-	ID3D11DeviceContext* GetDeviceContext() const { return immediateContext.Get(); }
+	/// @brief ãƒ‡ãƒã‚¤ã‚¹ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã‚’å–å¾—
+	/// @return ID3D11DeviceContextã®ãƒã‚¤ãƒ³ã‚¿
+	ID3D11DeviceContext* GetDeviceContext() const {
+		return immediateContext.Get();
+	}
 
-	/// <summary>
-    /// ƒXƒƒbƒvƒ`ƒFƒCƒ“‚ğæ“¾
-    /// </summary>
-    /// <returns>IDXGISwapChain ‚Ìƒ|ƒCƒ“ƒ^</returns>
-	IDXGISwapChain* GetSwapChain() const { return swapChain.Get(); }
+	/// @brief ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³ã‚’å–å¾—
+	/// @return IDXGISwapChainã®ãƒã‚¤ãƒ³ã‚¿
+	IDXGISwapChain* GetSwapChain() const {
+		return swapChain.Get();
+	}
 
-	/// <summary>
-	/// ƒtƒŒ[ƒ€ƒoƒbƒtƒ@—pƒŒƒ“ƒ_[ƒ^[ƒQƒbƒgƒrƒ…[‚ğæ“¾
-	/// </summary>
-	/// <returns>ID3D11RenderTargetView ‚Ìƒ|ƒCƒ“ƒ^</returns>
-	ID3D11RenderTargetView* GetRenderTargetView() const { return renderTargetView.Get(); }
+	/// @brief ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ç”¨ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼ã‚’å–å¾—
+	/// @return ID3D11RenderTargetViewã®ãƒã‚¤ãƒ³ã‚¿
+	ID3D11RenderTargetView* GetRenderTargetView() const {
+		return renderTargetView.Get();
+	}
 
-	/// <summary>
-	/// ƒtƒŒ[ƒ€ƒoƒbƒtƒ@—pƒfƒvƒXƒXƒeƒ“ƒVƒ‹ƒrƒ…[‚ğæ“¾
-	/// </summary>
-	/// <returns>ID3D11DepthStencilView ‚Ìƒ|ƒCƒ“ƒ^</returns>
-	ID3D11DepthStencilView* GetDepthStencilView() const { return depthStencilView.Get(); }
+	/// @brief ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ç”¨ãƒ‡ãƒ—ã‚¹ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ“ãƒ¥ãƒ¼ã‚’å–å¾—
+	/// @return ID3D11DepthStencilView ã®ãƒã‚¤ãƒ³ã‚¿
+	ID3D11DepthStencilView* GetDepthStencilView() const {
+		return depthStencilView.Get();
+	}
 
 private:
-	/// <summary>
-	/// ƒfƒoƒCƒX•ƒXƒƒbƒvƒ`ƒFƒCƒ“‚Ìì¬
-	/// </summary>
-	/// <param name="hwnd">ƒEƒBƒ“ƒhƒEƒnƒ“ƒhƒ‹</param>
-	/// <param name="frameBufferWidth">ƒtƒŒ[ƒ€ƒoƒbƒtƒ@‚Ì•</param>
-	/// <param name="frameBufferHeight">ƒtƒŒ[ƒ€ƒoƒbƒtƒ@‚Ì‚‚³</param>
-	/// <param name="isFullscreen">ƒtƒ‹ƒXƒNƒŠ[ƒ“‚Ìİ’èBtrue:ƒtƒ‹ƒXƒNƒŠ[ƒ“Afalse:’Êí</param>
+	/// @brief ãƒ‡ãƒã‚¤ã‚¹ï¼†ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³ã®ä½œæˆ
+	/// @param hwnd ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
+	/// @param frameBufferWidth ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ã®å¹…
+	/// @param frameBufferHeight ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ã®é«˜ã•
+	/// @param defaultFramerate ç›®æ¨™ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¬ãƒ¼ãƒˆ
+	/// @param isFullscreen ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®è¨­å®šã€‚true:ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã€false:é€šå¸¸
 	void CreateDeviceAndSwapChain(
-		HWND hwnd, 
-		UINT frameBufferWidth, 
-		UINT frameBufferHeight, 
+		HWND hwnd,
+		UINT frameBufferWidth,
+		UINT frameBufferHeight,
 		UINT defaultFramerate,
 		BOOL isFullscreen);
-
-	/// <summary>
-	/// ƒŒ[ƒ€ƒoƒbƒtƒ@—p‚ÌƒŒƒ“ƒ_[ƒ^[ƒQƒbƒgƒrƒ…[iRTVj‚ğì¬
-	/// </summary>
+	
+	/// @brief ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ç”¨ã®ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼ï¼ˆRTVï¼‰ã‚’ä½œæˆ
 	void CreateRTVForFrameBuffer();
 
-	/// <summary>
-	/// ƒtƒŒ[ƒ€ƒoƒbƒtƒ@—p‚Ì[“xƒXƒeƒ“ƒVƒ‹ƒrƒ…[iDSVj‚ğì¬
-	/// </summary>
-	/// <param name="frameBufferWidth">ƒtƒŒ[ƒ€ƒoƒbƒtƒ@‚Ì•</param>
-	/// <param name="frameBufferHeight">ƒtƒŒ[ƒ€ƒoƒbƒtƒ@‚Ì‚‚³</param>
+	/// @brief ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ç”¨ã®æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ“ãƒ¥ãƒ¼ï¼ˆDSVï¼‰ã‚’ä½œæˆ
+	/// @param frameBufferWidth ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ã®å¹…
+	/// @param frameBufferHeight ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ã®é«˜ã•
 	void CreateDSVForFrameBuffer(
-		UINT frameBufferWidth, 
+		UINT frameBufferWidth,
 		UINT frameBufferHeight);
 
 private:
-	// ƒXƒƒbƒvƒ`ƒFƒCƒ“
+	// ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³
 	Microsoft::WRL::ComPtr<IDXGISwapChain> swapChain = nullptr;
-	// Direct3D ƒfƒoƒCƒX
+	// Direct3D ãƒ‡ãƒã‚¤ã‚¹
 	Microsoft::WRL::ComPtr<ID3D11Device> device = nullptr;
-	// ƒfƒoƒCƒXƒRƒ“ƒeƒLƒXƒg
+	// ãƒ‡ãƒã‚¤ã‚¹ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆ
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> immediateContext = nullptr;
-	// ƒtƒŒ[ƒ€ƒoƒbƒtƒ@—pƒŒƒ“ƒ_[ƒ^[ƒQƒbƒgƒrƒ…[@
+	// ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ç”¨ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼ã€€
 	Microsoft::WRL::ComPtr<ID3D11RenderTargetView>  renderTargetView = nullptr;
-	// ƒtƒŒ[ƒ€ƒoƒbƒtƒ@—pƒfƒvƒXƒXƒeƒ“ƒVƒ‹ƒrƒ…[
+	// ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ç”¨ãƒ‡ãƒ—ã‚¹ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ“ãƒ¥ãƒ¼
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilView>  depthStencilView = nullptr;
 
-	//ƒtƒŒ[ƒ€ƒoƒbƒtƒ@‚Ì•
-	UINT frameBufferWidth = 0; 
-	//ƒtƒŒ[ƒ€ƒoƒbƒtƒ@‚Ì‚‚³
+	//ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ã®å¹…
+	UINT frameBufferWidth = 0;
+	//ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ã®é«˜ã•
 	UINT frameBufferHeight = 0;
-	// ‰ŠúƒtƒŒ[ƒ€ƒŒ[ƒg
+	// åˆæœŸãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¬ãƒ¼ãƒˆ
 	UINT defaultFramerate = 60;
 };

@@ -38,6 +38,11 @@ HWND CreateDefaultWindow(
 	_In_ DWORD windowStyle = WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME | WS_VISIBLE);
 
 /// <summary>
+/// ブレンドステートの作成
+/// </summary>
+void CreateBlendState();
+
+/// <summary>
 /// シーン登録
 /// </summary>
 /// <typeparam name="T">登録するシーンの型</typeparam>

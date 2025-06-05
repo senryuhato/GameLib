@@ -1,5 +1,5 @@
 #pragma once
-#include "../GameXLib/Runtime/Scene/Scene.h"
+#include "../../GameXLib/Runtime/Scene/Scene.h"
 
 /// <summary>
 /// タイトルシーン

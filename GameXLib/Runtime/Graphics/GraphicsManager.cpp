@@ -1,35 +1,33 @@
-#include "GraphicsManager.h"
+ï»¿#include "GraphicsManager.h"
 #include "../System/Misc.h"
 
-#pragma region DirectX ‚Ì‰Šú‰»
-/// <summary>
-/// DirectX ‚Ì‰Šú‰»
-/// </summary>
-/// <param name="hwnd">ƒEƒBƒ“ƒhƒEƒnƒ“ƒhƒ‹</param>
-/// <param name="defultFramerate">–Ú•WƒtƒŒ[ƒ€ƒŒ[ƒgiƒfƒtƒHƒ‹ƒg: 60j</param>
-/// <param name="isFullscreen">ƒtƒ‹ƒXƒNƒŠ[ƒ“‚Ìİ’èBtrue:ƒtƒ‹ƒXƒNƒŠ[ƒ“Afalse:’Êí</param>
-/// <returns>Œ‹‰Ê</returns>
+#pragma region DirectX ã®åˆæœŸåŒ–
+/// @brief DirectX ã®åˆæœŸåŒ–
+/// @param hwnd ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
+/// @param defaultFramerate ç›®æ¨™ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¬ãƒ¼ãƒˆ(ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ: 60)
+/// @param isFullscreen ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®è¨­å®šã€‚true:ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã€false:é€šå¸¸
+/// @return çµæœ
 bool GraphicsManager::Initialize(
 	HWND hwnd,
 	UINT defaultFramerate,
 	BOOL isFullscreen)
 {
-	// ƒtƒŒ[ƒ€ƒŒ[ƒg‚Ìİ’è
+	// ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¬ãƒ¼ãƒˆã®è¨­å®š
 	this->defaultFramerate = defaultFramerate;
-	// ‰æ–Ê‚ÌƒTƒCƒY‚ğæ“¾‚·‚éB
+	// ç”»é¢ã®ã‚µã‚¤ã‚ºã‚’å–å¾—ã™ã‚‹ã€‚
 	RECT rc;
 	GetClientRect(hwnd, &rc);
 	frameBufferWidth = rc.right - rc.left;
 	frameBufferHeight = rc.bottom - rc.top;
 
-	// ƒfƒoƒCƒX•ƒXƒƒbƒvƒ`ƒFƒCƒ“‚Ìì¬
+	// ãƒ‡ãƒã‚¤ã‚¹ï¼†ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³ã®ä½œæˆ
 	CreateDeviceAndSwapChain(hwnd, frameBufferWidth, frameBufferHeight, defaultFramerate, isFullscreen);
-	// ƒtƒŒ[ƒ€ƒoƒbƒtƒ@—pRTV‚Ìì¬
+	// ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ç”¨RTVã®ä½œæˆ
 	CreateRTVForFrameBuffer();
-	// ƒtƒŒ[ƒ€ƒoƒbƒtƒ@—pDSV‚Ìì¬
+	// ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ç”¨DSVã®ä½œæˆ
 	CreateDSVForFrameBuffer(frameBufferWidth, frameBufferHeight);
 
-	// ƒrƒ…[ƒ|[ƒg‚Ìİ’è
+	// ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆã®è¨­å®š
 	D3D11_VIEWPORT viewport = {};
 	viewport.TopLeftX = 0;
 	viewport.TopLeftY = 0;
@@ -43,13 +41,11 @@ bool GraphicsManager::Initialize(
 }
 #pragma endregion
 
-#pragma region DirectX ‚ÌƒŠƒ\[ƒX‚ğ‰ğ•ú
-/// <summary>
-/// DirectX ‚ÌƒŠƒ\[ƒX‚ğ‰ğ•ú
-/// </summary>
+#pragma region DirectX ã®ãƒªã‚½ãƒ¼ã‚¹ã‚’è§£æ”¾
+/// @brief DirectX ã®ãƒªã‚½ãƒ¼ã‚¹ã‚’è§£æ”¾
 void GraphicsManager::Uninitialize()
 {
-	// ƒtƒ‹ƒXƒNƒŠ[ƒ“‚È‚çI—¹‚ÉƒEƒBƒ“ƒhƒEƒ‚[ƒh‚É–ß‚·B(Alt+Enter‚ÅØ‚è‘Ö‚¦‚ª‚Å‚«‚é)
+	// ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãªã‚‰çµ‚äº†æ™‚ã«ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ¢ãƒ¼ãƒ‰ã«æˆ»ã™ã€‚(Alt+Enterã§åˆ‡ã‚Šæ›¿ãˆãŒã§ãã‚‹)
 	BOOL fullscreen = 0;
 	if (swapChain)
 	{
@@ -62,15 +58,13 @@ void GraphicsManager::Uninitialize()
 }
 #pragma endregion
 
-#pragma region ƒfƒoƒCƒX•ƒXƒƒbƒvƒ`ƒFƒCƒ“‚Ìì¬
-/// <summary>
-/// ƒfƒoƒCƒX•ƒXƒƒbƒvƒ`ƒFƒCƒ“‚Ìì¬
-/// </summary>
-/// <param name="hwnd">ƒEƒBƒ“ƒhƒEƒnƒ“ƒhƒ‹</param>
-/// <param name="frameBufferWidth">ƒtƒŒ[ƒ€ƒoƒbƒtƒ@‚Ì•</param>
-/// <param name="frameBufferHeight">ƒtƒŒ[ƒ€ƒoƒbƒtƒ@‚Ì‚‚³</param>
-/// <param name="defaultFramerate">–Ú•WƒtƒŒ[ƒ€ƒŒ[ƒg</param>
-/// <param name="isFullscreen">ƒtƒ‹ƒXƒNƒŠ[ƒ“‚Ìİ’èBtrue:ƒtƒ‹ƒXƒNƒŠ[ƒ“Afalse:’Êí</param>
+#pragma region ãƒ‡ãƒã‚¤ã‚¹ï¼†ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³ã®ä½œæˆ
+/// @brief ãƒ‡ãƒã‚¤ã‚¹ï¼†ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³ã®ä½œæˆ
+/// @param hwnd ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
+/// @param frameBufferWidth ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ã®å¹…
+/// @param frameBufferHeight ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ã®é«˜ã•
+/// @param defaultFramerate ç›®æ¨™ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¬ãƒ¼ãƒˆ
+/// @param isFullscreen ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®è¨­å®šã€‚true:ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã€false:é€šå¸¸
 void GraphicsManager::CreateDeviceAndSwapChain(
 	HWND hwnd,
 	UINT frameBufferWidth,
@@ -86,8 +80,8 @@ void GraphicsManager::CreateDeviceAndSwapChain(
 	createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
 #endif
 
-	// ‹@”\ƒŒƒxƒ‹
-	// ƒVƒF[ƒ_[ƒ‚ƒfƒ‹5.0‚Í_11_1ˆÈã‚Å‚È‚¢‚Æ‚¢‚¯‚È‚¢B
+	// æ©Ÿèƒ½ãƒ¬ãƒ™ãƒ«
+	// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ¢ãƒ‡ãƒ«5.0ã¯_11_1ä»¥ä¸Šã§ãªã„ã¨ã„ã‘ãªã„ã€‚
 	D3D_FEATURE_LEVEL featureLevels[] =
 	{
 		D3D_FEATURE_LEVEL_12_1, // DirectX 12.1
@@ -96,95 +90,91 @@ void GraphicsManager::CreateDeviceAndSwapChain(
 	    D3D_FEATURE_LEVEL_11_0, // DirectX 11.0
 	};
 
-	// ƒXƒƒbƒvƒ`ƒFƒCƒ“‚ğì¬‚·‚é‚½‚ß‚Ìİ’è
+	// ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³ã‚’ä½œæˆã™ã‚‹ãŸã‚ã®è¨­å®š
 	DXGI_SWAP_CHAIN_DESC swapChainDesc{};
 	{
-		swapChainDesc.BufferDesc.Width = frameBufferWidth; // ‰ğ‘œ“xi•j
-		swapChainDesc.BufferDesc.Height = frameBufferHeight; // ‰ğ‘œ“xi‚‚³j
-		swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM; // 1ƒsƒNƒZƒ‹‚ ‚½‚è‚ÌŠeF(RGBA)‚ğ8bit(0`255)‚ÌƒeƒNƒXƒ`ƒƒ(ƒoƒbƒNƒoƒbƒtƒ@)‚ğì¬‚·‚éB
-		swapChainDesc.BufferDesc.RefreshRate.Numerator = defaultFramerate; // ƒŠƒtƒŒƒbƒVƒ…ƒŒ[ƒg
+		swapChainDesc.BufferDesc.Width = frameBufferWidth; // è§£åƒåº¦ï¼ˆå¹…ï¼‰
+		swapChainDesc.BufferDesc.Height = frameBufferHeight; // è§£åƒåº¦ï¼ˆé«˜ã•ï¼‰
+		swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM; // 1ãƒ”ã‚¯ã‚»ãƒ«ã‚ãŸã‚Šã®å„è‰²(RGBA)ã‚’8bit(0ï½255)ã®ãƒ†ã‚¯ã‚¹ãƒãƒ£(ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡)ã‚’ä½œæˆã™ã‚‹ã€‚
+		swapChainDesc.BufferDesc.RefreshRate.Numerator = defaultFramerate; // ãƒªãƒ•ãƒ¬ãƒƒã‚·ãƒ¥ãƒ¬ãƒ¼ãƒˆ
 		swapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
-		swapChainDesc.SampleDesc.Count = 1; // ƒ}ƒ‹ƒ`ƒTƒ“ƒvƒŠƒ“ƒO‚È‚µ
+		swapChainDesc.SampleDesc.Count = 1; // ãƒãƒ«ãƒã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°ãªã—
 		swapChainDesc.SampleDesc.Quality = 0;
-		swapChainDesc.BufferCount = 1; // ƒoƒbƒNƒoƒbƒtƒ@‚Ì”
-		swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT; // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Æ‚µ‚Äg‚¤
-		swapChainDesc.OutputWindow = hwnd; // DirectX‚Å‘‚¢‚½‰æ‚ğ•\¦‚·‚éƒEƒBƒ“ƒhƒE
-		swapChainDesc.Windowed = !isFullscreen; // ƒEƒBƒ“ƒhƒEƒ‚[ƒh‚©Aƒtƒ‹ƒXƒNƒŠ[ƒ“‚É‚·‚é‚©B
+		swapChainDesc.BufferCount = 1; // ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®æ•°
+		swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT; // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¨ã—ã¦ä½¿ã†
+		swapChainDesc.OutputWindow = hwnd; // DirectXã§æ›¸ã„ãŸç”»ã‚’è¡¨ç¤ºã™ã‚‹ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
+		swapChainDesc.Windowed = !isFullscreen; // ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ¢ãƒ¼ãƒ‰ã‹ã€ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã«ã™ã‚‹ã‹ã€‚
 	}
 
 	D3D_FEATURE_LEVEL featureLevel{};
 
-	// ƒfƒoƒCƒX•ƒXƒƒbƒvƒ`ƒFƒCƒ“‚Ì¶¬
+	// ãƒ‡ãƒã‚¤ã‚¹ï¼†ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³ã®ç”Ÿæˆ
 	hr = D3D11CreateDeviceAndSwapChain(
-		nullptr,                   // ‚Ç‚ÌƒrƒfƒIƒAƒ_ƒvƒ^‚ğg—p‚·‚é‚©HŠù’è‚È‚ç‚Înullptr‚ÅAIDXGIAdapter‚ÌƒAƒhƒŒƒX‚ğ“n‚·B
-		D3D_DRIVER_TYPE_HARDWARE,  // ƒhƒ‰ƒCƒo‚Ìƒ^ƒCƒv‚ğ“n‚·BD3D_DRIVER_TYPE_HARDWARE ˆÈŠO‚ÍŠî–{“I‚Éƒ\ƒtƒgƒEƒFƒAÀ‘•‚ÅA“Á•Ê‚È‚±‚Æ‚ğ‚·‚éê‡‚É—p‚¢‚éB
-		nullptr,                   // ã‹L‚ğD3D_DRIVER_TYPE_SOFTWARE‚Éİ’è‚µ‚½Û‚ÉA‚»‚Ìˆ—‚ğs‚¤DLL‚Ìƒnƒ“ƒhƒ‹‚ğ“n‚·B‚»‚êˆÈŠO‚ğw’è‚µ‚Ä‚¢‚éÛ‚É‚Í•K‚¸nullptr‚ğ“n‚·B
-		createDeviceFlags,         // ‰½‚ç‚©‚Ìƒtƒ‰ƒO‚ğw’è‚·‚éB Ú‚µ‚­‚ÍD3D11_CREATE_DEVICE—ñ‹“Œ^‚ÅŒŸõB
-		featureLevels,             // D3D_FEATURE_LEVEL—ñ‹“Œ^‚Ì”z—ñ‚ğ—^‚¦‚éBnullptr‚É‚·‚é‚±‚Æ‚Å‚àã‹Lfeature‚Æ“¯“™‚Ì“à—e‚Ì”z—ñ‚ªg—p‚³‚ê‚éB
-		ARRAYSIZE(featureLevels),  // feature_levels”z—ñ‚Ì—v‘f”‚ğ“n‚·B
-		D3D11_SDK_VERSION,         // SDK‚Ìƒo[ƒWƒ‡ƒ“B•K‚¸‚±‚Ì’lB
-		&swapChainDesc,            // ‚±‚±‚Åİ’è‚µ‚½\‘¢‘Ì‚Éİ’è‚³‚ê‚Ä‚¢‚éƒpƒ‰ƒ[ƒ^‚ÅSwapChain‚ªì¬‚³‚ê‚éB
-		swapChain.GetAddressOf(),  // ì¬‚ª¬Œ÷‚µ‚½ê‡‚ÉAswap_chain‚ÌƒAƒhƒŒƒX‚ğŠi”[‚·‚éƒ|ƒCƒ“ƒ^•Ï”‚Ö‚ÌƒAƒhƒŒƒXB‚±‚±‚Åw’è‚µ‚½ƒ|ƒCƒ“ƒ^•Ï”Œo—R‚Åswap_chain‚ğ‘€ì‚·‚éB
-		device.GetAddressOf(),     // ì¬‚ª¬Œ÷‚µ‚½ê‡‚ÉAdevice‚ÌƒAƒhƒŒƒX‚ğŠi”[‚·‚éƒ|ƒCƒ“ƒ^•Ï”‚Ö‚ÌƒAƒhƒŒƒXB‚±‚±‚Åw’è‚µ‚½ƒ|ƒCƒ“ƒ^•Ï”Œo—R‚Ådevice‚ğ‘€ì‚·‚éB
-		&featureLevel,             // ì¬‚É¬Œ÷‚µ‚½D3D_FEATURE_LEVEL‚ğŠi”[‚·‚é‚½‚ß‚ÌD3D_FEATURE_LEVEL—ñ‹“Œ^•Ï”‚ÌƒAƒhƒŒƒX‚ğİ’è‚·‚éB
-		immediateContext.GetAddressOf() // ì¬‚ª¬Œ÷‚µ‚½ê‡‚ÉAcontext‚ÌƒAƒhƒŒƒX‚ğŠi”[‚·‚éƒ|ƒCƒ“ƒ^•Ï”‚Ö‚ÌƒAƒhƒŒƒXB‚±‚±‚Åw’è‚µ‚½ƒ|ƒCƒ“ƒ^•Ï”Œo—R‚Åicontext‚ğ‘€ì‚·‚éB
+		nullptr,                   // ã©ã®ãƒ“ãƒ‡ã‚ªã‚¢ãƒ€ãƒ—ã‚¿ã‚’ä½¿ç”¨ã™ã‚‹ã‹ï¼Ÿæ—¢å®šãªã‚‰ã°nullptrã§ã€IDXGIAdapterã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’æ¸¡ã™ã€‚
+		D3D_DRIVER_TYPE_HARDWARE,  // ãƒ‰ãƒ©ã‚¤ãƒã®ã‚¿ã‚¤ãƒ—ã‚’æ¸¡ã™ã€‚D3D_DRIVER_TYPE_HARDWARE ä»¥å¤–ã¯åŸºæœ¬çš„ã«ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢å®Ÿè£…ã§ã€ç‰¹åˆ¥ãªã“ã¨ã‚’ã™ã‚‹å ´åˆã«ç”¨ã„ã‚‹ã€‚
+		nullptr,                   // ä¸Šè¨˜ã‚’D3D_DRIVER_TYPE_SOFTWAREã«è¨­å®šã—ãŸéš›ã«ã€ãã®å‡¦ç†ã‚’è¡Œã†DLLã®ãƒãƒ³ãƒ‰ãƒ«ã‚’æ¸¡ã™ã€‚ãã‚Œä»¥å¤–ã‚’æŒ‡å®šã—ã¦ã„ã‚‹éš›ã«ã¯å¿…ãšnullptrã‚’æ¸¡ã™ã€‚
+		createDeviceFlags,         // ä½•ã‚‰ã‹ã®ãƒ•ãƒ©ã‚°ã‚’æŒ‡å®šã™ã‚‹ã€‚ è©³ã—ãã¯D3D11_CREATE_DEVICEåˆ—æŒ™å‹ã§æ¤œç´¢ã€‚
+		featureLevels,             // D3D_FEATURE_LEVELåˆ—æŒ™å‹ã®é…åˆ—ã‚’ä¸ãˆã‚‹ã€‚nullptrã«ã™ã‚‹ã“ã¨ã§ã‚‚ä¸Šè¨˜featureã¨åŒç­‰ã®å†…å®¹ã®é…åˆ—ãŒä½¿ç”¨ã•ã‚Œã‚‹ã€‚
+		ARRAYSIZE(featureLevels),  // feature_levelsé…åˆ—ã®è¦ç´ æ•°ã‚’æ¸¡ã™ã€‚
+		D3D11_SDK_VERSION,         // SDKã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã€‚å¿…ãšã“ã®å€¤ã€‚
+		&swapChainDesc,            // ã“ã“ã§è¨­å®šã—ãŸæ§‹é€ ä½“ã«è¨­å®šã•ã‚Œã¦ã„ã‚‹ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã§SwapChainãŒä½œæˆã•ã‚Œã‚‹ã€‚
+		swapChain.GetAddressOf(),  // ä½œæˆãŒæˆåŠŸã—ãŸå ´åˆã«ã€swap_chainã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’æ ¼ç´ã™ã‚‹ãƒã‚¤ãƒ³ã‚¿å¤‰æ•°ã¸ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã€‚ã“ã“ã§æŒ‡å®šã—ãŸãƒã‚¤ãƒ³ã‚¿å¤‰æ•°çµŒç”±ã§swap_chainã‚’æ“ä½œã™ã‚‹ã€‚
+		device.GetAddressOf(),     // ä½œæˆãŒæˆåŠŸã—ãŸå ´åˆã«ã€deviceã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’æ ¼ç´ã™ã‚‹ãƒã‚¤ãƒ³ã‚¿å¤‰æ•°ã¸ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã€‚ã“ã“ã§æŒ‡å®šã—ãŸãƒã‚¤ãƒ³ã‚¿å¤‰æ•°çµŒç”±ã§deviceã‚’æ“ä½œã™ã‚‹ã€‚
+		&featureLevel,             // ä½œæˆã«æˆåŠŸã—ãŸD3D_FEATURE_LEVELã‚’æ ¼ç´ã™ã‚‹ãŸã‚ã®D3D_FEATURE_LEVELåˆ—æŒ™å‹å¤‰æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’è¨­å®šã™ã‚‹ã€‚
+		immediateContext.GetAddressOf() // ä½œæˆãŒæˆåŠŸã—ãŸå ´åˆã«ã€contextã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’æ ¼ç´ã™ã‚‹ãƒã‚¤ãƒ³ã‚¿å¤‰æ•°ã¸ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã€‚ã“ã“ã§æŒ‡å®šã—ãŸãƒã‚¤ãƒ³ã‚¿å¤‰æ•°çµŒç”±ã§icontextã‚’æ“ä½œã™ã‚‹ã€‚
 	);
 
 	_ASSERT_EXPR(SUCCEEDED(hr), HRTrace(hr));
 }
 #pragma endregion
 
-#pragma region ƒŒ[ƒ€ƒoƒbƒtƒ@—p‚ÌƒŒƒ“ƒ_[ƒ^[ƒQƒbƒgƒrƒ…[iRTVj‚ğì¬
-/// <summary>
-/// ƒŒ[ƒ€ƒoƒbƒtƒ@—p‚ÌƒŒƒ“ƒ_[ƒ^[ƒQƒbƒgƒrƒ…[iRTVj‚ğì¬
-/// </summary>
+#pragma region ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ç”¨ã®ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼ï¼ˆRTVï¼‰ã‚’ä½œæˆ
+/// @brief ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ç”¨ã®ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼ï¼ˆRTVï¼‰ã‚’ä½œæˆ
 void GraphicsManager::CreateRTVForFrameBuffer()
 {
 	HRESULT hr = S_OK;
 
-	// ƒXƒƒbƒvƒ`ƒF[ƒ“‚©‚çƒoƒbƒNƒoƒbƒtƒ@ƒeƒNƒXƒ`ƒƒ‚ğæ“¾‚·‚éB
-	// ¦ƒXƒƒbƒvƒ`ƒF[ƒ“‚É“à•ï‚³‚ê‚Ä‚¢‚éƒoƒbƒNƒoƒbƒtƒ@ƒeƒNƒXƒ`ƒƒ‚Í'F'‚ğ‘‚«‚ŞƒeƒNƒXƒ`ƒƒB
+	// ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ãƒ¼ãƒ³ã‹ã‚‰ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’å–å¾—ã™ã‚‹ã€‚
+	// â€»ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ãƒ¼ãƒ³ã«å†…åŒ…ã•ã‚Œã¦ã„ã‚‹ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ãƒ†ã‚¯ã‚¹ãƒãƒ£ã¯'è‰²'ã‚’æ›¸ãè¾¼ã‚€ãƒ†ã‚¯ã‚¹ãƒãƒ£ã€‚
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> backBuffer;
 	hr = swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<LPVOID*>(backBuffer.GetAddressOf()));
 	_ASSERT_EXPR(SUCCEEDED(hr), HRTrace(hr));
 
-	// ƒoƒbƒNƒoƒbƒtƒ@ƒeƒNƒXƒ`ƒƒ‚Ö‚Ì‘‚«‚İ‚Ì‘‹Œû‚Æ‚È‚éƒŒƒ“ƒ_[ƒ^[ƒQƒbƒgƒrƒ…[‚ğ¶¬‚·‚éB
+	// ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ãƒ†ã‚¯ã‚¹ãƒãƒ£ã¸ã®æ›¸ãè¾¼ã¿ã®çª“å£ã¨ãªã‚‹ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼ã‚’ç”Ÿæˆã™ã‚‹ã€‚
 	hr = device->CreateRenderTargetView(backBuffer.Get(), nullptr, renderTargetView.GetAddressOf());
 
 	_ASSERT_EXPR(SUCCEEDED(hr), HRTrace(hr));
 }
 #pragma endregion
 
-#pragma region ƒtƒŒ[ƒ€ƒoƒbƒtƒ@—p‚Ì[“xƒXƒeƒ“ƒVƒ‹ƒrƒ…[iDSVj‚ğì¬
-/// <summary>
-/// ƒtƒŒ[ƒ€ƒoƒbƒtƒ@—p‚Ì[“xƒXƒeƒ“ƒVƒ‹ƒrƒ…[iDSVj‚ğì¬
-/// </summary>
-/// <param name="frameBufferWidth">ƒtƒŒ[ƒ€ƒoƒbƒtƒ@‚Ì•</param>
-/// <param name="frameBufferHeight">ƒtƒŒ[ƒ€ƒoƒbƒtƒ@‚Ì‚‚³</param>
+#pragma region ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ç”¨ã®æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ“ãƒ¥ãƒ¼ï¼ˆDSVï¼‰ã‚’ä½œæˆ
+/// @brief ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ç”¨ã®æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ“ãƒ¥ãƒ¼ï¼ˆDSVï¼‰ã‚’ä½œæˆ
+/// @param frameBufferWidth ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ã®å¹…
+/// @param frameBufferHeight ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ã®é«˜ã•
 void GraphicsManager::CreateDSVForFrameBuffer(
 	UINT frameBufferWidth,
 	UINT frameBufferHeight)
 {
 	HRESULT hr = S_OK;
 
-	// [“xƒXƒeƒ“ƒVƒ‹î•ñ‚ğ‘‚«‚Ş‚½‚ß‚ÌƒeƒNƒXƒ`ƒƒ‚ğì¬‚·‚éB
+	// æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«æƒ…å ±ã‚’æ›¸ãè¾¼ã‚€ãŸã‚ã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ä½œæˆã™ã‚‹ã€‚
 	D3D11_TEXTURE2D_DESC texture2dDesc{};
 	texture2dDesc.Width = frameBufferWidth;
 	texture2dDesc.Height = frameBufferHeight;
 	texture2dDesc.MipLevels = 1;
 	texture2dDesc.ArraySize = 1;
-	texture2dDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;	// 1ƒsƒNƒZƒ‹‚ ‚½‚èA[“xî•ñ‚ğ24Bit / ƒXƒeƒ“ƒVƒ‹î•ñ‚ğ8bit‚ÌƒeƒNƒXƒ`ƒƒ‚ğì¬‚·‚éB
+	texture2dDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;	// 1ãƒ”ã‚¯ã‚»ãƒ«ã‚ãŸã‚Šã€æ·±åº¦æƒ…å ±ã‚’24Bit / ã‚¹ãƒ†ãƒ³ã‚·ãƒ«æƒ…å ±ã‚’8bitã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ä½œæˆã™ã‚‹ã€‚
 	texture2dDesc.SampleDesc.Count = 1;
 	texture2dDesc.SampleDesc.Quality = 0;
 	texture2dDesc.Usage = D3D11_USAGE_DEFAULT;
-	texture2dDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;		// [“xƒXƒeƒ“ƒVƒ‹—p‚ÌƒeƒNƒXƒ`ƒƒ‚ğì¬‚·‚éB
+	texture2dDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;		// æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ç”¨ã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ä½œæˆã™ã‚‹ã€‚
 	texture2dDesc.CPUAccessFlags = 0;
 
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> depthStencilBuffer{};
 	hr = device->CreateTexture2D(&texture2dDesc, nullptr, depthStencilBuffer.GetAddressOf());
 	_ASSERT_EXPR(SUCCEEDED(hr), HRTrace(hr));
 
-	// [“xƒXƒeƒ“ƒVƒ‹ƒeƒNƒXƒ`ƒƒ‚Ö‚Ì‘‚«‚İ‚É‘‹Œû‚É‚È‚é[“xƒXƒeƒ“ƒVƒ‹ƒrƒ…[‚ğì¬‚·‚éB
+	// æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ†ã‚¯ã‚¹ãƒãƒ£ã¸ã®æ›¸ãè¾¼ã¿ã«çª“å£ã«ãªã‚‹æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ“ãƒ¥ãƒ¼ã‚’ä½œæˆã™ã‚‹ã€‚
 	D3D11_DEPTH_STENCIL_VIEW_DESC depthStencilViewDesc{};
 	depthStencilViewDesc.Format = texture2dDesc.Format;
 	depthStencilViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;

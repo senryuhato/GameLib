@@ -3,12 +3,12 @@
 #include <sstream>
 #include <map>
 #include <DirectXMath.h>
-#include "WinMain.h"
-#include "..\GameXLib\Runtime\Scene\Scene.h"
+#include "../GameXLib\Runtime\Scene\Scene.h"
 #include "../GameXLib/Runtime/System/Misc.h"
+#include "WinMain.h"
 #include "SystemInstance.h"
-#include "TitleScene.h"
-#include "MainScene.h"
+#include "Scene\TitleScene.h"
+#include "Scene\MainScene.h"
 
 #pragma region 定数
 /// <summary>
@@ -118,10 +118,25 @@ Microsoft::WRL::ComPtr<ID3D11DepthStencilState> defaultDepthStencilState;
 /// </summary>
 Microsoft::WRL::ComPtr<ID3D11RasterizerState> defaultRasterizerState[2];
 
+enum BLEND_MODE
+{
+	NONE = 0,
+	ALPHA,
+	ADD,
+	SUBTRACT,
+	REPLACE,
+	MULTIPLY,
+	LIGHTEN,
+	DARKEN,
+	SCREEN,
+	// 最大
+	MODE_MAX,
+};
+
 /// <summary>
 /// ブレンドステート
 /// </summary>
-Microsoft::WRL::ComPtr<ID3D11BlendState> defaultBlendState;
+Microsoft::WRL::ComPtr<ID3D11BlendState> defaultBlendState[BLEND_MODE::MODE_MAX];
 
 /// <summary>
 /// サンプラーステート
@@ -247,7 +262,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 
 					// ステート設定
 					immediateContext->PSSetSamplers(0, 3, defaultSamplerState[0].GetAddressOf());
-					immediateContext->OMSetBlendState(defaultBlendState.Get(), nullptr, 0xFFFFFFFF);
+					immediateContext->OMSetBlendState(defaultBlendState[BLEND_MODE::ALPHA].Get(), nullptr, 0xFFFFFFFF);
 					immediateContext->RSSetState(defaultRasterizerState[0].Get());
 					immediateContext->OMSetDepthStencilState(defaultDepthStencilState.Get(), 1);
 					immediateContext->RSSetState(defaultRasterizerState[0].Get());
@@ -257,7 +272,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 
 					// ワールド座標設定
 					CreateWorldTransform();
-						
+
 					// ゲーム処理
 					scenes[currentSceneKey]->Render();
 
@@ -315,7 +330,7 @@ void CreateWorldTransform()
 	DirectX::XMMATRIX rotation{ DirectX::XMMatrixRotationRollPitchYaw(roll, pitch, yaw) };
 	// 平行移動行列
 	DirectX::XMMATRIX translation{ DirectX::XMMatrixTranslation(0,0,0) };
-	
+
 	// ワールド行列
 	DirectX::XMStoreFloat4x4(&worldTransform, coordinate * scale * rotation * translation);
 }
@@ -396,19 +411,7 @@ void CreateState()
 	_ASSERT_EXPR(SUCCEEDED(hr), HRTrace(hr));
 
 	// ブレンドステート
-	D3D11_BLEND_DESC blendDesc = {};
-	blendDesc.AlphaToCoverageEnable = FALSE;
-	blendDesc.IndependentBlendEnable = FALSE;
-	blendDesc.RenderTarget[0].BlendEnable = TRUE;
-	blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
-	blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
-	blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
-	blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
-	blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_INV_SRC_ALPHA;
-	blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
-	blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-	hr = systemInstace.graphicsManager.GetDevice()->CreateBlendState(&blendDesc, defaultBlendState.GetAddressOf());
-	_ASSERT_EXPR(SUCCEEDED(hr), HRTrace(hr));
+	CreateBlendState();
 
 	// サンプラーステート
 	D3D11_SAMPLER_DESC samplerDesc;
@@ -488,6 +491,120 @@ LRESULT CALLBACK WindowProcedure(
 	}
 	return 0;
 	return DefWindowProc(hwnd, msg, wParam, lParam);;
+}
+#pragma endregion
+
+#pragma region ブレンドステートの作成
+/// <summary>
+/// ブレンドステートの作成
+/// </summary>
+void CreateBlendState()
+{
+	HRESULT hr;
+
+	D3D11_BLEND_DESC bDesc = {};
+	bDesc.AlphaToCoverageEnable = FALSE;
+	bDesc.IndependentBlendEnable = FALSE;
+	bDesc.RenderTarget[0].BlendEnable = TRUE;
+
+	// NONE(なし)
+	bDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;
+	bDesc.RenderTarget[0].DestBlend = D3D11_BLEND_ZERO;
+	bDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+	bDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+	bDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+	bDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+	bDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+
+	hr = systemInstace.graphicsManager.GetDevice()->CreateBlendState(&bDesc, &defaultBlendState[BLEND_MODE::NONE]);
+
+	// ALPHA()
+	bDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+	bDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+	bDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+	bDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+	bDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+	bDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+	bDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+
+	hr = systemInstace.graphicsManager.GetDevice()->CreateBlendState(&bDesc, &defaultBlendState[BLEND_MODE::ALPHA]);
+
+	// ADD(加算)
+	bDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+	bDesc.RenderTarget[0].DestBlend = D3D11_BLEND_ONE;
+	bDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+	bDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+	bDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+	bDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+	bDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+
+	hr = systemInstace.graphicsManager.GetDevice()->CreateBlendState(&bDesc, &defaultBlendState[BLEND_MODE::ADD]);
+
+	// SUBTRACT(減産)
+	bDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+	bDesc.RenderTarget[0].DestBlend = D3D11_BLEND_ONE;
+	bDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_SUBTRACT;
+	bDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ZERO;
+	bDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
+	bDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+	bDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+
+	hr = systemInstace.graphicsManager.GetDevice()->CreateBlendState(&bDesc, &defaultBlendState[BLEND_MODE::SUBTRACT]);
+
+	// REPLACE
+	bDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+	bDesc.RenderTarget[0].DestBlend = D3D11_BLEND_ZERO;
+	bDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+	bDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+	bDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+	bDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+	bDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+
+	hr = systemInstace.graphicsManager.GetDevice()->CreateBlendState(&bDesc, &defaultBlendState[BLEND_MODE::REPLACE]);
+
+	// MULTIPLY(乗算)
+	bDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_ZERO;
+	bDesc.RenderTarget[0].DestBlend = D3D11_BLEND_SRC_COLOR;
+	bDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+	bDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_DEST_ALPHA;
+	bDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+	bDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+	bDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+
+	hr = systemInstace.graphicsManager.GetDevice()->CreateBlendState(&bDesc, &defaultBlendState[BLEND_MODE::MULTIPLY]);
+
+	// LIGHTEN
+	bDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;
+	bDesc.RenderTarget[0].DestBlend = D3D11_BLEND_ONE;
+	bDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_MAX;
+	bDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_DEST_ALPHA;
+	bDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+	bDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_MAX;
+	bDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+
+	hr = systemInstace.graphicsManager.GetDevice()->CreateBlendState(&bDesc, &defaultBlendState[BLEND_MODE::LIGHTEN]);
+
+	// DARKEN
+	bDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;
+	bDesc.RenderTarget[0].DestBlend = D3D11_BLEND_ONE;
+	bDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_MIN;
+	bDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+	bDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
+	bDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_MIN;
+	bDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+
+	hr = systemInstace.graphicsManager.GetDevice()->CreateBlendState(&bDesc, &defaultBlendState[BLEND_MODE::DARKEN]);
+
+	// SCREEN
+	bDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+	bDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_COLOR;
+	bDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+	bDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+	bDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_INV_SRC_ALPHA;
+	bDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+	bDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+
+	hr = systemInstace.graphicsManager.GetDevice()->CreateBlendState(&bDesc, &defaultBlendState[BLEND_MODE::SCREEN]);
 }
 #pragma endregion
 
@@ -635,18 +752,30 @@ HWND CreateDefaultWindow(
 
 	// ウィンドウを作成し、そのハンドルを返す
 	return CreateWindowExW(
-		0,                  // 拡張ウィンドウスタイル（なし）
-		className,          // 使用するウィンドウクラスの名前
-		windowTitle,        // ウィンドウのタイトル
-		windowStyle,        // ウィンドウのスタイル
-		CW_USEDEFAULT,      // 初期X座標（デフォルト）
-		CW_USEDEFAULT,      // 初期Y座標（デフォルト）
-		clientRect.right - clientRect.left, // 計算されたウィンドウの幅
-		clientRect.bottom - clientRect.top, // 計算されたウィンドウの高さ
-		nullptr,            // 親ウィンドウ（なし）
-		nullptr,            // メニュー（なし）
-		instance,           // アプリケーションインスタンス
-		nullptr             // 追加パラメータ（なし）
+		// 拡張ウィンドウスタイル（なし）
+		0,
+		// 使用するウィンドウクラスの名前
+		className,
+		// ウィンドウのタイトル
+		windowTitle,
+		// ウィンドウのスタイル
+		windowStyle,
+		// 初期X座標（デフォルト）
+		CW_USEDEFAULT,
+		// 初期Y座標（デフォルト）
+		CW_USEDEFAULT,
+		// 計算されたウィンドウの幅
+		clientRect.right - clientRect.left,
+		// 計算されたウィンドウの高さ
+		clientRect.bottom - clientRect.top,
+		// 親ウィンドウ（なし）
+		nullptr,
+		// メニュー（なし）
+		nullptr,
+		// アプリケーションインスタンス
+		instance,
+		// 追加パラメータ（なし）
+		nullptr
 	);
 }
 #pragma endregion
