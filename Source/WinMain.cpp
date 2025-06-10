@@ -1,4 +1,4 @@
-#include <crtdbg.h>
+ï»¿#include <crtdbg.h>
 #include <time.h>
 #include <sstream>
 #include <map>
@@ -10,111 +10,111 @@
 #include "Scene\TitleScene.h"
 #include "Scene\MainScene.h"
 
-#pragma region ’è”
+#pragma region å®šæ•°
 /// <summary>
-/// window–¼
+/// windowå
 /// </summary>
 static const LPCWSTR CLASS_NAME = L"GameProject";
 
 /// <summary>
-/// ƒŠƒtƒŒƒbƒVƒ…ƒŒ[ƒg
+/// ãƒªãƒ•ãƒ¬ãƒƒã‚·ãƒ¥ãƒ¬ãƒ¼ãƒˆ
 /// </summary>
 static const UINT DEFAULT_FRAMERATE = 60;
 
 /// <summary>
-/// ƒEƒBƒ“ƒhƒE–¼
+/// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦å
 /// </summary>
-static const wchar_t* WINDOW_TITLE = L"ƒQ[ƒ€ƒvƒƒWƒFƒNƒg";
+static const wchar_t* WINDOW_TITLE = L"ã‚²ãƒ¼ãƒ ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ";
 
 /// <summary>
-/// ‰æ–Ê•
+/// ç”»é¢å¹…
 /// </summary>
 static const int SCREEN_WIDTH = 1280;
 
 /// <summary>
-/// ‰æ–Ê‚‚³
+/// ç”»é¢é«˜ã•
 /// </summary>
 static const int SCREEN_HEIGHT = 720;
 
 /// <summary>
-/// ƒfƒtƒHƒ‹ƒgƒtƒŒ[ƒ€ƒŒ[ƒg
+/// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¬ãƒ¼ãƒˆ
 /// </summary>
 static const int FRAMERATE = 60;
 
 /// <summary>
-/// ‰Šúƒtƒ‹ƒXƒNƒŠ[ƒ“ƒ‚[ƒh
+/// åˆæœŸãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãƒ¢ãƒ¼ãƒ‰
 /// </summary>
 const BOOL FULSCREEN_MODE = false;
 
 /// <summary>
-/// ƒNƒŠƒAƒJƒ‰[
+/// ã‚¯ãƒªã‚¢ã‚«ãƒ©ãƒ¼
 /// </summary>
 const FLOAT REFRESH_COLOR[4] = { 0.2f, 0.2f, 0.2f, 1.0f };
 
 /// <summary>
-/// ‚’¼“¯Šú(ON)
+/// åž‚ç›´åŒæœŸ(ON)
 /// </summary>
 const UINT SYNC_INTERVAL_VALID = 1;
 
 /// <summary>
-/// ‚’¼“¯Šú(OFF)
+/// åž‚ç›´åŒæœŸ(OFF)
 /// </summary>
 const UINT SYNC_INTERVAL_INVALID = 0;
 
 /// <summary>
-/// ƒ^ƒCƒgƒ‹ƒV[ƒ“ƒL[
+/// ã‚¿ã‚¤ãƒˆãƒ«ã‚·ãƒ¼ãƒ³ã‚­ãƒ¼
 /// </summary>
 static const std::string TITLE_SCENE = "TitleScene";
 
 /// <summary>
-/// ƒƒCƒ“ƒV[ƒ“ƒL[
+/// ãƒ¡ã‚¤ãƒ³ã‚·ãƒ¼ãƒ³ã‚­ãƒ¼
 /// </summary>
 static const std::string MAIN_SCENE = "MainScene";
 #pragma endregion
 
-#pragma region •Ï”
+#pragma region å¤‰æ•°
 /// <summary>
-/// ƒEƒBƒ“ƒhƒEƒnƒ“ƒhƒ‹
+/// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
 /// </summary>
 HWND hwnd = nullptr;
 
 /// <summary>
-/// ƒtƒŒ[ƒ€ƒŒ[ƒg‚ð•\Ž¦‚³‚¹‚é‚©
+/// ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¬ãƒ¼ãƒˆã‚’è¡¨ç¤ºã•ã›ã‚‹ã‹
 /// </summary>
 bool isShowFrameRate = true;
 
 /// <summary>
-/// ƒVƒXƒeƒ€•ÛŽƒNƒ‰ƒX
+/// ã‚·ã‚¹ãƒ†ãƒ ä¿æŒã‚¯ãƒ©ã‚¹
 /// </summary>
 SystemInstance systemInstace;
 
 /// <summary>
-/// Œ»Ý‚ÌƒV[ƒ“‚ÌƒL[
+/// ç¾åœ¨ã®ã‚·ãƒ¼ãƒ³ã®ã‚­ãƒ¼
 /// </summary>
 std::string currentSceneKey;
 
 /// <summary>
-/// ŽŸ‚ÌƒV[ƒ“‚ÌƒL[(ƒV[ƒ“‚Ì•ÏXŽžˆÈŠO‚ÍEmpty)
+/// æ¬¡ã®ã‚·ãƒ¼ãƒ³ã®ã‚­ãƒ¼(ã‚·ãƒ¼ãƒ³ã®å¤‰æ›´æ™‚ä»¥å¤–ã¯Empty)
 /// </summary>
 std::string nextSceneKey;
 
 /// <summary>
-/// ƒV[ƒ“ƒŠƒXƒg
+/// ã‚·ãƒ¼ãƒ³ãƒªã‚¹ãƒˆ
 /// </summary>
 std::map<std::string, std::unique_ptr<Scene>> scenes;
 
 /// <summary>
-/// ‚’¼“¯Šú
+/// åž‚ç›´åŒæœŸ
 /// </summary>
 const UINT syncInterval = SYNC_INTERVAL_VALID;
 
 /// <summary>
-/// [“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg
+/// æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆ
 /// </summary>
 Microsoft::WRL::ComPtr<ID3D11DepthStencilState> defaultDepthStencilState;
 
 /// <summary>
-/// ƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg
+/// ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆ
 /// </summary>
 Microsoft::WRL::ComPtr<ID3D11RasterizerState> defaultRasterizerState[2];
 
@@ -129,17 +129,17 @@ enum BLEND_MODE
 	LIGHTEN,
 	DARKEN,
 	SCREEN,
-	// Å‘å
+	// æœ€å¤§
 	MODE_MAX,
 };
 
 /// <summary>
-/// ƒuƒŒƒ“ƒhƒXƒe[ƒg
+/// ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆ
 /// </summary>
 Microsoft::WRL::ComPtr<ID3D11BlendState> defaultBlendState[BLEND_MODE::MODE_MAX];
 
 /// <summary>
-/// ƒTƒ“ƒvƒ‰[ƒXƒe[ƒg
+/// ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆ
 /// </summary>
 Microsoft::WRL::ComPtr<ID3D11SamplerState> defaultSamplerState[3];
 
@@ -149,165 +149,165 @@ Microsoft::WRL::ComPtr<ID3D11SamplerState> defaultSamplerState[3];
 DirectX::XMFLOAT4X4 viewProjection;
 
 /// <summary>
-/// ƒ‰ƒCƒgˆÊ’u
+/// ãƒ©ã‚¤ãƒˆä½ç½®
 /// </summary>
 DirectX::XMFLOAT4 lightDirection;
 
 /// <summary>
-/// ƒJƒƒ‰ˆÊ’u
+/// ã‚«ãƒ¡ãƒ©ä½ç½®
 /// </summary>
 DirectX::XMFLOAT4 cameraPosition;
 
 /// <summary>
-/// À•W
+/// åº§æ¨™
 /// </summary>
 DirectX::XMFLOAT4X4 worldTransform;
 #pragma endregion
 
-#pragma region C++/CLI Windows ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ÌƒGƒ“ƒgƒŠƒ|ƒCƒ“ƒg
+#pragma region C++/CLI Windows ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã®ã‚¨ãƒ³ãƒˆãƒªãƒã‚¤ãƒ³ãƒˆ
 /// <summary>
-/// C++/CLI ‚Å‚Ì Windows ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ÌƒGƒ“ƒgƒŠƒ|ƒCƒ“ƒgB
+/// C++/CLI ã§ã® Windows ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã®ã‚¨ãƒ³ãƒˆãƒªãƒã‚¤ãƒ³ãƒˆã€‚
 /// </summary>
-/// <param name="hInstance">Œ»Ý‚ÌƒCƒ“ƒXƒ^ƒ“ƒXƒnƒ“ƒhƒ‹</param>
-/// <param name="hPrevInstance">ˆÈ‘O‚ÌƒCƒ“ƒXƒ^ƒ“ƒXƒnƒ“ƒhƒ‹ií‚É NULLj</param>
-/// <param name="lpCmdLine">ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“ˆø”</param>
-/// <param name="nShowCmd">ƒEƒBƒ“ƒhƒE‚Ì•\Ž¦ó‘Ô</param>
-/// <returns>ƒvƒƒOƒ‰ƒ€‚ÌI—¹ƒR[ƒhi’Êí‚Í 0j</returns>
+/// <param name="hInstance">ç¾åœ¨ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãƒãƒ³ãƒ‰ãƒ«</param>
+/// <param name="hPrevInstance">ä»¥å‰ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãƒãƒ³ãƒ‰ãƒ«ï¼ˆå¸¸ã« NULLï¼‰</param>
+/// <param name="lpCmdLine">ã‚³ãƒžãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³å¼•æ•°</param>
+/// <param name="nShowCmd">ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®è¡¨ç¤ºçŠ¶æ…‹</param>
+/// <returns>ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®çµ‚äº†ã‚³ãƒ¼ãƒ‰ï¼ˆé€šå¸¸ã¯ 0ï¼‰</returns>
 int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
 {
-	// ƒfƒoƒbƒOƒ‚[ƒhŽž‚Éƒƒ‚ƒŠƒŠ[ƒNŒŸo‚ð—LŒø‰»B
-#if defined(DEBUG) | defined(_DEBUG)
-	// `_CRTDBG_ALLOC_MEM_DF` : ƒƒ‚ƒŠŠ„‚è“–‚Ä‚ÌƒfƒoƒbƒOî•ñ‚ð—LŒø‰»B
-	// `_CRTDBG_LEAK_CHECK_DF` : ƒvƒƒOƒ‰ƒ€I—¹Žž‚Éƒƒ‚ƒŠƒŠ[ƒN‚ðƒ`ƒFƒbƒNB
+	// ãƒ‡ãƒãƒƒã‚°ãƒ¢ãƒ¼ãƒ‰æ™‚ã«ãƒ¡ãƒ¢ãƒªãƒªãƒ¼ã‚¯æ¤œå‡ºã‚’æœ‰åŠ¹åŒ–ã€‚
+	#if defined(DEBUG) | defined(_DEBUG)
+		// `_CRTDBG_ALLOC_MEM_DF` : ãƒ¡ãƒ¢ãƒªå‰²ã‚Šå½“ã¦ã®ãƒ‡ãƒãƒƒã‚°æƒ…å ±ã‚’æœ‰åŠ¹åŒ–ã€‚
+		// `_CRTDBG_LEAK_CHECK_DF` : ãƒ—ãƒ­ã‚°ãƒ©ãƒ çµ‚äº†æ™‚ã«ãƒ¡ãƒ¢ãƒªãƒªãƒ¼ã‚¯ã‚’ãƒã‚§ãƒƒã‚¯ã€‚
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	//_CrtSetBreakAlloc(####);‚ðŽg—p‚·‚é‚ÆAŽw’è‚³‚ê‚½ƒAƒƒP[ƒVƒ‡ƒ“”Ô†‚ÅƒuƒŒ[ƒN‰Â”\B
-#endif
+	//_CrtSetBreakAlloc(####);ã‚’ä½¿ç”¨ã™ã‚‹ã¨ã€æŒ‡å®šã•ã‚ŒãŸã‚¢ãƒ­ã‚±ãƒ¼ã‚·ãƒ§ãƒ³ç•ªå·ã§ãƒ–ãƒ¬ãƒ¼ã‚¯å¯èƒ½ã€‚
+	#endif
 
-	// —”‚ÌƒV[ƒh’l‚ðÝ’èB
+		// ä¹±æ•°ã®ã‚·ãƒ¼ãƒ‰å€¤ã‚’è¨­å®šã€‚
 	srand(static_cast<unsigned int>(time(nullptr)));
 
-	// ƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚Ì“o˜^
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã®ç™»éŒ²
 	if (RegisterDefaultWindowClass(hInstance, CLASS_NAME, WindowProcedure))
 	{
-		// ƒEƒBƒ“ƒhƒE‚Ìì¬
+		// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä½œæˆ
 		hwnd = CreateDefaultWindow(hInstance, CLASS_NAME, SCREEN_WIDTH, SCREEN_HEIGHT, WINDOW_TITLE, WS_OVERLAPPEDWINDOW ^ WS_MAXIMIZEBOX ^ WS_THICKFRAME | WS_VISIBLE);
 		if (hwnd)
 		{
-			// ƒEƒBƒ“ƒhƒE‚Ì•\Ž¦ó‘ÔÝ’è(•\Ž¦‚Æ”ñ•\Ž¦)
+			// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®è¡¨ç¤ºçŠ¶æ…‹è¨­å®š(è¡¨ç¤ºã¨éžè¡¨ç¤º)
 			ShowWindow(hwnd, nShowCmd);
 
-			// DirectX11‰Šú‰»
+			// DirectX11åˆæœŸåŒ–
 			if (systemInstace.graphicsManager.Initialize(hwnd, DEFAULT_FRAMERATE, FULSCREEN_MODE))
 			{
-				// Imgui‰Šú‰»
+				// ImguiåˆæœŸåŒ–
 				systemInstace.imguiManager.Initialize(hwnd, systemInstace.graphicsManager.GetDevice(), systemInstace.graphicsManager.GetDeviceContext());
 
-				// ƒV[ƒ““o˜^
+				// ã‚·ãƒ¼ãƒ³ç™»éŒ²
 				RegisterSceneIfNotExists<TitleScene>(TITLE_SCENE);
 				RegisterSceneIfNotExists<MainScene>(MAIN_SCENE);
-				// Å‰‚ÌƒV[ƒ“Ý’è
+				// æœ€åˆã®ã‚·ãƒ¼ãƒ³è¨­å®š
 				LoadScene(TITLE_SCENE);
 
-				// ƒJ[ƒ\ƒ‹Ý’è
+				// ã‚«ãƒ¼ã‚½ãƒ«è¨­å®š
 				SetShowMouseCursor(true);
 
-				// ƒ^ƒCƒ}[ƒŠƒZƒbƒg
+				// ã‚¿ã‚¤ãƒžãƒ¼ãƒªã‚»ãƒƒãƒˆ
 				systemInstace.highResolutionTimer.Reset();
 
-				// ƒXƒe[ƒg‚Ìì¬
+				// ã‚¹ãƒ†ãƒ¼ãƒˆã®ä½œæˆ
 				CreateState();
 
-				// ƒQ[ƒ€ƒ‹[ƒv
+				// ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
 				while (DispatchWindowMessage())
 				{
-					// ƒ^ƒCƒ}[XV
+					// ã‚¿ã‚¤ãƒžãƒ¼æ›´æ–°
 					systemInstace.highResolutionTimer.Tick();
-					// ƒwƒbƒ_[‚ÉFPS‚ð•\Ž¦‚·‚é‚©
+					// ãƒ˜ãƒƒãƒ€ãƒ¼ã«FPSã‚’è¡¨ç¤ºã™ã‚‹ã‹
 					if (isShowFrameRate)
 					{
-						// ƒwƒbƒ_[‚ÉFPS‚ð•\Ž¦‚·‚é
+						// ãƒ˜ãƒƒãƒ€ãƒ¼ã«FPSã‚’è¡¨ç¤ºã™ã‚‹
 						CalculateFrameStats(systemInstace.highResolutionTimer.TimeStamp());
 					}
-					// ƒtƒŒ[ƒ€ŠÔ•b”
+					// ãƒ•ãƒ¬ãƒ¼ãƒ é–“ç§’æ•°
 					float elapsedTime = systemInstace.highResolutionTimer.TimeInterval();
-					// 1ƒtƒŒ[ƒ€“–‚½‚è‚ÌÅ‘å•b”Žw’è
+					// 1ãƒ•ãƒ¬ãƒ¼ãƒ å½“ãŸã‚Šã®æœ€å¤§ç§’æ•°æŒ‡å®š
 					const float limitElapsedTime = 1.0f / 5;
 					elapsedTime = elapsedTime > limitElapsedTime ? limitElapsedTime : elapsedTime;
 
-					// ƒQ[ƒ€XV
-					// ƒV[ƒ“‚ªÝ’è‚³‚ê‚Ä‚¢‚é‚©
+					// ã‚²ãƒ¼ãƒ æ›´æ–°
+					// ã‚·ãƒ¼ãƒ³ãŒè¨­å®šã•ã‚Œã¦ã„ã‚‹ã‹
 					if (!currentSceneKey.empty())
 					{
-						// ŽŸ‚ÌƒV[ƒ“‚ªŽw’è‚³‚ê‚Ä‚¢‚éê‡
+						// æ¬¡ã®ã‚·ãƒ¼ãƒ³ãŒæŒ‡å®šã•ã‚Œã¦ã„ã‚‹å ´åˆ
 						if (!nextSceneKey.empty())
 						{
-							// ƒV[ƒ“Ø‚è‘Ö‚¦
+							// ã‚·ãƒ¼ãƒ³åˆ‡ã‚Šæ›¿ãˆ
 							scenes[currentSceneKey]->Uninitializr();
 							currentSceneKey = nextSceneKey;
 							scenes[nextSceneKey]->Initialize();
 						}
-						// ƒV[ƒ“XV
+						// ã‚·ãƒ¼ãƒ³æ›´æ–°
 						scenes[currentSceneKey]->Update();
 					}
-					// ƒQ[ƒ€•`‰æ
+					// ã‚²ãƒ¼ãƒ æç”»
 					ID3D11DeviceContext* immediateContext = systemInstace.graphicsManager.GetDeviceContext();
 					ID3D11RenderTargetView* renderTargetView = systemInstace.graphicsManager.GetRenderTargetView();
 					ID3D11DepthStencilView* depthStencilView = systemInstace.graphicsManager.GetDepthStencilView();
 					IDXGISwapChain* swapChain = systemInstace.graphicsManager.GetSwapChain();
 
-					// ‰æ–ÊƒNƒŠƒA•ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒgÝ’è
+					// ç”»é¢ã‚¯ãƒªã‚¢ï¼†ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆè¨­å®š
 					immediateContext->ClearRenderTargetView(renderTargetView, REFRESH_COLOR);
 					immediateContext->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 					immediateContext->OMSetRenderTargets(1, &renderTargetView, depthStencilView);
 
-					// ƒXƒe[ƒgÝ’è
+					// ã‚¹ãƒ†ãƒ¼ãƒˆè¨­å®š
 					immediateContext->PSSetSamplers(0, 3, defaultSamplerState[0].GetAddressOf());
 					immediateContext->OMSetBlendState(defaultBlendState[BLEND_MODE::ALPHA].Get(), nullptr, 0xFFFFFFFF);
 					immediateContext->RSSetState(defaultRasterizerState[0].Get());
 					immediateContext->OMSetDepthStencilState(defaultDepthStencilState.Get(), 1);
 					immediateContext->RSSetState(defaultRasterizerState[0].Get());
 
-					// ƒJƒƒ‰ì¬
+					// ã‚«ãƒ¡ãƒ©ä½œæˆ
 					CreateCamera();
 
-					// ƒ[ƒ‹ƒhÀ•WÝ’è
+					// ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™è¨­å®š
 					CreateWorldTransform();
 
-					// ƒQ[ƒ€ˆ—
+					// ã‚²ãƒ¼ãƒ å‡¦ç†
 					scenes[currentSceneKey]->Render();
 
-					//// UI•\Ž¦ˆ—
+					//// UIè¡¨ç¤ºå‡¦ç†
 					systemInstace.imguiManager.RenderImGuiFrame();
 
-					// ƒoƒbƒNƒoƒbƒtƒ@‚É•`‰æ‚µ‚½‰æ‚ð‰æ–Ê‚É•\Ž¦‚·‚éB
+					// ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã«æç”»ã—ãŸç”»ã‚’ç”»é¢ã«è¡¨ç¤ºã™ã‚‹ã€‚
 					swapChain->Present(0, 0);
 				}
 
-				// ImGuiI—¹ˆ—
+				// ImGuiçµ‚äº†å‡¦ç†
 				systemInstace.imguiManager.Uninitialize();
 
-				// •`‰æI—¹ˆ—
+				// æç”»çµ‚äº†å‡¦ç†
 				systemInstace.graphicsManager.Uninitialize();
 			}
-			// ƒEƒBƒ“ƒhƒE‚Ìíœ
+			// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®å‰Šé™¤
 			DestroyWindow(hwnd);
 		}
-		// ƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚Ìíœ
+		// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã®å‰Šé™¤
 		UnregisterClass(CLASS_NAME, hInstance);
 	}
 
-	// ³íI—¹
+	// æ­£å¸¸çµ‚äº†
 	return 0;
 }
 #pragma endregion
 
-#pragma region ƒ[ƒ‹ƒhÀ•WÝ’è
+#pragma region ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™è¨­å®š
 /// <summary>
-/// ƒ[ƒ‹ƒhÀ•WÝ’è
+/// ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™è¨­å®š
 /// </summary>
 void CreateWorldTransform()
 {
-	// Ž²•ÏŠ·
+	// è»¸å¤‰æ›
 	const DirectX::XMFLOAT4X4 coordinateSystemTransforms[]{
 	  { -1, 0, 0, 0, 0, 1,  0, 0, 0, 0, 1, 0, 0, 0, 0, 1 }, // 0:RHS Y-UP 
 	  {  1, 0, 0, 0, 0, 1,  0, 0, 0, 0, 1, 0, 0, 0, 0, 1 }, // 1:LHS Y-UP 
@@ -315,63 +315,63 @@ void CreateWorldTransform()
 	  {  1, 0, 0, 0, 0, 0,  1, 0, 0, 1, 0, 0, 0, 0, 0, 1 },  // 3:LHS Z-UP 
 	};
 
-	// Ž²
+	// è»¸
 	const float scale_factor = 1.0f;
 	DirectX::XMMATRIX coordinate{ DirectX::XMLoadFloat4x4(&coordinateSystemTransforms[1]) * DirectX::XMMatrixScaling(scale_factor, scale_factor, scale_factor) };
 
-	// XYZ‚Ì‰ñ“]Ý’è
+	// XYZã®å›žè»¢è¨­å®š
 	constexpr float roll = DirectX::XMConvertToRadians(360);
 	constexpr float pitch = DirectX::XMConvertToRadians(360);
 	constexpr float yaw = DirectX::XMConvertToRadians(360);
 
-	// ƒXƒP[ƒŠƒ“ƒOs—ñ
+	// ã‚¹ã‚±ãƒ¼ãƒªãƒ³ã‚°è¡Œåˆ—
 	DirectX::XMMATRIX scale{ DirectX::XMMatrixScaling(0.1f, 0.1f, 0.1f) };
-	// ‰ñ“]s—ñ
+	// å›žè»¢è¡Œåˆ—
 	DirectX::XMMATRIX rotation{ DirectX::XMMatrixRotationRollPitchYaw(roll, pitch, yaw) };
-	// •½sˆÚ“®s—ñ
+	// å¹³è¡Œç§»å‹•è¡Œåˆ—
 	DirectX::XMMATRIX translation{ DirectX::XMMatrixTranslation(0,0,0) };
 
-	// ƒ[ƒ‹ƒhs—ñ
+	// ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—
 	DirectX::XMStoreFloat4x4(&worldTransform, coordinate * scale * rotation * translation);
 }
 #pragma endregion
 
-#pragma region ƒJƒƒ‰ì¬
+#pragma region ã‚«ãƒ¡ãƒ©ä½œæˆ
 /// <summary>
-/// ƒJƒƒ‰ì¬
+/// ã‚«ãƒ¡ãƒ©ä½œæˆ
 /// </summary>
 void CreateCamera()
 {
-	// ‰æ–ÊƒTƒCƒYŽæ“¾
+	// ç”»é¢ã‚µã‚¤ã‚ºå–å¾—
 	D3D11_VIEWPORT viewport;
 	UINT numViewports{ 1 };
 	systemInstace.graphicsManager.GetDeviceContext()->RSGetViewports(&numViewports, &viewport);
 
-	// ƒAƒXƒyƒNƒg”ä
+	// ã‚¢ã‚¹ãƒšã‚¯ãƒˆæ¯”
 	float aspectRatio{ viewport.Width / viewport.Height };
-	// “§Ž‹“Š‰eì¬
+	// é€è¦–æŠ•å½±ä½œæˆ
 	DirectX::XMMATRIX projection{ DirectX::XMMatrixPerspectiveFovLH(DirectX::XMConvertToRadians(30), aspectRatio, 0.1f, 1000.0f) };
 
-	// ƒJƒƒ‰î•ñÝ’è
+	// ã‚«ãƒ¡ãƒ©æƒ…å ±è¨­å®š
 	DirectX::XMVECTOR eye{ DirectX::XMVectorSet(0.0f, 0.0f, -250.0f, 1.0f) };
 	DirectX::XMVECTOR focus{ DirectX::XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f) };
 	DirectX::XMVECTOR up{ DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f) };
 	DirectX::XMMATRIX view{ DirectX::XMMatrixLookAtLH(eye, focus, up) };
 
-	// ViewProjectionì¬
+	// ViewProjectionä½œæˆ
 	DirectX::XMStoreFloat4x4(&viewProjection, view * projection);
 }
 #pragma endregion
 
-#pragma region ƒXƒe[ƒg‚Ìì¬
+#pragma region ã‚¹ãƒ†ãƒ¼ãƒˆã®ä½œæˆ
 /// <summary>
-/// ƒXƒe[ƒg‚Ìì¬
+/// ã‚¹ãƒ†ãƒ¼ãƒˆã®ä½œæˆ
 /// </summary>
 void CreateState()
 {
 	HRESULT hr = S_OK;
 
-	// [“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg‚Ìì¬
+	// æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆã®ä½œæˆ
 	D3D11_DEPTH_STENCIL_DESC depthStencilDesc;
 	depthStencilDesc.DepthEnable = TRUE;
 	depthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
@@ -390,7 +390,7 @@ void CreateState()
 	hr = systemInstace.graphicsManager.GetDevice()->CreateDepthStencilState(&depthStencilDesc, defaultDepthStencilState.GetAddressOf());
 	_ASSERT_EXPR(SUCCEEDED(hr), HRTrace(hr));
 
-	// ƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg
+	// ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆ
 	D3D11_RASTERIZER_DESC rasterizerDesc = {};
 	rasterizerDesc.FillMode = D3D11_FILL_SOLID;
 	rasterizerDesc.CullMode = D3D11_CULL_BACK;
@@ -401,19 +401,19 @@ void CreateState()
 	rasterizerDesc.ScissorEnable = FALSE;
 	rasterizerDesc.MultisampleEnable = TRUE;
 	rasterizerDesc.AntialiasedLineEnable = FALSE;
-	// DirectXŽ²
+	// DirectXè»¸
 	rasterizerDesc.FrontCounterClockwise = FALSE;
 	hr = systemInstace.graphicsManager.GetDevice()->CreateRasterizerState(&rasterizerDesc, defaultRasterizerState[0].GetAddressOf());
 	_ASSERT_EXPR(SUCCEEDED(hr), HRTrace(hr));
-	// OpenGLŽ²
+	// OpenGLè»¸
 	rasterizerDesc.FrontCounterClockwise = TRUE;
 	hr = systemInstace.graphicsManager.GetDevice()->CreateRasterizerState(&rasterizerDesc, defaultRasterizerState[1].GetAddressOf());
 	_ASSERT_EXPR(SUCCEEDED(hr), HRTrace(hr));
 
-	// ƒuƒŒƒ“ƒhƒXƒe[ƒg
+	// ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆ
 	CreateBlendState();
 
-	// ƒTƒ“ƒvƒ‰[ƒXƒe[ƒg
+	// ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆ
 	D3D11_SAMPLER_DESC samplerDesc;
 	samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
 	samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -442,22 +442,22 @@ void CreateState()
 }
 #pragma endregion
 
-#pragma region ƒEƒBƒ“ƒhƒEƒƒbƒZ[ƒW‚ðˆ—‚·‚éƒR[ƒ‹ƒoƒbƒNŠÖ”iWin32 API —pj
+#pragma region ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å‡¦ç†ã™ã‚‹ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°ï¼ˆWin32 API ç”¨ï¼‰
 /// <summary>
-/// ƒEƒBƒ“ƒhƒEƒƒbƒZ[ƒW‚ðˆ—‚·‚éƒR[ƒ‹ƒoƒbƒNŠÖ”iWin32 API —pj
+/// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å‡¦ç†ã™ã‚‹ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°ï¼ˆWin32 API ç”¨ï¼‰
 /// </summary>
-/// <param name="hwnd">ƒEƒBƒ“ƒhƒEƒnƒ“ƒhƒ‹</param>
-/// <param name="msg">Žó‚¯Žæ‚Á‚½ƒƒbƒZ[ƒW</param>
-/// <param name="wParam">ƒƒbƒZ[ƒW‚Ì’Ç‰Áî•ñi1‚Â–Ú‚Ìƒpƒ‰ƒ[ƒ^j</param>
-/// <param name="lParam">ƒƒbƒZ[ƒW‚Ì’Ç‰Áî•ñi2‚Â–Ú‚Ìƒpƒ‰ƒ[ƒ^j</param>
-/// <returns>ƒƒbƒZ[ƒW‚ðˆ—‚µ‚½Œ‹‰Êi’Êí‚Í `DefWindowProc` ‚Ì–ß‚è’l‚ð•Ô‚·j</returns>
+/// <param name="hwnd">ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«</param>
+/// <param name="msg">å—ã‘å–ã£ãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸</param>
+/// <param name="wParam">ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®è¿½åŠ æƒ…å ±ï¼ˆ1ã¤ç›®ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ï¼‰</param>
+/// <param name="lParam">ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®è¿½åŠ æƒ…å ±ï¼ˆ2ã¤ç›®ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ï¼‰</param>
+/// <returns>ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å‡¦ç†ã—ãŸçµæžœï¼ˆé€šå¸¸ã¯ `DefWindowProc` ã®æˆ»ã‚Šå€¤ã‚’è¿”ã™ï¼‰</returns>
 LRESULT CALLBACK WindowProcedure(
 	_In_ HWND hwnd,
 	_In_ UINT msg,
 	_In_ WPARAM wParam,
 	_In_ LPARAM lParam)
 {
-	// ImGui“ü—Íˆ—
+	// ImGuiå…¥åŠ›å‡¦ç†
 	systemInstace.imguiManager.WndProcHandler(hwnd, msg, wParam, lParam);
 
 	switch (msg)
@@ -494,9 +494,9 @@ LRESULT CALLBACK WindowProcedure(
 }
 #pragma endregion
 
-#pragma region ƒuƒŒƒ“ƒhƒXƒe[ƒg‚Ìì¬
+#pragma region ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆã®ä½œæˆ
 /// <summary>
-/// ƒuƒŒƒ“ƒhƒXƒe[ƒg‚Ìì¬
+/// ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆã®ä½œæˆ
 /// </summary>
 void CreateBlendState()
 {
@@ -507,7 +507,7 @@ void CreateBlendState()
 	bDesc.IndependentBlendEnable = FALSE;
 	bDesc.RenderTarget[0].BlendEnable = TRUE;
 
-	// NONE(‚È‚µ)
+	// NONE(ãªã—)
 	bDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;
 	bDesc.RenderTarget[0].DestBlend = D3D11_BLEND_ZERO;
 	bDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
@@ -529,7 +529,7 @@ void CreateBlendState()
 
 	hr = systemInstace.graphicsManager.GetDevice()->CreateBlendState(&bDesc, &defaultBlendState[BLEND_MODE::ALPHA]);
 
-	// ADD(‰ÁŽZ)
+	// ADD(åŠ ç®—)
 	bDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
 	bDesc.RenderTarget[0].DestBlend = D3D11_BLEND_ONE;
 	bDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
@@ -540,7 +540,7 @@ void CreateBlendState()
 
 	hr = systemInstace.graphicsManager.GetDevice()->CreateBlendState(&bDesc, &defaultBlendState[BLEND_MODE::ADD]);
 
-	// SUBTRACT(Œ¸ŽY)
+	// SUBTRACT(æ¸›ç”£)
 	bDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
 	bDesc.RenderTarget[0].DestBlend = D3D11_BLEND_ONE;
 	bDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_SUBTRACT;
@@ -562,7 +562,7 @@ void CreateBlendState()
 
 	hr = systemInstace.graphicsManager.GetDevice()->CreateBlendState(&bDesc, &defaultBlendState[BLEND_MODE::REPLACE]);
 
-	// MULTIPLY(æŽZ)
+	// MULTIPLY(ä¹—ç®—)
 	bDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_ZERO;
 	bDesc.RenderTarget[0].DestBlend = D3D11_BLEND_SRC_COLOR;
 	bDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
@@ -609,57 +609,57 @@ void CreateBlendState()
 #pragma endregion
 
 /// <summary>
-/// ƒV[ƒ““o˜^
+/// ã‚·ãƒ¼ãƒ³ç™»éŒ²
 /// </summary>
-/// <typeparam name="T">“o˜^‚·‚éƒV[ƒ“‚ÌŒ^</typeparam>
-/// <param name="registerSceneName">“o˜^‚·‚éƒV[ƒ“–¼</param>
+/// <typeparam name="T">ç™»éŒ²ã™ã‚‹ã‚·ãƒ¼ãƒ³ã®åž‹</typeparam>
+/// <param name="registerSceneName">ç™»éŒ²ã™ã‚‹ã‚·ãƒ¼ãƒ³å</param>
 template<typename T>
 void RegisterScene(std::string registerSceneName)
 {
-	// ƒNƒ‰ƒX–¼‚ðKey‚Æ‚µ‚Äã‘‚«“o˜^‚·‚é
+	// ã‚¯ãƒ©ã‚¹åã‚’Keyã¨ã—ã¦ä¸Šæ›¸ãç™»éŒ²ã™ã‚‹
 	scenes[registerSceneName] = std::make_unique<T>();
 }
 
 /// <summary>
-/// ƒV[ƒ““o˜^iŠù‚É“o˜^‚³‚ê‚Ä‚¢‚éê‡‚Í“o˜^‚µ‚È‚¢j
+/// ã‚·ãƒ¼ãƒ³ç™»éŒ²ï¼ˆæ—¢ã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹å ´åˆã¯ç™»éŒ²ã—ãªã„ï¼‰
 /// </summary>
-/// <typeparam name="T">“o˜^‚·‚éƒV[ƒ“‚ÌŒ^</typeparam>
-/// <param name="registerSceneName">“o˜^‚·‚éƒV[ƒ“–¼</param>
-/// <returns>Œ‹‰Ê</returns>
+/// <typeparam name="T">ç™»éŒ²ã™ã‚‹ã‚·ãƒ¼ãƒ³ã®åž‹</typeparam>
+/// <param name="registerSceneName">ç™»éŒ²ã™ã‚‹ã‚·ãƒ¼ãƒ³å</param>
+/// <returns>çµæžœ</returns>
 template<typename T>
 bool RegisterSceneIfNotExists(std::string registerSceneName)
 {
-	// ‚·‚Å‚É“o˜^‚³‚ê‚Ä‚¢‚éê‡“o˜^‚³‚ê‚È‚¢
+	// ã™ã§ã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹å ´åˆç™»éŒ²ã•ã‚Œãªã„
 	if (scenes.find(registerSceneName) != scenes.end()) return false;
-	// V‹K“o˜^
+	// æ–°è¦ç™»éŒ²
 	RegisterScene<T>(registerSceneName);
 	return true;
 }
 
-#pragma region ƒV[ƒ“•ÏX
+#pragma region ã‚·ãƒ¼ãƒ³å¤‰æ›´
 /// <summary>
-/// ƒV[ƒ“•ÏX
+/// ã‚·ãƒ¼ãƒ³å¤‰æ›´
 /// </summary>
-/// <param name="loadSceneName">•ÏXƒV[ƒ“–¼</param>
+/// <param name="loadSceneName">å¤‰æ›´ã‚·ãƒ¼ãƒ³å</param>
 void LoadScene(std::string loadSceneName)
 {
 	if (scenes.find(loadSceneName) != scenes.end())
 	{
-		// ƒV[ƒ“‚ªÝ’è‚³‚ê‚Ä‚¢‚È‚¢ê‡AÅ‰‚Ì“Ç‚Ýž‚ÝƒV[ƒ“‚ðÝ’è‚·‚é
+		// ã‚·ãƒ¼ãƒ³ãŒè¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆã€æœ€åˆã®èª­ã¿è¾¼ã¿ã‚·ãƒ¼ãƒ³ã‚’è¨­å®šã™ã‚‹
 		if (currentSceneKey.empty()) currentSceneKey = loadSceneName;
 		nextSceneKey = loadSceneName;
 	}
 }
 #pragma endregion
 
-#pragma region ƒ}ƒEƒXƒJ[ƒ\ƒ‹‚Ì•\Ž¦”ñ•\Ž¦‚ÌÝ’è
+#pragma region ãƒžã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«ã®è¡¨ç¤ºéžè¡¨ç¤ºã®è¨­å®š
 /// <summary>
-/// ƒ}ƒEƒXƒJ[ƒ\ƒ‹‚Ì•\Ž¦”ñ•\Ž¦‚ÌÝ’è
+/// ãƒžã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«ã®è¡¨ç¤ºéžè¡¨ç¤ºã®è¨­å®š
 /// </summary>
-/// <param name="isShow">true:•\Ž¦,false:”ñ•\Ž¦</param>
+/// <param name="isShow">true:è¡¨ç¤º,false:éžè¡¨ç¤º</param>
 void SetShowMouseCursor(bool isShow)
 {
-	// ƒJ[ƒ\ƒ‹‚ÍA•\Ž¦ƒJƒEƒ“ƒg‚ª 0 ˆÈã‚Ìê‡‚É‚Ì‚Ý•\Ž¦
+	// ã‚«ãƒ¼ã‚½ãƒ«ã¯ã€è¡¨ç¤ºã‚«ã‚¦ãƒ³ãƒˆãŒ 0 ä»¥ä¸Šã®å ´åˆã«ã®ã¿è¡¨ç¤º
 	int count = ShowCursor(isShow);
 	while (isShow ? count < 0 : count >= 0)
 	{
@@ -668,74 +668,74 @@ void SetShowMouseCursor(bool isShow)
 }
 #pragma endregion
 
-#pragma region ƒfƒtƒHƒ‹ƒgÝ’è‚ÅƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚ð“o˜^‚µ‚Ü‚·
+#pragma region ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆè¨­å®šã§ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã‚’ç™»éŒ²ã—ã¾ã™
 /// <summary>
-/// ƒfƒtƒHƒ‹ƒgÝ’è‚ÅƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚ð“o˜^‚µ‚Ü‚·B
-/// Žw’è‚³‚ê‚½ƒEƒBƒ“ƒhƒEƒvƒƒV[ƒWƒƒ‚ðŽ‚ÂA•W€“I‚ÈÝ’è‚ÌƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚ð“o˜^‚µ‚Ü‚·B
-/// ”wŒiFAƒJ[ƒ\ƒ‹AƒXƒ^ƒCƒ‹‚È‚Ç‚Ìƒpƒ‰ƒ[ƒ^‚ÍŒÅ’è‚³‚ê‚Ä‚¢‚Ü‚·B
+/// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆè¨­å®šã§ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã‚’ç™»éŒ²ã—ã¾ã™ã€‚
+/// æŒ‡å®šã•ã‚ŒãŸã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£ã‚’æŒã¤ã€æ¨™æº–çš„ãªè¨­å®šã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã‚’ç™»éŒ²ã—ã¾ã™ã€‚
+/// èƒŒæ™¯è‰²ã€ã‚«ãƒ¼ã‚½ãƒ«ã€ã‚¹ã‚¿ã‚¤ãƒ«ãªã©ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã¯å›ºå®šã•ã‚Œã¦ã„ã¾ã™ã€‚
 /// </summary>
-/// <param name="instance">ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ÌƒCƒ“ƒXƒ^ƒ“ƒXƒnƒ“ƒhƒ‹</param>
-/// <param name="applicationName">“o˜^‚·‚éƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚Ì–¼‘O</param>
-/// <param name="windowProcedure">ƒEƒBƒ“ƒhƒEƒvƒƒV[ƒWƒƒiƒƒbƒZ[ƒWˆ—ŠÖ”j</param>
-/// <returns>true:¬Œ÷ false:Ž¸”s</returns>
+/// <param name="instance">ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãƒãƒ³ãƒ‰ãƒ«</param>
+/// <param name="applicationName">ç™»éŒ²ã™ã‚‹ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã®åå‰</param>
+/// <param name="windowProcedure">ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£ï¼ˆãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å‡¦ç†é–¢æ•°ï¼‰</param>
+/// <returns>true:æˆåŠŸ false:å¤±æ•—</returns>
 bool RegisterDefaultWindowClass(
 	_In_ HINSTANCE instance,
 	_In_ LPCWSTR applicationName,
 	_In_ WNDPROC windowProcedure)
 {
-	// ƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚Ìƒpƒ‰ƒ[ƒ^[‚ðÝ’è
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼ã‚’è¨­å®š
 	WNDCLASSEX wcex{};
-	// \‘¢‘Ì‚ÌƒTƒCƒY‚ðÝ’è
+	// æ§‹é€ ä½“ã®ã‚µã‚¤ã‚ºã‚’è¨­å®š
 	wcex.cbSize = sizeof(WNDCLASSEX);
-	// ƒEƒBƒ“ƒhƒE‚ÌƒXƒ^ƒCƒ‹
-	// CS_HREDRAW: ƒEƒBƒ“ƒhƒE‚Ì•‚ª•ÏX‚³‚ê‚½Û‚ÉÄ•`‰æ
-	// CS_VREDRAW: ƒEƒBƒ“ƒhƒE‚Ì‚‚³‚ª•ÏX‚³‚ê‚½Û‚ÉÄ•`‰æ
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ã‚¹ã‚¿ã‚¤ãƒ«
+	// CS_HREDRAW: ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®å¹…ãŒå¤‰æ›´ã•ã‚ŒãŸéš›ã«å†æç”»
+	// CS_VREDRAW: ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®é«˜ã•ãŒå¤‰æ›´ã•ã‚ŒãŸéš›ã«å†æç”»
 	wcex.style = CS_HREDRAW | CS_VREDRAW;
-	// ƒEƒBƒ“ƒhƒEƒvƒƒV[ƒWƒƒiƒƒbƒZ[ƒWˆ—ŠÖ”j‚ðŽw’èB
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£ï¼ˆãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å‡¦ç†é–¢æ•°ï¼‰ã‚’æŒ‡å®šã€‚
 	wcex.lpfnWndProc = windowProcedure;
-	// ƒNƒ‰ƒXƒƒ‚ƒŠ‚Ì’Ç‰ÁƒoƒCƒg”i’Êí‚Í 0j
+	// ã‚¯ãƒ©ã‚¹ãƒ¡ãƒ¢ãƒªã®è¿½åŠ ãƒã‚¤ãƒˆæ•°ï¼ˆé€šå¸¸ã¯ 0ï¼‰
 	wcex.cbClsExtra = 0;
-	// ƒEƒBƒ“ƒhƒE‚²‚Æ‚Ì’Ç‰Áƒƒ‚ƒŠ‚ÌƒoƒCƒg”i’Êí‚Í 0j
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã”ã¨ã®è¿½åŠ ãƒ¡ãƒ¢ãƒªã®ãƒã‚¤ãƒˆæ•°ï¼ˆé€šå¸¸ã¯ 0ï¼‰
 	wcex.cbWndExtra = 0;
-	// ƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚ª‘®‚·‚éƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ÌƒCƒ“ƒXƒ^ƒ“ƒXƒnƒ“ƒhƒ‹
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ãŒå±žã™ã‚‹ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãƒãƒ³ãƒ‰ãƒ«
 	wcex.hInstance = instance;
-	// ƒEƒBƒ“ƒhƒE‚ÌƒAƒCƒRƒ“‚ðÝ’èiNULL ‚Ìê‡‚ÍƒfƒtƒHƒ‹ƒgƒAƒCƒRƒ“j
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ã‚¢ã‚¤ã‚³ãƒ³ã‚’è¨­å®šï¼ˆNULL ã®å ´åˆã¯ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚¢ã‚¤ã‚³ãƒ³ï¼‰
 	wcex.hIcon = nullptr;
-	// ƒ}ƒEƒXƒJ[ƒ\ƒ‹‚ÌƒfƒtƒHƒ‹ƒgÝ’èi’Êí‚Í–îˆóƒJ[ƒ\ƒ‹j
+	// ãƒžã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«ã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆè¨­å®šï¼ˆé€šå¸¸ã¯çŸ¢å°ã‚«ãƒ¼ã‚½ãƒ«ï¼‰
 	wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
-	// ƒEƒBƒ“ƒhƒE‚Ì”wŒiF‚ðÝ’èB
-	// (HBRUSH)(COLOR_WINDOW + 1) ‚ÅƒVƒXƒeƒ€‚Ì•W€”wŒiF‚ðŽg—p
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®èƒŒæ™¯è‰²ã‚’è¨­å®šã€‚
+	// (HBRUSH)(COLOR_WINDOW + 1) ã§ã‚·ã‚¹ãƒ†ãƒ ã®æ¨™æº–èƒŒæ™¯è‰²ã‚’ä½¿ç”¨
 	wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-	// ƒƒjƒ…[‚ÌƒŠƒ\[ƒX–¼iNULL ‚Ìê‡‚Íƒƒjƒ…[‚È‚µj
+	// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®ãƒªã‚½ãƒ¼ã‚¹åï¼ˆNULL ã®å ´åˆã¯ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãªã—ï¼‰
 	wcex.lpszMenuName = nullptr;
-	// ƒEƒBƒ“ƒhƒEƒNƒ‰ƒX–¼‚ðÝ’è
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹åã‚’è¨­å®š
 	wcex.lpszClassName = applicationName;
-	// ¬‚³‚¢ƒAƒCƒRƒ“iƒ^ƒXƒNƒo[‚ÌƒTƒ€ƒlƒCƒ‹—pjBNULL ‚Ìê‡‚ÍƒfƒtƒHƒ‹ƒg
+	// å°ã•ã„ã‚¢ã‚¤ã‚³ãƒ³ï¼ˆã‚¿ã‚¹ã‚¯ãƒãƒ¼ã®ã‚µãƒ ãƒã‚¤ãƒ«ç”¨ï¼‰ã€‚NULL ã®å ´åˆã¯ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ
 	wcex.hIconSm = nullptr;
 
-	// ƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚Ì“o˜^B
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã®ç™»éŒ²ã€‚
 	if (!RegisterClassExW(&wcex))
 	{
-		MessageBox(nullptr, L"ƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚Ì“o˜^‚ÉŽ¸”s‚µ‚Ü‚µ‚½B", L"ƒGƒ‰[", MB_ICONERROR);
-		return false; // Ž¸”sŽž‚É false ‚ð•Ô‚·
+		MessageBox(nullptr, L"ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã®ç™»éŒ²ã«å¤±æ•—ã—ã¾ã—ãŸã€‚", L"ã‚¨ãƒ©ãƒ¼", MB_ICONERROR);
+		return false; // å¤±æ•—æ™‚ã« false ã‚’è¿”ã™
 	}
-	return true; // ¬Œ÷Žž‚É true ‚ð•Ô‚·
+	return true; // æˆåŠŸæ™‚ã« true ã‚’è¿”ã™
 }
 #pragma endregion
 
-#pragma region ƒfƒtƒHƒ‹ƒgÝ’è‚ÅƒEƒBƒ“ƒhƒE‚ðì¬‚µ‚Ü‚·
+#pragma region ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆè¨­å®šã§ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’ä½œæˆã—ã¾ã™
 /// <summary>
-/// ƒfƒtƒHƒ‹ƒgÝ’è‚ÅƒEƒBƒ“ƒhƒE‚ðì¬‚µ‚Ü‚·B
-/// Žw’è‚³‚ê‚½ƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚ðŽg—p‚µA•W€“I‚ÈÝ’è‚ÌƒEƒBƒ“ƒhƒE‚ðì¬‚µ‚Ü‚·B
-/// ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚ÌƒTƒCƒY‚ðŽw’è‚µA‚»‚ê‚É‡‚¤ƒEƒBƒ“ƒhƒEƒTƒCƒY‚ðŽ©“®’²®‚µ‚Ü‚·B
+/// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆè¨­å®šã§ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’ä½œæˆã—ã¾ã™ã€‚
+/// æŒ‡å®šã•ã‚ŒãŸã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã‚’ä½¿ç”¨ã—ã€æ¨™æº–çš„ãªè¨­å®šã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’ä½œæˆã—ã¾ã™ã€‚
+/// ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã®ã‚µã‚¤ã‚ºã‚’æŒ‡å®šã—ã€ãã‚Œã«åˆã†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚µã‚¤ã‚ºã‚’è‡ªå‹•èª¿æ•´ã—ã¾ã™ã€‚
 /// </summary>
-/// <param name="instance">ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ÌƒCƒ“ƒXƒ^ƒ“ƒXƒnƒ“ƒhƒ‹</param>
-/// <param name="className">ƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚Ì–¼‘O</param>
-/// <param name="screenWidth">ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚Ì•iƒsƒNƒZƒ‹j</param>
-/// <param name="screenHeight">ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚Ì‚‚³iƒsƒNƒZƒ‹j</param>
-/// <param name="windowTitle">ƒEƒBƒ“ƒhƒE‚Ìƒ^ƒCƒgƒ‹</param>
-/// <param name="windowStyle">ƒEƒBƒ“ƒhƒE‚ÌƒXƒ^ƒCƒ‹iƒfƒtƒHƒ‹ƒg‚Í WS_OVERLAPPEDWINDOW ‚©‚ç WS_THICKFRAME ‚ðœŠOj</param>
-/// <returns>ì¬‚³‚ê‚½ƒEƒBƒ“ƒhƒE‚Ìƒnƒ“ƒhƒ‹iŽ¸”sŽž‚Í nullptrj</returns>
+/// <param name="instance">ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãƒãƒ³ãƒ‰ãƒ«</param>
+/// <param name="className">ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã®åå‰</param>
+/// <param name="screenWidth">ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã®å¹…ï¼ˆãƒ”ã‚¯ã‚»ãƒ«ï¼‰</param>
+/// <param name="screenHeight">ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã®é«˜ã•ï¼ˆãƒ”ã‚¯ã‚»ãƒ«ï¼‰</param>
+/// <param name="windowTitle">ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ã‚¿ã‚¤ãƒˆãƒ«</param>
+/// <param name="windowStyle">ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ã‚¹ã‚¿ã‚¤ãƒ«ï¼ˆãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã¯ WS_OVERLAPPEDWINDOW ã‹ã‚‰ WS_THICKFRAME ã‚’é™¤å¤–ï¼‰</param>
+/// <returns>ä½œæˆã•ã‚ŒãŸã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ãƒãƒ³ãƒ‰ãƒ«ï¼ˆå¤±æ•—æ™‚ã¯ nullptrï¼‰</returns>
 HWND CreateDefaultWindow(
 	_In_ HINSTANCE instance,
 	_In_ LPCWSTR className,
@@ -744,52 +744,52 @@ HWND CreateDefaultWindow(
 	_In_ LPCWSTR windowTitle,
 	_In_ DWORD windowStyle)
 {
-	// ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚ÌƒTƒCƒY‚ðŽw’è
+	// ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã®ã‚µã‚¤ã‚ºã‚’æŒ‡å®š
 	RECT clientRect{ 0, 0, screenWidth, screenHeight };
 
-	// ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚ªŽw’è‚ÌƒTƒCƒY‚É‚È‚é‚æ‚¤‚ÉƒEƒBƒ“ƒhƒEƒTƒCƒY‚ð’²®
+	// ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸãŒæŒ‡å®šã®ã‚µã‚¤ã‚ºã«ãªã‚‹ã‚ˆã†ã«ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚µã‚¤ã‚ºã‚’èª¿æ•´
 	AdjustWindowRect(&clientRect, WS_OVERLAPPEDWINDOW, FALSE);
 
-	// ƒEƒBƒ“ƒhƒE‚ðì¬‚µA‚»‚Ìƒnƒ“ƒhƒ‹‚ð•Ô‚·
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’ä½œæˆã—ã€ãã®ãƒãƒ³ãƒ‰ãƒ«ã‚’è¿”ã™
 	return CreateWindowExW(
-		// Šg’£ƒEƒBƒ“ƒhƒEƒXƒ^ƒCƒ‹i‚È‚µj
+		// æ‹¡å¼µã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¹ã‚¿ã‚¤ãƒ«ï¼ˆãªã—ï¼‰
 		0,
-		// Žg—p‚·‚éƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚Ì–¼‘O
+		// ä½¿ç”¨ã™ã‚‹ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã®åå‰
 		className,
-		// ƒEƒBƒ“ƒhƒE‚Ìƒ^ƒCƒgƒ‹
+		// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ã‚¿ã‚¤ãƒˆãƒ«
 		windowTitle,
-		// ƒEƒBƒ“ƒhƒE‚ÌƒXƒ^ƒCƒ‹
+		// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ã‚¹ã‚¿ã‚¤ãƒ«
 		windowStyle,
-		// ‰ŠúXÀ•WiƒfƒtƒHƒ‹ƒgj
+		// åˆæœŸXåº§æ¨™ï¼ˆãƒ‡ãƒ•ã‚©ãƒ«ãƒˆï¼‰
 		CW_USEDEFAULT,
-		// ‰ŠúYÀ•WiƒfƒtƒHƒ‹ƒgj
+		// åˆæœŸYåº§æ¨™ï¼ˆãƒ‡ãƒ•ã‚©ãƒ«ãƒˆï¼‰
 		CW_USEDEFAULT,
-		// ŒvŽZ‚³‚ê‚½ƒEƒBƒ“ƒhƒE‚Ì•
+		// è¨ˆç®—ã•ã‚ŒãŸã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®å¹…
 		clientRect.right - clientRect.left,
-		// ŒvŽZ‚³‚ê‚½ƒEƒBƒ“ƒhƒE‚Ì‚‚³
+		// è¨ˆç®—ã•ã‚ŒãŸã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®é«˜ã•
 		clientRect.bottom - clientRect.top,
-		// eƒEƒBƒ“ƒhƒEi‚È‚µj
+		// è¦ªã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ï¼ˆãªã—ï¼‰
 		nullptr,
-		// ƒƒjƒ…[i‚È‚µj
+		// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ï¼ˆãªã—ï¼‰
 		nullptr,
-		// ƒAƒvƒŠƒP[ƒVƒ‡ƒ“ƒCƒ“ƒXƒ^ƒ“ƒX
+		// ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 		instance,
-		// ’Ç‰Áƒpƒ‰ƒ[ƒ^i‚È‚µj
+		// è¿½åŠ ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ï¼ˆãªã—ï¼‰
 		nullptr
 	);
 }
 #pragma endregion
 
-#pragma region ƒEƒBƒ“ƒhƒEƒƒbƒZ[ƒW‚ðƒfƒBƒXƒpƒbƒ`
+#pragma region ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒ
 /// <summary>
-/// ƒEƒBƒ“ƒhƒEƒƒbƒZ[ƒW‚ðƒfƒBƒXƒpƒbƒ`B
-/// false‚ª•Ô‚Á‚Ä‚«‚½‚çAƒQ[ƒ€I—¹B
+/// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒã€‚
+/// falseãŒè¿”ã£ã¦ããŸã‚‰ã€ã‚²ãƒ¼ãƒ çµ‚äº†ã€‚
 /// </summary>
-/// <returns>Œ‹‰Ê</returns>
+/// <returns>çµæžœ</returns>
 bool DispatchWindowMessage()
 {
 	MSG msg = { 0 };
-	//ƒEƒBƒ“ƒhƒE‚©‚ç‚ÌƒƒbƒZ[ƒW‚ðŽó‚¯Žæ‚éB
+	//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‹ã‚‰ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å—ã‘å–ã‚‹ã€‚
 	while (PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE))
 	{
 		if (msg.message == WM_QUIT) return false;
@@ -797,26 +797,26 @@ bool DispatchWindowMessage()
 		DispatchMessage(&msg);
 	}
 
-	//ƒEƒBƒ“ƒhƒEƒƒbƒZ[ƒW‚ª‹ó‚É‚È‚Á‚½B
+	//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒç©ºã«ãªã£ãŸã€‚
 	return true;
 }
 #pragma endregion
 
-#pragma region FPSŒvŽZ
+#pragma region FPSè¨ˆç®—
 /// <summary>
-/// FPSŒvŽZ
+/// FPSè¨ˆç®—
 /// </summary>
-/// <param name="timeStamp">Œo‰ß‚µ‚½‡ŒvŽžŠÔ</param>
+/// <param name="timeStamp">çµŒéŽã—ãŸåˆè¨ˆæ™‚é–“</param>
 void CalculateFrameStats(float timeStamp)
 {
-	// CalculateFrameStats ƒtƒŒ[ƒ€ƒŒ[ƒgŒvŽZ
-	// 1•b“–‚½‚è‚Ì•½‹Ï‚ÌƒtƒŒ[ƒ€”‚ðŒvŽZ‚µA
-	// ‚±‚ê‚ç‚ÌŒ‹‰Ê‚ÍƒEƒBƒ“ƒhƒE‚ÌƒLƒƒƒvƒVƒ‡ƒ“ƒo[‚É’Ç‰Á‚³‚ê‚Ü‚·B
-	// 1ƒtƒŒ[ƒ€‚ðƒŒƒ“ƒ_ƒŠƒ“ƒO‚·‚é‚Ì‚É‚©‚©‚é•½‹ÏŽžŠÔ‚ðŽZo‚µ‚Ü‚·B
+	// CalculateFrameStats ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¬ãƒ¼ãƒˆè¨ˆç®—
+	// 1ç§’å½“ãŸã‚Šã®å¹³å‡ã®ãƒ•ãƒ¬ãƒ¼ãƒ æ•°ã‚’è¨ˆç®—ã—ã€
+	// ã“ã‚Œã‚‰ã®çµæžœã¯ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ã‚­ãƒ£ãƒ—ã‚·ãƒ§ãƒ³ãƒãƒ¼ã«è¿½åŠ ã•ã‚Œã¾ã™ã€‚
+	// 1ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã™ã‚‹ã®ã«ã‹ã‹ã‚‹å¹³å‡æ™‚é–“ã‚’ç®—å‡ºã—ã¾ã™ã€‚
 	static int frames = 0;
 	static float time_tlapsed = 0.0f;
 
-	// 1•bŠÔ‚ÌFPS‚ðŽZo
+	// 1ç§’é–“ã®FPSã‚’ç®—å‡º
 	if ((++frames, timeStamp - time_tlapsed) >= 1.0f)
 	{
 		float fps = static_cast<float>(frames); // fps = frameCnt / 1
@@ -826,7 +826,7 @@ void CalculateFrameStats(float timeStamp)
 		outs << "FPS : " << fps << " / " << "Frame Time : " << mspf << " (ms)";
 		SetWindowTextA(hwnd, outs.str().c_str());
 
-		// ŽŸ‚Ì•½‹Ï‚ÉƒŠƒZƒbƒg‚µ‚Ü‚·B
+		// æ¬¡ã®å¹³å‡ã«ãƒªã‚»ãƒƒãƒˆã—ã¾ã™ã€‚
 		frames = 0;
 		time_tlapsed += 1.0f;
 	}

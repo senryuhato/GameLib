@@ -1,33 +1,21 @@
-#pragma once
+ï»¿#pragma once
 
-/// <summary>
-/// ƒV[ƒ“ƒNƒ‰ƒX
-/// </summary>
+/// @brief ã‚·ãƒ¼ãƒ³ã‚¯ãƒ©ã‚¹
 class Scene
 {
 public:
-	/// <summary>
-	/// ‰Šú‰»ˆ—
-	/// </summary>
+	/// @brief åˆæœŸåŒ–å‡¦ç†
 	virtual void Initialize() {}
 
-	/// <summary>
-	/// I—¹ˆ—
-	/// </summary>
+	/// @brief çµ‚äº†å‡¦ç†
 	virtual void Uninitializr() {}
 
-	/// <summary>
-	/// XVˆ—
-	/// </summary>
+	/// @brief æ›´æ–°å‡¦ç†
 	virtual void Update() {}
 
-	/// <summary>
-	/// •`‰æˆ—
-	/// </summary>
+	/// @brief æç”»å‡¦ç†
 	virtual void Render() {}
 
-	/// <summary>
-    /// GUI•`‰æ
-    /// </summary>
+	/// @brief GUIæç”»
 	virtual void ShowGUI() {}
 };

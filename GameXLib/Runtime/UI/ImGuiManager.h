@@ -1,70 +1,54 @@
-#pragma once
+ï»¿#pragma once
 #include <d3d11.h>
 #include <vector>
 #include <functional>
 
-/// <summary>
-/// ImGui ‚Ì‰Šú‰»EXVE•`‰æEI—¹ˆ—‚ğŠÇ—‚·‚éƒNƒ‰ƒX
-/// </summary>
+/// @brief ImGui ã®åˆæœŸåŒ–ãƒ»æ›´æ–°ãƒ»æç”»ãƒ»çµ‚äº†å‡¦ç†ã‚’ç®¡ç†ã™ã‚‹ã‚¯ãƒ©ã‚¹
 class ImGuiManager
 {
 public:
-	/// <summary>
-	/// ImGui‚Ì‰Šú‰»ˆ—
-	/// </summary>
-	/// <param name="hwnd">ƒEƒBƒ“ƒhƒEƒnƒ“ƒhƒ‹</param>
-	/// <param name="device">DirectX 11 ƒfƒoƒCƒX</param>
-	/// <param name="immediateContext">DirectX 11 ƒfƒoƒCƒXƒRƒ“ƒeƒLƒXƒg</param>
-	/// <return>Œ‹‰Ê</return>
+	/// @brief ImGuiã®åˆæœŸåŒ–å‡¦ç†
+	/// @param hwnd ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
+	/// @param device DirectX 11 ãƒ‡ãƒã‚¤ã‚¹
+	/// @param immediateContext DirectX 11 ãƒ‡ãƒã‚¤ã‚¹ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆ
+	/// @return çµæœ
 	bool Initialize(
 		HWND hwnd, 
 		ID3D11Device* device, 
 		ID3D11DeviceContext*
 		immediateContext);
 
-	/// <summary>
-	/// ImGui‚ÌI—¹ˆ—
-	/// </summary>
+	/// @brief ImGuiã®çµ‚äº†å‡¦ç†
 	void Uninitialize();
 
-	/// <summary>
-	/// Imgui‚Ì‘S”Êˆ—
-	/// </summary>
+	/// @brief Imguiã®å…¨èˆ¬å‡¦ç†
 	void RenderImGuiFrame();
 
-	/// <summary>
-	/// ŠÖ”ƒ|ƒCƒ“ƒ^[‚ğ“o˜^‚·‚é
-	/// </summary>
-	/// <param name="func">“o˜^‚·‚éŠÖ”</param>
+	/// @brief é–¢æ•°ãƒã‚¤ãƒ³ã‚¿ãƒ¼ã‚’ç™»éŒ²ã™ã‚‹
+	/// @param func ç™»éŒ²ã™ã‚‹é–¢æ•°
 	void RegisterImGuiFunction(std::function<void()> func)
 	{
 		drawFunctions.push_back(func);
 	}
 
-	/// <summary>
-	/// ImGui‚ÌƒEƒBƒ“ƒhƒEƒƒbƒZ[ƒW‚ğˆ—‚·‚éƒƒ“ƒoŠÖ”
-	/// </summary>
-	/// <param name="hwnd">ƒEƒBƒ“ƒhƒEƒnƒ“ƒhƒ‹</param>
-	/// <param name="msg">ó‚¯æ‚Á‚½ƒƒbƒZ[ƒW</param>
-	/// <param name="wParam">ƒƒbƒZ[ƒW‚Ì’Ç‰Áî•ñi1‚Â–Ú‚Ìƒpƒ‰ƒ[ƒ^j</param>
-	/// <param name="lParam">ƒƒbƒZ[ƒW‚Ì’Ç‰Áî•ñi2‚Â–Ú‚Ìƒpƒ‰ƒ[ƒ^j</param>
-	/// <returns>ƒƒbƒZ[ƒW‚ğˆ—‚µ‚½Œ‹‰Êi’Êí‚Í `DefWindowProc` ‚Ì–ß‚è’l‚ğ•Ô‚·j</returns>
+	/// @brief ImGuiã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å‡¦ç†ã™ã‚‹ãƒ¡ãƒ³ãƒé–¢æ•°
+	/// @param hwnd ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
+	/// @param msg å—ã‘å–ã£ãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
+	/// @param wParam ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®è¿½åŠ æƒ…å ±ï¼ˆ1ã¤ç›®ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ï¼‰
+	/// @param lParam ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®è¿½åŠ æƒ…å ±ï¼ˆ2ã¤ç›®ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ï¼‰
+	/// @return ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å‡¦ç†ã—ãŸçµæœï¼ˆé€šå¸¸ã¯ `DefWindowProc` ã®æˆ»ã‚Šå€¤ã‚’è¿”ã™ï¼‰
 	LRESULT WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 private:
-	// ‰Šú‰»ƒtƒ‰ƒO
-	bool initialized = false;
-	// ImGui•\¦ˆ—”z—ñ
-	std::vector<std::function<void()>> drawFunctions;
-
-private:
-	/// <summary>
-	/// V‚µ‚¢ƒtƒŒ[ƒ€‚ÌŠJn
-	/// </summary>
+	// æ–°ã—ã„ãƒ•ãƒ¬ãƒ¼ãƒ ã®é–‹å§‹
 	void NewFrame();
 
-	/// <summary>
-	/// ImGui‚Ì•`‰æˆ—
-	/// </summary>
+	// ImGuiã®æç”»å‡¦ç†
 	void Render();
+
+private:
+	// åˆæœŸåŒ–ãƒ•ãƒ©ã‚°
+	bool initialized = false;
+	// ImGuiè¡¨ç¤ºå‡¦ç†é…åˆ—
+	std::vector<std::function<void()>> drawFunctions;
 };

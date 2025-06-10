@@ -1,7 +1,7 @@
-#pragma once
+ï»¿#pragma once
 #include <windows.h>
 
-// ‚‰ğ‘œ“xƒ^ƒCƒ}[
+/// @brief é«˜è§£åƒåº¦ã‚¿ã‚¤ãƒãƒ¼
 class HighResolutionTimer
 {
 public:
@@ -16,25 +16,26 @@ public:
 		lastTime = thisTime;
 	}
 
-	// Reset()‚ªŒÄ‚Ño‚³‚ê‚Ä‚©‚çŒo‰ß‚µ‚½‡ŒvŠÔ‚ğ•Ô‚µ‚Ü‚·B
+	/// @brief ç´¯è¨ˆçµŒéæ™‚é–“ã‚’å–å¾—
+	/// @return Reset()ãŒå‘¼ã³å‡ºã•ã‚Œã¦ã‹ã‚‰çµŒéã—ãŸåˆè¨ˆæ™‚é–“ã‚’è¿”ã—ã¾ã™ã€‚
 	float TimeStamp() const  // in seconds
 	{
-		// ’â~‚µ‚Ä‚¢‚éê‡A’â~‚µ‚Ä‚©‚çŒo‰ß‚µ‚½ŠÔ‚ğƒJƒEƒ“ƒg‚µ‚Ü‚¹‚ñB
-		// ‚³‚ç‚ÉAˆÈ‘O‚·‚Å‚É’â~‚µ‚Ä‚¢‚½ê‡ stopTime - baseTime ‚É‚Í
-		// pausedTime@‚ªŠÜ‚Ü‚ê‚Ä‚¢‚é‚½‚ß mStopTime ‚©‚ç pausedTime ‚ğ
-		// Œ¸Z‚·‚é‚±‚Æ‚ÅC³‚µ‚Ü‚·B
+		// åœæ­¢ã—ã¦ã„ã‚‹å ´åˆã€åœæ­¢ã—ã¦ã‹ã‚‰çµŒéã—ãŸæ™‚é–“ã‚’ã‚«ã‚¦ãƒ³ãƒˆã—ã¾ã›ã‚“ã€‚
+		// ã•ã‚‰ã«ã€ä»¥å‰ã™ã§ã«åœæ­¢ã—ã¦ã„ãŸå ´åˆ stopTime - baseTime ã«ã¯
+		// pausedTimeã€€ãŒå«ã¾ã‚Œã¦ã„ã‚‹ãŸã‚ mStopTime ã‹ã‚‰ pausedTime ã‚’
+		// æ¸›ç®—ã™ã‚‹ã“ã¨ã§ä¿®æ­£ã—ã¾ã™ã€‚
 		//
 		//                     |<--pausedTime-->|
 		// ----*---------------*-----------------*------------*------------*------> time
 		//  baseTime       stopTime        start_time     stopTime    thisTime
 
-		if (stopped)
+		if(stopped)
 		{
 			return static_cast<float>(((stopTime - pausedTime) - baseTime) * secondsPerCount);
 		}
 
-		// thisTime - mBaseTime ‚ÌŠÔ‚É‚Í pausedTime ‚ªŠÜ‚Ü‚ê‚Ä‚¢‚Ü‚·B
-		// ‚»‚Ì‚½‚ß thisTime ‚©‚ç pausedTime ‚ğŒ¸Z‚·‚é‚±‚Æ‚ÅC³‚µ‚Ü‚·B
+		// thisTime - mBaseTime ã®é–“ã«ã¯ pausedTime ãŒå«ã¾ã‚Œã¦ã„ã¾ã™ã€‚
+		// ãã®ãŸã‚ thisTime ã‹ã‚‰ pausedTime ã‚’æ¸›ç®—ã™ã‚‹ã“ã¨ã§ä¿®æ­£ã—ã¾ã™ã€‚
 		//
 		//  (thisTime - pausedTime) - baseTime 
 		//
@@ -47,12 +48,15 @@ public:
 		}
 	}
 
+	/// @brief Tické–“ã®æ™‚é–“ã‚’å–å¾—
+	/// @return Tické–“ç§’æ•°
 	float TimeInterval() const  // in seconds
 	{
 		return static_cast<float>(deltaTime);
 	}
 
-	void Reset() // Call before message loop.
+	/// @brief ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒ«ãƒ¼ãƒ—ã®å‰ã«å‘¼ã³å‡ºã—ã¾ã™ã€‚
+	void Reset()
 	{
 		::QueryPerformanceCounter(reinterpret_cast<LARGE_INTEGER*>(&thisTime));
 		baseTime = thisTime;
@@ -62,17 +66,18 @@ public:
 		stopped = false;
 	}
 
-	void Start() // Call when unpaused.
+	/// @brief ä¸€æ™‚åœæ­¢ãŒè§£é™¤ã•ã‚ŒãŸã‚‰å‘¼ã³å‡ºã—ã¾ã™ã€‚
+	void Start()
 	{
 		LONGLONG startTime;
 		::QueryPerformanceCounter(reinterpret_cast<LARGE_INTEGER*>(&startTime));
 
-		// ƒXƒgƒbƒv‚©‚çƒXƒ^[ƒg‚ÌŠÔ‚ÌŒo‰ßŠÔ‚ğ—İÏ‚µ‚Ü‚·B
+		// ã‚¹ãƒˆãƒƒãƒ—ã‹ã‚‰ã‚¹ã‚¿ãƒ¼ãƒˆã®é–“ã®çµŒéæ™‚é–“ã‚’ç´¯ç©ã—ã¾ã™ã€‚
 		//
 		//                     |<-------d------->|
 		// ----*---------------*-----------------*------------> time
 		//  baseTime       stopTime        start_time     
-		if (stopped)
+		if(stopped)
 		{
 			pausedTime += (startTime - stopTime);
 			lastTime = startTime;
@@ -81,34 +86,36 @@ public:
 		}
 	}
 
-	void Stop() // Call when paused.
+	/// @brief ä¸€æ™‚åœæ­¢æ™‚ã«å‘¼ã³å‡ºã—ã¾ã™ã€‚
+	void Stop()
 	{
-		if (!stopped)
+		if(!stopped)
 		{
 			::QueryPerformanceCounter(reinterpret_cast<LARGE_INTEGER*>(&stopTime));
 			stopped = true;
 		}
 	}
 
-	void Tick() // Call every frame.
+	/// @brief ã™ã¹ã¦ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’å‘¼ã³å‡ºã—ã¾ã™ã€‚
+	void Tick()
 	{
-		if (stopped)
+		if(stopped)
 		{
 			deltaTime = 0.0;
 			return;
 		}
 
 		::QueryPerformanceCounter(reinterpret_cast<LARGE_INTEGER*>(&thisTime));
-		// Œ»İ‚Æ‘O‚ÌƒtƒŒ[ƒ€‚Æ‚ÌŠÔ·
+		// ç¾åœ¨ã¨å‰ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã¨ã®æ™‚é–“å·®
 		deltaTime = (thisTime - lastTime) * secondsPerCount;
 
-		// Ÿ‚ÌƒtƒŒ[ƒ€‚Ì€”õ
+		// æ¬¡ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã®æº–å‚™
 		lastTime = thisTime;
 
-		// ”ñ•‰‚Ì‹­§’lBDXSDK‚ÌCDXUTTimer‚ÍAƒvƒƒZƒbƒT‚ÍÈ“d—Íƒ‚[ƒh‚É“ü‚é‚©A
-		// •Ê‚Ì‚à‚Ì‚ÉƒVƒƒƒbƒtƒ‹‚³‚ê‚½Œã‚ÉAmDeltaTime ‚Í•‰‚Ì’l‚É‚È‚é‰Â”\«‚ª‚ ‚é
-		// ‚±‚Æ‚ªŒ¾‹y‚³‚ê‚Ä‚¢‚Ü‚·B
-		if (deltaTime < 0.0)
+		// éè² ã®å¼·åˆ¶å€¤ã€‚DXSDKã®CDXUTTimerã¯ã€ãƒ—ãƒ­ã‚»ãƒƒã‚µã¯çœé›»åŠ›ãƒ¢ãƒ¼ãƒ‰ã«å…¥ã‚‹ã‹ã€
+		// åˆ¥ã®ã‚‚ã®ã«ã‚·ãƒ£ãƒƒãƒ•ãƒ«ã•ã‚ŒãŸå¾Œã«ã€mDeltaTime ã¯è² ã®å€¤ã«ãªã‚‹å¯èƒ½æ€§ãŒã‚ã‚‹
+		// ã“ã¨ãŒè¨€åŠã•ã‚Œã¦ã„ã¾ã™ã€‚
+		if(deltaTime < 0.0)
 		{
 			deltaTime = 0.0;
 		}
@@ -124,5 +131,5 @@ private:
 	LONGLONG lastTime = 0LL;
 	LONGLONG thisTime = 0LL;
 
-	bool stopped{ false };
+	bool stopped{false};
 };

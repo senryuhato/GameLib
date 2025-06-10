@@ -1,14 +1,6 @@
-#include "imGuiDX11.h"
+ï»¿#include "imGuiDX11.h"
 #include "ImGuiManager.h"
 
-#pragma region ImGui ‚Ì‰Šú‰»ˆ—
-/// <summary>
-/// ImGui ‚Ì‰Šú‰»ˆ—
-/// </summary>
-/// <param name="hwnd">ƒEƒBƒ“ƒhƒEƒnƒ“ƒhƒ‹</param>
-/// <param name="device">DirectX 11 ƒfƒoƒCƒX</param>
-/// <param name="immediateContext">DirectX 11 ƒfƒoƒCƒXƒRƒ“ƒeƒLƒXƒg</param>
-/// <return>Œ‹‰Ê</return>
 bool ImGuiManager::Initialize(
 	HWND hwnd, 
 	ID3D11Device* device, 
@@ -20,10 +12,10 @@ bool ImGuiManager::Initialize(
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO();
-	//io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\Consola.ttf", 14.0f, nullptr, io.Fonts->GetGlyphRangesJapanese()); // Fontİ’è
-	io.Fonts->AddFontFromFileTTF("Resources\\System\\Fonts\\ipag.ttf", 12.0f, nullptr, io.Fonts->GetGlyphRangesJapanese());// Fontİ’è
+	//io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\Consola.ttf", 14.0f, nullptr, io.Fonts->GetGlyphRangesJapanese()); // Fontè¨­å®š
+	io.Fonts->AddFontFromFileTTF("Resources\\System\\Fonts\\ipag.ttf", 12.0f, nullptr, io.Fonts->GetGlyphRangesJapanese());// Fontè¨­å®š
 
-#if 1 // ƒhƒbƒLƒ“ƒO																												 
+#if 1 // ãƒ‰ãƒƒã‚­ãƒ³ã‚°																												 
 	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 	io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 #endif
@@ -46,12 +38,7 @@ bool ImGuiManager::Initialize(
 	ImGui::StyleColorsDark();
 	return true;
 }
-#pragma endregion
 
-#pragma region ImGui ‚ÌI—¹ˆ—
-/// <summary>
-/// ImGui ‚ÌI—¹ˆ—
-/// </summary>
 void ImGuiManager::Uninitialize()
 {
 	if (!initialized) return;
@@ -60,63 +47,38 @@ void ImGuiManager::Uninitialize()
 	ImGui::DestroyContext();
 	initialized = false;
 }
-#pragma endregion
 
-#pragma region Imgui‚Ì‘S”Êˆ—
-/// <summary>
-/// Imgui‚Ì‘S”Êˆ—
-/// </summary>
 void ImGuiManager::RenderImGuiFrame()
 {
 	if (!initialized) return;
-	// •`‰æ€”õ
+	// æç”»æº–å‚™
 	NewFrame();
-	// ImGui•\¦ˆ—
+	// ImGuiè¡¨ç¤ºå‡¦ç†
 	for(auto& func : drawFunctions)
 	{
-		// ŠÖ”ƒ|ƒCƒ“ƒ^Às
+		// é–¢æ•°ãƒã‚¤ãƒ³ã‚¿å®Ÿè¡Œ
 		func();
 	}
-	// •`‰æˆ—
+	// æç”»å‡¦ç†
 	Render();
-	// ƒNƒŠƒAˆ—
+	// ã‚¯ãƒªã‚¢å‡¦ç†
 	drawFunctions.clear();
 }
-#pragma endregion
 
-#pragma region ImGui‚ÌƒEƒBƒ“ƒhƒEƒƒbƒZ[ƒW‚ğˆ—‚·‚éƒƒ“ƒoŠÖ”
-/// <summary>
-/// ImGui‚ÌƒEƒBƒ“ƒhƒEƒƒbƒZ[ƒW‚ğˆ—‚·‚éƒƒ“ƒoŠÖ”
-/// </summary>
-/// <param name="hwnd">ƒEƒBƒ“ƒhƒEƒnƒ“ƒhƒ‹</param>
-/// <param name="msg">ó‚¯æ‚Á‚½ƒƒbƒZ[ƒW</param>
-/// <param name="wParam">ƒƒbƒZ[ƒW‚Ì’Ç‰Áî•ñi1‚Â–Ú‚Ìƒpƒ‰ƒ[ƒ^j</param>
-/// <param name="lParam">ƒƒbƒZ[ƒW‚Ì’Ç‰Áî•ñi2‚Â–Ú‚Ìƒpƒ‰ƒ[ƒ^j</param>
-/// <returns>ƒƒbƒZ[ƒW‚ğˆ—‚µ‚½Œ‹‰Êi’Êí‚Í `DefWindowProc` ‚Ì–ß‚è’l‚ğ•Ô‚·j</returns>
 LRESULT ImGuiManager::WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	if (!initialized) return 0;
 	return ImGui_ImplWin32_WndProcHandler(hwnd, msg, wParam, lParam);
 }
-#pragma endregion
 
-#pragma region V‚µ‚¢ƒtƒŒ[ƒ€‚ÌŠJn
-/// <summary>
-/// V‚µ‚¢ƒtƒŒ[ƒ€‚ÌŠJn
-/// </summary>
 void ImGuiManager::NewFrame()
 {
-	// Œ»İ‚Ìó‹µ‚¾‚ÆƒEƒBƒ“ƒhƒEƒTƒCƒY‚ğ•ÏX‚µ‚½‚Æ‚«ˆÊ’u‚ª‚¸‚ê‚é
+	// ç¾åœ¨ã®çŠ¶æ³ã ã¨ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚µã‚¤ã‚ºã‚’å¤‰æ›´ã—ãŸã¨ãä½ç½®ãŒãšã‚Œã‚‹
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 }
-#pragma endregion
 
-#pragma region ImGui ‚Ì•`‰æˆ—
-/// <summary>
-/// ImGui ‚Ì•`‰æˆ—
-/// </summary>
 void ImGuiManager::Render()
 {
 	ImGui::Render();
@@ -129,4 +91,3 @@ void ImGuiManager::Render()
 		ImGui::RenderPlatformWindowsDefault();
 	}
 }
-#pragma endregion

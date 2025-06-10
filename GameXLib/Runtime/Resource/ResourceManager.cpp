@@ -2,13 +2,6 @@
 #include "../System/Misc.h"
 #include "ResourceManager.h"
 
-#pragma region 画像データ読み込み
-/// <summary>
-/// 画像データ読み込み
-/// </summary>
-/// <param name="device">デバイス</param>
-/// <param name="filename">ファイル名</param>
-/// <param name="shaderResourceView">シェーダーリソースビュー</param>
 void ResourceManager::LoadTextureFromFile(ID3D11Device* device, const wchar_t* filename, ID3D11ShaderResourceView** shaderResourceView)
 {
 	HRESULT hr = S_OK;
@@ -30,5 +23,3 @@ void ResourceManager::LoadTextureFromFile(ID3D11Device* device, const wchar_t* f
 		textures.insert(std::make_pair(filename, *shaderResourceView));
 	}
 }
-#pragma endregion
-

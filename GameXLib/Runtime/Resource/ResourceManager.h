@@ -4,23 +4,17 @@
 #include <map>
 #include <string>
 
-/// <summary>
-/// リソースマネージャー
-/// </summary>
+/// @brief リソースマネージャー
 class ResourceManager
 {
 public:
-	/// <summary>
-	/// 画像データ読み込み
-	/// </summary>
-	/// <param name="device">デバイス</param>
-	/// <param name="filename">ファイル名</param>
-	/// <param name="shaderResourceView">シェーダーリソースビュー</param>
+	/// @brief 画像データ読み込み
+	/// @param device デバイス
+	/// @param filename ファイル名
+	/// @param shaderResourceView シェーダーリソースビュー
 	void LoadTextureFromFile(ID3D11Device* device, const wchar_t* filename, ID3D11ShaderResourceView** shaderResourceView);
 
 private:
-	/// <summary>
-	/// 画像リソース
-	/// </summary>
+	// 画像リソース
 	std::map<std::wstring, Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>> textures;
 };

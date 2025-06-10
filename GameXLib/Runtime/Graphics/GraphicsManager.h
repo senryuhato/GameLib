@@ -6,10 +6,10 @@
 class GraphicsManager
 {
 public:
-	/// @brief コンストラクタ
+	/// @brief コンストラクタ 処理なし
 	GraphicsManager() = default;
 
-	/// @brief デストラクタ
+	/// @brief デストラクタ リソース解放
 	~GraphicsManager() 
 	{
 		Uninitialize();
@@ -61,6 +61,7 @@ public:
 
 private:
 	/// @brief デバイス＆スワップチェインの作成
+	/// 
 	/// @param hwnd ウィンドウハンドル
 	/// @param frameBufferWidth フレームバッファの幅
 	/// @param frameBufferHeight フレームバッファの高さ

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <Windows.h>
 #include <DirectXMath.h>
 #include "../../ThirdParty/ImGui/imgui-docking/imgui.h"
@@ -6,4 +6,5 @@
 #include "../../ThirdParty/ImGui/imgui-docking/imgui_impl_dx11.h"
 #include "../../ThirdParty/ImGui/imgui-docking/imgui_impl_win32.h"
 
+// ImGuiのウィンドウメッセージ処理
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);

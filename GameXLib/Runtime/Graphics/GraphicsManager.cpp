@@ -1,12 +1,6 @@
 ﻿#include "GraphicsManager.h"
 #include "../System/Misc.h"
 
-#pragma region DirectX の初期化
-/// @brief DirectX の初期化
-/// @param hwnd ウィンドウハンドル
-/// @param defaultFramerate 目標フレームレート(デフォルト: 60)
-/// @param isFullscreen フルスクリーンの設定。true:フルスクリーン、false:通常
-/// @return 結果
 bool GraphicsManager::Initialize(
 	HWND hwnd,
 	UINT defaultFramerate,
@@ -39,10 +33,7 @@ bool GraphicsManager::Initialize(
 
 	return true;
 }
-#pragma endregion
 
-#pragma region DirectX のリソースを解放
-/// @brief DirectX のリソースを解放
 void GraphicsManager::Uninitialize()
 {
 	// フルスクリーンなら終了時にウィンドウモードに戻す。(Alt+Enterで切り替えができる)
@@ -56,15 +47,7 @@ void GraphicsManager::Uninitialize()
 		}
 	}
 }
-#pragma endregion
 
-#pragma region デバイス＆スワップチェインの作成
-/// @brief デバイス＆スワップチェインの作成
-/// @param hwnd ウィンドウハンドル
-/// @param frameBufferWidth フレームバッファの幅
-/// @param frameBufferHeight フレームバッファの高さ
-/// @param defaultFramerate 目標フレームレート
-/// @param isFullscreen フルスクリーンの設定。true:フルスクリーン、false:通常
 void GraphicsManager::CreateDeviceAndSwapChain(
 	HWND hwnd,
 	UINT frameBufferWidth,
@@ -126,10 +109,7 @@ void GraphicsManager::CreateDeviceAndSwapChain(
 
 	_ASSERT_EXPR(SUCCEEDED(hr), HRTrace(hr));
 }
-#pragma endregion
 
-#pragma region レームバッファ用のレンダーターゲットビュー（RTV）を作成
-/// @brief レームバッファ用のレンダーターゲットビュー（RTV）を作成
 void GraphicsManager::CreateRTVForFrameBuffer()
 {
 	HRESULT hr = S_OK;
@@ -147,10 +127,6 @@ void GraphicsManager::CreateRTVForFrameBuffer()
 }
 #pragma endregion
 
-#pragma region フレームバッファ用の深度ステンシルビュー（DSV）を作成
-/// @brief フレームバッファ用の深度ステンシルビュー（DSV）を作成
-/// @param frameBufferWidth フレームバッファの幅
-/// @param frameBufferHeight フレームバッファの高さ
 void GraphicsManager::CreateDSVForFrameBuffer(
 	UINT frameBufferWidth,
 	UINT frameBufferHeight)
@@ -183,6 +159,3 @@ void GraphicsManager::CreateDSVForFrameBuffer(
 
 	_ASSERT_EXPR(SUCCEEDED(hr), HRTrace(hr));
 }
-#pragma endregion
-
-
