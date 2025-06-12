@@ -1,29 +1,38 @@
-#pragma once
+ï»¿#pragma once
 #include "../../GameXLib/Runtime/Scene/Scene.h"
+#include "../../GameXLib/Runtime/Component/SpriteComponent.h"
+#include "../Object/Player.h"
+#include <memory>
 
 /// <summary>
-/// ƒƒCƒ“ƒV[ƒ“
+/// ãƒ¡ã‚¤ãƒ³ã‚·ãƒ¼ãƒ³
 /// </summary>
 class MainScene : public Scene
 {
 public:
 	/// <summary>
-	/// ‰Šú‰»ˆ—
+	/// åˆæœŸåŒ–å‡¦ç†
 	/// </summary>
 	void Initialize() override;
 
 	/// <summary>
-	/// XVˆ—
+	/// æ›´æ–°å‡¦ç†
 	/// </summary>
 	void Update() override;
 
 	/// <summary>
-	/// •`‰æˆ—
+	/// æç”»å‡¦ç†
 	/// </summary>
 	void Render() override;
 
 	/// <summary>
-	/// GUI•`‰æ
+	/// GUIæç”»
 	/// </summary>
 	void ShowGUI() override;
+
+public:
+	// ãƒ†ã‚¹ãƒˆç”»åƒ
+	std::shared_ptr<SpriteComponent> testSprite;
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
+	std::shared_ptr<Player> player;
 };

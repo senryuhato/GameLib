@@ -260,6 +260,9 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 					immediateContext->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 					immediateContext->OMSetRenderTargets(1, &renderTargetView, depthStencilView);
 
+
+
+
 					// ステート設定
 					immediateContext->PSSetSamplers(0, 3, defaultSamplerState[0].GetAddressOf());
 					immediateContext->OMSetBlendState(defaultBlendState[BLEND_MODE::ALPHA].Get(), nullptr, 0xFFFFFFFF);
@@ -272,6 +275,12 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 
 					// ワールド座標設定
 					CreateWorldTransform();
+
+
+
+
+
+
 
 					// ゲーム処理
 					scenes[currentSceneKey]->Render();

@@ -11,25 +11,25 @@ public:
 	SpriteComponent(ID3D11Device* device, const wchar_t* textureFileName);
 
 	/// @brief 描画処理
-	void Render();
-
-public:
-	// 位置
-	DirectX::XMFLOAT2 position;
-	// スケール
-	DirectX::XMFLOAT2 scale;
-	// 画像位置
-	DirectX::XMFLOAT2 texturePosition;
-	// 画像サイズ
-	DirectX::XMFLOAT2 textureSize;
-	// 中心点
-	DirectX::XMFLOAT2 center;
-	// 回転
-	float angle;
-	// 色
-	DirectX::XMFLOAT4 color;
+	/// @param position 位置
+	/// @param scale スケール
+	/// @param texturePosition 画像位置
+	/// @param textureSize 画像サイズ
+	/// @param center 中心点
+	/// @param angle 回転
+	/// @param color 色
+	void Render(
+		const DirectX::XMFLOAT2& position,
+		const DirectX::XMFLOAT2& scale,
+		const DirectX::XMFLOAT2& texturePosition,
+		const DirectX::XMFLOAT2& textureSize,
+		const DirectX::XMFLOAT2& center,
+		float angle,
+		const DirectX::XMFLOAT4& color);
 
 private:
 	// 頂点バッファ
 	ID3D11Buffer* vertexBuffer;
+	// シェーダーリソースビュー
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> shaderResourceView;
 };

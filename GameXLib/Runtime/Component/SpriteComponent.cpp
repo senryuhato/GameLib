@@ -2,6 +2,9 @@
 #include <DirectXMath.h>
 #include <cstdio>
 #include <memory>
+#include <wrl.h>
+#include "../System/Misc.h"
+#include "..\..\ThirdParty\DirectXTex\WICTextureLoader11.h"
 
 // 頂点
 struct Vertex
@@ -24,9 +27,9 @@ D3D11_INPUT_ELEMENT_DESC layout[] =
 // CSOファイル読み込み関数
 bool LoadCSOFile(
 	ID3D11Device *device,
-    const char* csoVsName,
+	const char* csoVsName,
 	const char* csoPsName,
-    ID3D11VertexShader **vertexShader,
+	ID3D11VertexShader **vertexShader,
 	ID3D11InputLayout **inputLayout,
 	ID3D11PixelShader **pixelShader)
 {
@@ -75,7 +78,7 @@ bool LoadCSOFile(
 }
 
 
-SpriteComponent::SpriteComponent(ID3D11Device* device, const wchar_t* textureFileName)
+SpriteComponent::SpriteComponent(ID3D11Device* device,const wchar_t* textureFileName)
 {
 	Vertex vertices[] =
 	{
@@ -109,10 +112,22 @@ SpriteComponent::SpriteComponent(ID3D11Device* device, const wchar_t* textureFil
 		assert(0 && "頂点バッファ作成失敗");
 	}
 
-	
+	Microsoft::WRL::ComPtr<ID3D11Resource> resource;
+	// 画像読み込み
+	hr = DirectX::CreateWICTextureFromFile(device,textureFileName,resource.GetAddressOf(),shaderResourceView.GetAddressOf());
+	_ASSERT_EXPR(SUCCEEDED(hr),HRTrace(hr));
+
+
 }
 
-void SpriteComponent::Render()
+void SpriteComponent::Render(
+		const DirectX::XMFLOAT2& position,
+		const DirectX::XMFLOAT2& scale,
+		const DirectX::XMFLOAT2& texturePosition,
+		const DirectX::XMFLOAT2& textureSize,
+		const DirectX::XMFLOAT2& center,
+		float angle,
+		const DirectX::XMFLOAT4& color)
 {
 	// 描画位置
 	// サイズ

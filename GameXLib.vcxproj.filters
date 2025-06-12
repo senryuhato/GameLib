@@ -88,6 +88,12 @@
     <Filter Include="GameXLib\Runtime\Resource">
       <UniqueIdentifier>{191cf99f-080d-44bb-93a2-b78c317154a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Object">
+      <UniqueIdentifier>{634ec0be-5d95-4ab0-900d-61d0ef546cdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object">
+      <UniqueIdentifier>{b5ec2607-f485-4c05-838b-2f9eb75f231d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imconfig.h">
@@ -222,6 +228,9 @@
     <ClInclude Include="GameXLib\Runtime\Component\SpriteComponent.h">
       <Filter>GameXLib\Runtime\Component</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Object\Player.h">
+      <Filter>ヘッダー ファイル\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui.cpp">
@@ -316,6 +325,9 @@
     </ClCompile>
     <ClCompile Include="GameXLib\Runtime\Component\SpriteComponent.cpp">
       <Filter>GameXLib\Runtime\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Player.cpp">
+      <Filter>ソース ファイル\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

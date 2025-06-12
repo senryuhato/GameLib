@@ -1,26 +1,30 @@
-#include <windows.h>
+ï»¿#include <windows.h>
 #include "MainScene.h"
 #include "../../GameXLib/Runtime/UI/ImGui.h"
 #include "../..\GameXLib\Runtime\UI\ImGuiManager.h"
 
-#pragma region ‰Šú‰»ˆ—
+#pragma region åˆæœŸåŒ–å‡¦ç†
 /// <summary>
-/// ‰Šú‰»ˆ—
+/// åˆæœŸåŒ–å‡¦ç†
 /// </summary>
 void MainScene::Initialize()
 {
+	// ç”»åƒèª­ã¿è¾¼ã¿
+	//testSprite = std::make_shared<SpriteComponent>();
 
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼åˆæœŸåŒ–
+	player = std::make_shared<Player>();
 }
 #pragma endregion
 
-#pragma region XVˆ—
+#pragma region æ›´æ–°å‡¦ç†
 /// <summary>
-/// XVˆ—
+/// æ›´æ–°å‡¦ç†
 /// </summary>
 void MainScene::Update()
 {
 	//std::shared_ptr<BaseImGuiManager> baseImGuiManager = ServiceLocator::GetService<BaseImGuiManager>(ServiceNames::BASE_IMGUI_MANAGER);
-	//// UI•\¦ˆ—
+	//// UIè¡¨ç¤ºå‡¦ç†
 	//if (baseImGuiManager)
 	//{
 	//	baseImGuiManager->RegisterImGuiFunction(std::bind(&MainScene::ShowGUI, this));
@@ -36,9 +40,9 @@ void MainScene::Update()
 }
 #pragma endregion
 
-#pragma region •`‰æˆ—
+#pragma region æç”»å‡¦ç†
 /// <summary>
-/// •`‰æˆ—
+/// æç”»å‡¦ç†
 /// </summary>
 void MainScene::Render()
 {
@@ -46,9 +50,9 @@ void MainScene::Render()
 }
 #pragma endregion
 
-#pragma region GUI•`‰æ
+#pragma region GUIæç”»
 /// <summary>
-/// GUI•`‰æ
+/// GUIæç”»
 /// </summary>
 void MainScene::ShowGUI()
 {

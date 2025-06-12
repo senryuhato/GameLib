@@ -57,6 +57,7 @@
     <ClInclude Include="GameXLib\ThirdParty\Sample\Sources\texture.h" />
     <ClInclude Include="GameXLib\ThirdParty\Sample\TextureResource.h" />
     <ClInclude Include="GameXLib\ThirdParty\Sample\Transform.h" />
+    <ClInclude Include="Source\Object\Player.h" />
     <ClInclude Include="Source\Resources.h" />
     <ClInclude Include="Source\Scene\MainScene.h" />
     <ClInclude Include="Source\Scene\TitleScene.h" />
@@ -91,6 +92,7 @@
     <ClCompile Include="GameXLib\ThirdParty\Sample\Sources\skinned_mesh_model.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\Sample\Sources\texture.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\Sample\TextureResource.cpp" />
+    <ClCompile Include="Source\Object\Player.cpp" />
     <ClCompile Include="Source\Resources.cpp" />
     <ClCompile Include="Source\Scene\MainScene.cpp" />
     <ClCompile Include="Source\Scene\TitleScene.cpp" />
