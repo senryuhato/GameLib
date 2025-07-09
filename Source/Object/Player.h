@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-/// @brief プレイヤー
+// プレイヤー
 class Player
 {
 public:

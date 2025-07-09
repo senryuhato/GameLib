@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <windows.h>
 
-/// @brief 高解像度タイマー
+// 高解像度タイマー
 class HighResolutionTimer
 {
 public:

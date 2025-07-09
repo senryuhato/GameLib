@@ -1,8 +1,8 @@
 ﻿#pragma once
 #include <d3d11.h>
-#include <wrl.h>
 #include <map>
 #include <string>
+#include <wrl\client.h>
 
 /// @brief リソースマネージャー
 class ResourceManager

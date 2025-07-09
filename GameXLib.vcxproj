@@ -19,15 +19,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameXLib\Runtime\Component\SpriteComponent.h" />
+    <ClInclude Include="GameXLib\GameXLib.h" />
     <ClInclude Include="GameXLib\Runtime\Graphics\GraphicsManager.h" />
+    <ClInclude Include="GameXLib\Runtime\Resource\Buffer.h" />
+    <ClInclude Include="GameXLib\Runtime\Resource\RenderState.h" />
     <ClInclude Include="GameXLib\Runtime\Resource\ResourceManager.h" />
-    <ClInclude Include="GameXLib\Runtime\Scene\Scene.h" />
+    <ClInclude Include="GameXLib\Runtime\Resource\SkeletalMesh.h" />
+    <ClInclude Include="GameXLib\Runtime\Resource\Sprite.h" />
+    <ClInclude Include="GameXLib\Runtime\Resource\StaticMesh.h" />
+    <ClInclude Include="GameXLib\Runtime\Resource\TextureResource.h" />
     <ClInclude Include="GameXLib\Runtime\Serialization\Cereal.h" />
     <ClInclude Include="GameXLib\Runtime\System\Misc.h" />
     <ClInclude Include="GameXLib\Runtime\Timer\HighResolutionTimer.h" />
     <ClInclude Include="GameXLib\Runtime\UI\ImGui.h" />
-    <ClInclude Include="GameXLib\Runtime\UI\imGuiDX11.h" />
     <ClInclude Include="GameXLib\Runtime\UI\ImGuiManager.h" />
     <ClInclude Include="GameXLib\ThirdParty\DirectXTex\WICTextureLoader11.h" />
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imconfig.h" />
@@ -49,26 +53,31 @@
     <ClInclude Include="GameXLib\ThirdParty\Sample\Math\BanchworkTimer.h" />
     <ClInclude Include="GameXLib\ThirdParty\Sample\Math\ViewProjection.h" />
     <ClInclude Include="GameXLib\ThirdParty\Sample\Mouse.h" />
-    <ClInclude Include="GameXLib\ThirdParty\Sample\RenderState.h" />
     <ClInclude Include="GameXLib\ThirdParty\Sample\Shader.h" />
     <ClInclude Include="GameXLib\ThirdParty\Sample\Sources\SkinnedMesh.h" />
     <ClInclude Include="GameXLib\ThirdParty\Sample\Sources\skinned_mesh.h" />
     <ClInclude Include="GameXLib\ThirdParty\Sample\Sources\skinned_mesh_model.h" />
     <ClInclude Include="GameXLib\ThirdParty\Sample\Sources\texture.h" />
-    <ClInclude Include="GameXLib\ThirdParty\Sample\TextureResource.h" />
     <ClInclude Include="GameXLib\ThirdParty\Sample\Transform.h" />
+    <ClInclude Include="Source\Object\Bullet.h" />
+    <ClInclude Include="Source\Object\Enemy.h" />
     <ClInclude Include="Source\Object\Player.h" />
-    <ClInclude Include="Source\Resources.h" />
     <ClInclude Include="Source\Scene\MainScene.h" />
+    <ClInclude Include="Source\Scene\Scene.h" />
+    <ClInclude Include="Source\Scene\SceneManager.h" />
     <ClInclude Include="Source\Scene\TitleScene.h" />
-    <ClInclude Include="Source\Sprite2D.h" />
-    <ClInclude Include="Source\SystemInstance.h" />
-    <ClInclude Include="Source\WinMain.h" />
+    <ClInclude Include="Source\System\Framework.h" />
+    <ClInclude Include="Source\System\GameInstance.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameXLib\Runtime\Component\SpriteComponent.cpp" />
+    <ClCompile Include="GameXLib\GameXLib.cpp" />
     <ClCompile Include="GameXLib\Runtime\Graphics\GraphicsManager.cpp" />
+    <ClCompile Include="GameXLib\Runtime\Resource\RenderState.cpp" />
     <ClCompile Include="GameXLib\Runtime\Resource\ResourceManager.cpp" />
+    <ClCompile Include="GameXLib\Runtime\Resource\SkeletalMesh.cpp" />
+    <ClCompile Include="GameXLib\Runtime\Resource\Sprite.cpp" />
+    <ClCompile Include="GameXLib\Runtime\Resource\StaticMesh.cpp" />
+    <ClCompile Include="GameXLib\Runtime\Resource\TextureResource.cpp" />
     <ClCompile Include="GameXLib\Runtime\UI\ImGuiManager.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\DirectXTex\WICTextureLoader11.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui.cpp" />
@@ -84,20 +93,21 @@
     <ClCompile Include="GameXLib\ThirdParty\Sample\GamePad.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\Sample\Input.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\Sample\Mouse.cpp" />
-    <ClCompile Include="GameXLib\ThirdParty\Sample\RenderState.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\Sample\Sample.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\Sample\Shader.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\Sample\Sources\SkinnedMesh.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\Sample\Sources\skinned_mesh.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\Sample\Sources\skinned_mesh_model.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\Sample\Sources\texture.cpp" />
-    <ClCompile Include="GameXLib\ThirdParty\Sample\TextureResource.cpp" />
+    <ClCompile Include="Source\Memo.cpp" />
+    <ClCompile Include="Source\Object\Bullet.cpp" />
+    <ClCompile Include="Source\Object\Enemy.cpp" />
     <ClCompile Include="Source\Object\Player.cpp" />
-    <ClCompile Include="Source\Resources.cpp" />
     <ClCompile Include="Source\Scene\MainScene.cpp" />
+    <ClCompile Include="Source\Scene\SceneManager.cpp" />
     <ClCompile Include="Source\Scene\TitleScene.cpp" />
-    <ClCompile Include="Source\Sprite2D.cpp" />
-    <ClCompile Include="Source\WinMain.cpp" />
+    <ClCompile Include="Source\System\Framework.cpp" />
+    <ClCompile Include="Source\System\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GameXLib\ThirdParty\Sample\Shaders\skinned_mesh.hlsli" />

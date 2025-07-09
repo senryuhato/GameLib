@@ -1,13 +1,5 @@
-#pragma once
+ï»¿#pragma once
 #include <DirectXMath.h>
-
-// ƒVƒŠƒAƒ‰ƒCƒY
-#include <cereal/archives/json.hpp>
-#include <cereal/archives/binary.hpp> 
-#include <cereal/types/memory.hpp> 
-#include <cereal/types/vector.hpp> 
-#include <cereal/types/set.hpp> 
-#include <cereal/types/unordered_map.hpp> 
 
 namespace DirectX
 {

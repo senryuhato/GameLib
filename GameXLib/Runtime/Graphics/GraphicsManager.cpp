@@ -1,5 +1,5 @@
-﻿#include "GraphicsManager.h"
-#include "../System/Misc.h"
+﻿#include "../System/Misc.h"
+#include "GraphicsManager.h"
 
 bool GraphicsManager::Initialize(
 	HWND hwnd,

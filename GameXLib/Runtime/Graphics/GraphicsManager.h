@@ -1,15 +1,15 @@
 ﻿#pragma once
-#include <wrl.h>
 #include <d3d11.h>
+#include <wrl.h>
 
-/// @brief DirectX 11 を用いたグラフィックス管理クラス
+// DirectX 11 を用いたグラフィックス管理クラス
 class GraphicsManager
 {
 public:
-	/// @brief コンストラクタ 処理なし
+	/// @brief 処理なし
 	GraphicsManager() = default;
 
-	/// @brief デストラクタ リソース解放
+	/// @brief リソース解放
 	~GraphicsManager() 
 	{
 		Uninitialize();
@@ -92,9 +92,9 @@ private:
 	// デバイスコンテキスト
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> immediateContext = nullptr;
 	// フレームバッファ用レンダーターゲットビュー　
-	Microsoft::WRL::ComPtr<ID3D11RenderTargetView>  renderTargetView = nullptr;
+	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> renderTargetView = nullptr;
 	// フレームバッファ用デプスステンシルビュー
-	Microsoft::WRL::ComPtr<ID3D11DepthStencilView>  depthStencilView = nullptr;
+	Microsoft::WRL::ComPtr<ID3D11DepthStencilView> depthStencilView = nullptr;
 
 	//フレームバッファの幅
 	UINT frameBufferWidth = 0;

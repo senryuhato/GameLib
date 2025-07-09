@@ -1,7 +1,10 @@
 ﻿#pragma once
 #include <d3d11.h>
-#include <vector>
 #include <functional>
+#include <vector>
+
+// ImGuiのウィンドウメッセージ処理
+extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd,UINT msg,WPARAM wParam,LPARAM lParam);
 
 /// @brief ImGui の初期化・更新・描画・終了処理を管理するクラス
 class ImGuiManager

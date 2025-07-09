@@ -1,6 +1,6 @@
-#pragma once
-#include <windows.h>
+﻿#pragma once
 #include <crtdbg.h>
+#include <windows.h>
 
 #if defined( DEBUG ) || defined( _DEBUG )
 #define _ASSERT_EXPR_A(expr, msg) \

@@ -1,4 +1,6 @@
-﻿#include "imGuiDX11.h"
+﻿#include "..\..\ThirdParty\ImGui\imgui-docking\imgui.h"
+#include "..\..\ThirdParty\ImGui\imgui-docking\imgui_impl_dx11.h"
+#include "..\..\ThirdParty\ImGui\imgui-docking\imgui_impl_win32.h"
 #include "ImGuiManager.h"
 
 bool ImGuiManager::Initialize(

@@ -1,6 +1,13 @@
 ﻿#include "../../ThirdParty/DirectXTex/WICTextureLoader11.h"
 #include "../System/Misc.h"
 #include "ResourceManager.h"
+#include <crtdbg.h>
+#include <d3d11.h>
+#include <map>
+#include <string>
+#include <utility>
+#include <Windows.h>
+#include <wrl\client.h>
 
 void ResourceManager::LoadTextureFromFile(ID3D11Device* device, const wchar_t* filename, ID3D11ShaderResourceView** shaderResourceView)
 {

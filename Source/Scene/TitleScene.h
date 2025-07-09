@@ -1,29 +1,19 @@
-#pragma once
-#include "../../GameXLib/Runtime/Scene/Scene.h"
+ï»¿#pragma once
+#include "Scene.h"
 
-/// <summary>
-/// ƒ^ƒCƒgƒ‹ƒV[ƒ“
-/// </summary>
+// ã‚¿ã‚¤ãƒˆãƒ«ã‚·ãƒ¼ãƒ³
 class TitleScene : public Scene
 {
 public:
-	/// <summary>
-	/// ‰Šú‰»ˆ—
-	/// </summary>
+	/// @brief åˆæœŸåŒ–å‡¦ç†
 	void Initialize() override;
 
-	/// <summary>
-	/// XVˆ—
-	/// </summary>
+	/// @brief æ›´æ–°å‡¦ç†
 	void Update() override;
 
-	/// <summary>
-    /// •`‰æˆ—
-    /// </summary>
+	/// @brief æç”»å‡¦ç†
 	void Render() override;
 
-	/// <summary>
-    /// GUI•`‰æ
-    /// </summary>
+	/// @brief GUIæç”»
 	void ShowGUI() override;
 };

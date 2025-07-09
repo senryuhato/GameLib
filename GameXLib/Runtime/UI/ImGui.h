@@ -1,8 +1,8 @@
 ﻿#pragma once
-#include <DirectXMath.h>
 #include "../../ThirdParty/ImGui/imgui-docking/imgui.h"
+#include <DirectXMath.h>
 
-/// @brief 4D Vector
+// 4D Vector
 struct ImXMFloat4
 {
 	union
@@ -30,7 +30,7 @@ struct ImXMFloat4
 	ImXMFloat4(DirectX::XMFLOAT4& m) : x(m.x), y(m.y), z(m.z), w(m.w) {}
 };
 
-/// @brief 3D Vector
+// 3D Vector
 struct ImXMFloat3
 {
 	union

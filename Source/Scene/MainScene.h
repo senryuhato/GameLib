@@ -1,38 +1,28 @@
 ﻿#pragma once
-#include "../../GameXLib/Runtime/Scene/Scene.h"
-#include "../../GameXLib/Runtime/Component/SpriteComponent.h"
 #include "../Object/Player.h"
+#include "..\Object\Enemy.h"
+#include "Scene.h"
 #include <memory>
 
-/// <summary>
-/// メインシーン
-/// </summary>
+// メインシーン
 class MainScene : public Scene
 {
 public:
-	/// <summary>
-	/// 初期化処理
-	/// </summary>
+	/// @brief 初期化処理
 	void Initialize() override;
 
-	/// <summary>
-	/// 更新処理
-	/// </summary>
+	/// @brief 更新処理
 	void Update() override;
 
-	/// <summary>
-	/// 描画処理
-	/// </summary>
+	/// @brief 描画処理
 	void Render() override;
 
-	/// <summary>
-	/// GUI描画
-	/// </summary>
+	/// @brief GUI描画
 	void ShowGUI() override;
 
 public:
-	// テスト画像
-	std::shared_ptr<SpriteComponent> testSprite;
 	// プレイヤー
 	std::shared_ptr<Player> player;
+	// 敵
+	std::shared_ptr<Enemy> enemy;
 };

@@ -55,9 +55,6 @@
     <Filter Include="GameXLib\Runtime\Serialization">
       <UniqueIdentifier>{0ce91cce-740f-430f-acb8-662602a1f088}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameXLib\ThirdParty\Cereal">
-      <UniqueIdentifier>{ab9738be-01b9-4429-b3b0-bf2fd7dfe62a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameXLib\ThirdParty\Sample\FbxSdk">
       <UniqueIdentifier>{071c9fb2-072f-460c-90a6-ad1db9607caf}</UniqueIdentifier>
     </Filter>
@@ -94,6 +91,12 @@
     <Filter Include="ヘッダー ファイル\Object">
       <UniqueIdentifier>{b5ec2607-f485-4c05-838b-2f9eb75f231d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\System">
+      <UniqueIdentifier>{d8d75955-b785-45db-973b-dbeb149a6d3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\System">
+      <UniqueIdentifier>{d64e8e6b-dd3e-405b-a8ab-5b5e8713b89c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imconfig.h">
@@ -117,9 +120,6 @@
     <ClInclude Include="GameXLib\Runtime\Timer\HighResolutionTimer.h">
       <Filter>GameXLib\Runtime\Timer</Filter>
     </ClInclude>
-    <ClInclude Include="GameXLib\Runtime\UI\imGuiDX11.h">
-      <Filter>GameXLib\Runtime\UI</Filter>
-    </ClInclude>
     <ClInclude Include="GameXLib\Runtime\UI\ImGuiManager.h">
       <Filter>GameXLib\Runtime\UI</Filter>
     </ClInclude>
@@ -128,9 +128,6 @@
     </ClInclude>
     <ClInclude Include="GameXLib\Runtime\Graphics\GraphicsManager.h">
       <Filter>GameXLib\Runtime\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\Runtime\Scene\Scene.h">
-      <Filter>GameXLib\Runtime\Scene</Filter>
     </ClInclude>
     <ClInclude Include="GameXLib\Runtime\Serialization\Cereal.h">
       <Filter>GameXLib\Runtime\Serialization</Filter>
@@ -156,13 +153,7 @@
     <ClInclude Include="GameXLib\ThirdParty\Sample\Mouse.h">
       <Filter>GameXLib\ThirdParty\Sample</Filter>
     </ClInclude>
-    <ClInclude Include="GameXLib\ThirdParty\Sample\RenderState.h">
-      <Filter>GameXLib\ThirdParty\Sample</Filter>
-    </ClInclude>
     <ClInclude Include="GameXLib\ThirdParty\Sample\Shader.h">
-      <Filter>GameXLib\ThirdParty\Sample</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\ThirdParty\Sample\TextureResource.h">
       <Filter>GameXLib\ThirdParty\Sample</Filter>
     </ClInclude>
     <ClInclude Include="GameXLib\ThirdParty\Sample\Transform.h">
@@ -204,18 +195,6 @@
     <ClInclude Include="GameXLib\Runtime\UI\ImGui.h">
       <Filter>GameXLib\Runtime\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Source\WinMain.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SystemInstance.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Sprite2D.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Resources.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Scene\TitleScene.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
@@ -225,11 +204,47 @@
     <ClInclude Include="GameXLib\Runtime\Resource\ResourceManager.h">
       <Filter>GameXLib\Runtime\Resource</Filter>
     </ClInclude>
-    <ClInclude Include="GameXLib\Runtime\Component\SpriteComponent.h">
-      <Filter>GameXLib\Runtime\Component</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Object\Player.h">
       <Filter>ヘッダー ファイル\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\GameInstance.h">
+      <Filter>ヘッダー ファイル\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\SceneManager.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Framework.h">
+      <Filter>ヘッダー ファイル\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Enemy.h">
+      <Filter>ヘッダー ファイル\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Bullet.h">
+      <Filter>ヘッダー ファイル\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Scene.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\GameXLib.h">
+      <Filter>GameXLib</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\Runtime\Resource\Sprite.h">
+      <Filter>GameXLib\Runtime\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\Runtime\Resource\StaticMesh.h">
+      <Filter>GameXLib\Runtime\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\Runtime\Resource\SkeletalMesh.h">
+      <Filter>GameXLib\Runtime\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\Runtime\Resource\TextureResource.h">
+      <Filter>GameXLib\Runtime\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\Runtime\Resource\RenderState.h">
+      <Filter>GameXLib\Runtime\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\Runtime\Resource\Buffer.h">
+      <Filter>GameXLib\Runtime\Resource</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -247,9 +262,6 @@
     </ClCompile>
     <ClCompile Include="GameXLib\Runtime\Graphics\GraphicsManager.cpp">
       <Filter>GameXLib\Runtime\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\WinMain.cpp">
-      <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="GameXLib\ThirdParty\Sample\Audio.cpp">
       <Filter>GameXLib\ThirdParty\Sample</Filter>
@@ -269,13 +281,7 @@
     <ClCompile Include="GameXLib\ThirdParty\Sample\Mouse.cpp">
       <Filter>GameXLib\ThirdParty\Sample</Filter>
     </ClCompile>
-    <ClCompile Include="GameXLib\ThirdParty\Sample\RenderState.cpp">
-      <Filter>GameXLib\ThirdParty\Sample</Filter>
-    </ClCompile>
     <ClCompile Include="GameXLib\ThirdParty\Sample\Shader.cpp">
-      <Filter>GameXLib\ThirdParty\Sample</Filter>
-    </ClCompile>
-    <ClCompile Include="GameXLib\ThirdParty\Sample\TextureResource.cpp">
       <Filter>GameXLib\ThirdParty\Sample</Filter>
     </ClCompile>
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_impl_dx11.cpp">
@@ -308,12 +314,6 @@
     <ClCompile Include="GameXLib\ThirdParty\DirectXTex\WICTextureLoader11.cpp">
       <Filter>GameXLib\ThirdParty\DirectXTex</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Sprite2D.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Resources.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Scene\MainScene.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
@@ -323,11 +323,44 @@
     <ClCompile Include="GameXLib\Runtime\Resource\ResourceManager.cpp">
       <Filter>GameXLib\Runtime\Resource</Filter>
     </ClCompile>
-    <ClCompile Include="GameXLib\Runtime\Component\SpriteComponent.cpp">
-      <Filter>GameXLib\Runtime\Component</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Object\Player.cpp">
       <Filter>ソース ファイル\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\WinMain.cpp">
+      <Filter>ソース ファイル\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\SceneManager.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Framework.cpp">
+      <Filter>ソース ファイル\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Enemy.cpp">
+      <Filter>ソース ファイル\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Bullet.cpp">
+      <Filter>ソース ファイル\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Memo.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\GameXLib.cpp">
+      <Filter>GameXLib</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\Runtime\Resource\Sprite.cpp">
+      <Filter>GameXLib\Runtime\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\Runtime\Resource\StaticMesh.cpp">
+      <Filter>GameXLib\Runtime\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\Runtime\Resource\SkeletalMesh.cpp">
+      <Filter>GameXLib\Runtime\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\Runtime\Resource\TextureResource.cpp">
+      <Filter>GameXLib\Runtime\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\Runtime\Resource\RenderState.cpp">
+      <Filter>GameXLib\Runtime\Resource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
