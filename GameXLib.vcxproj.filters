@@ -31,68 +31,8 @@
     <Filter Include="GameXLib\Runtime">
       <UniqueIdentifier>{fc6fa613-a306-45b9-a1a4-22cb2f6d84d4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameXLib\Runtime\Framework">
-      <UniqueIdentifier>{5a696bee-448f-4607-ab86-0e6fa20e8240}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameXLib\Runtime\UI">
-      <UniqueIdentifier>{eee4b194-911b-4d5d-8d2f-63bc9432a4a3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameXLib\Runtime\Timer">
-      <UniqueIdentifier>{c52e0e51-3f4d-4a07-923e-873c05dc2bba}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameXLib\Runtime\System">
-      <UniqueIdentifier>{0d0c3065-a805-447d-ba62-d20e926d0be5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameXLib\Runtime\Graphics">
-      <UniqueIdentifier>{89878421-bce6-4715-b96f-3ce9066bea4a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameXLib\Runtime\Scene">
-      <UniqueIdentifier>{0e0f69a4-ec7b-41f8-8a1b-32079de2245d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameXLib\ThirdParty\Sample">
-      <UniqueIdentifier>{5629bc7d-5dcf-47bd-bc60-7fe98c710349}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameXLib\Runtime\Serialization">
-      <UniqueIdentifier>{0ce91cce-740f-430f-acb8-662602a1f088}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameXLib\ThirdParty\Sample\FbxSdk">
-      <UniqueIdentifier>{071c9fb2-072f-460c-90a6-ad1db9607caf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameXLib\ThirdParty\Sample\Math">
-      <UniqueIdentifier>{832ea0ad-0c3a-49c4-82eb-0d6ca955b611}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameXLib\ThirdParty\Sample\Shaders">
-      <UniqueIdentifier>{831cf960-eb32-4929-804e-40fc67373dd4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameXLib\ThirdParty\Sample\Sources">
-      <UniqueIdentifier>{d65ffc31-6048-439d-b8ef-639eeddfa4a9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameXLib\Runtime\Component">
-      <UniqueIdentifier>{2024c796-0c4e-4207-82d2-8b78a33cfb84}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameXLib\Runtime\GameCore">
-      <UniqueIdentifier>{d87801b1-1dbb-4ede-b303-2b8a0c771b00}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameXLib\ThirdParty\DirectXTex">
       <UniqueIdentifier>{8889ce2a-5bf7-475f-8024-6c10446a2b0e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Scene">
-      <UniqueIdentifier>{750bc87b-1dcf-4e18-b6bd-fdf0ab9e5473}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Scene">
-      <UniqueIdentifier>{c7677cc8-eb3b-4ff5-8517-01c12f128999}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameXLib\Runtime\Resource">
-      <UniqueIdentifier>{191cf99f-080d-44bb-93a2-b78c317154a1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Object">
-      <UniqueIdentifier>{634ec0be-5d95-4ab0-900d-61d0ef546cdd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Object">
-      <UniqueIdentifier>{b5ec2607-f485-4c05-838b-2f9eb75f231d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\System">
-      <UniqueIdentifier>{d8d75955-b785-45db-973b-dbeb149a6d3c}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\System">
       <UniqueIdentifier>{d64e8e6b-dd3e-405b-a8ab-5b5e8713b89c}</UniqueIdentifier>
@@ -117,134 +57,14 @@
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imstb_truetype.h">
       <Filter>GameXLib\ThirdParty\ImGui\imgui-docking</Filter>
     </ClInclude>
-    <ClInclude Include="GameXLib\Runtime\Timer\HighResolutionTimer.h">
-      <Filter>GameXLib\Runtime\Timer</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\Runtime\UI\ImGuiManager.h">
-      <Filter>GameXLib\Runtime\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\Runtime\System\Misc.h">
-      <Filter>GameXLib\Runtime\System</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\Runtime\Graphics\GraphicsManager.h">
-      <Filter>GameXLib\Runtime\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\Runtime\Serialization\Cereal.h">
-      <Filter>GameXLib\Runtime\Serialization</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\ThirdParty\Sample\Audio.h">
-      <Filter>GameXLib\ThirdParty\Sample</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\ThirdParty\Sample\AudioResource.h">
-      <Filter>GameXLib\ThirdParty\Sample</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\ThirdParty\Sample\AudioSource.h">
-      <Filter>GameXLib\ThirdParty\Sample</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\ThirdParty\Sample\Buffer.h">
-      <Filter>GameXLib\ThirdParty\Sample</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\ThirdParty\Sample\GamePad.h">
-      <Filter>GameXLib\ThirdParty\Sample</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\ThirdParty\Sample\Input.h">
-      <Filter>GameXLib\ThirdParty\Sample</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\ThirdParty\Sample\Mouse.h">
-      <Filter>GameXLib\ThirdParty\Sample</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\ThirdParty\Sample\Shader.h">
-      <Filter>GameXLib\ThirdParty\Sample</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\ThirdParty\Sample\Transform.h">
-      <Filter>GameXLib\ThirdParty\Sample</Filter>
-    </ClInclude>
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_impl_dx11.h">
       <Filter>GameXLib\ThirdParty\ImGui\imgui-docking</Filter>
     </ClInclude>
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_impl_win32.h">
       <Filter>GameXLib\ThirdParty\ImGui\imgui-docking</Filter>
     </ClInclude>
-    <ClInclude Include="GameXLib\ThirdParty\Sample\Sources\skinned_mesh.h">
-      <Filter>GameXLib\ThirdParty\Sample\Sources</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\ThirdParty\Sample\Sources\skinned_mesh_model.h">
-      <Filter>GameXLib\ThirdParty\Sample\Sources</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\ThirdParty\Sample\Sources\SkinnedMesh.h">
-      <Filter>GameXLib\ThirdParty\Sample\Sources</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\ThirdParty\Sample\Sources\texture.h">
-      <Filter>GameXLib\ThirdParty\Sample\Sources</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\ThirdParty\Sample\Math\BanchworkTimer.h">
-      <Filter>GameXLib\ThirdParty\Sample\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\ThirdParty\Sample\Math\ViewProjection.h">
-      <Filter>GameXLib\ThirdParty\Sample\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\ThirdParty\Sample\FbxSdk\FbxFileImporter.h">
-      <Filter>GameXLib\ThirdParty\Sample\FbxSdk</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\ThirdParty\Sample\FbxSdk\FbxSdk.h">
-      <Filter>GameXLib\ThirdParty\Sample\FbxSdk</Filter>
-    </ClInclude>
     <ClInclude Include="GameXLib\ThirdParty\DirectXTex\WICTextureLoader11.h">
       <Filter>GameXLib\ThirdParty\DirectXTex</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\Runtime\UI\ImGui.h">
-      <Filter>GameXLib\Runtime\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Scene\TitleScene.h">
-      <Filter>ヘッダー ファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Scene\MainScene.h">
-      <Filter>ヘッダー ファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\Runtime\Resource\ResourceManager.h">
-      <Filter>GameXLib\Runtime\Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Object\Player.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\System\GameInstance.h">
-      <Filter>ヘッダー ファイル\System</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Scene\SceneManager.h">
-      <Filter>ヘッダー ファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\System\Framework.h">
-      <Filter>ヘッダー ファイル\System</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Object\Enemy.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Object\Bullet.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Scene\Scene.h">
-      <Filter>ヘッダー ファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\GameXLib.h">
-      <Filter>GameXLib</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\Runtime\Resource\Sprite.h">
-      <Filter>GameXLib\Runtime\Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\Runtime\Resource\StaticMesh.h">
-      <Filter>GameXLib\Runtime\Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\Runtime\Resource\SkeletalMesh.h">
-      <Filter>GameXLib\Runtime\Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\Runtime\Resource\TextureResource.h">
-      <Filter>GameXLib\Runtime\Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\Runtime\Resource\RenderState.h">
-      <Filter>GameXLib\Runtime\Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="GameXLib\Runtime\Resource\Buffer.h">
-      <Filter>GameXLib\Runtime\Resource</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -257,33 +77,6 @@
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_widgets.cpp">
       <Filter>GameXLib\ThirdParty\ImGui\imgui-docking</Filter>
     </ClCompile>
-    <ClCompile Include="GameXLib\Runtime\UI\ImGuiManager.cpp">
-      <Filter>GameXLib\Runtime\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="GameXLib\Runtime\Graphics\GraphicsManager.cpp">
-      <Filter>GameXLib\Runtime\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="GameXLib\ThirdParty\Sample\Audio.cpp">
-      <Filter>GameXLib\ThirdParty\Sample</Filter>
-    </ClCompile>
-    <ClCompile Include="GameXLib\ThirdParty\Sample\AudioResource.cpp">
-      <Filter>GameXLib\ThirdParty\Sample</Filter>
-    </ClCompile>
-    <ClCompile Include="GameXLib\ThirdParty\Sample\AudioSource.cpp">
-      <Filter>GameXLib\ThirdParty\Sample</Filter>
-    </ClCompile>
-    <ClCompile Include="GameXLib\ThirdParty\Sample\GamePad.cpp">
-      <Filter>GameXLib\ThirdParty\Sample</Filter>
-    </ClCompile>
-    <ClCompile Include="GameXLib\ThirdParty\Sample\Input.cpp">
-      <Filter>GameXLib\ThirdParty\Sample</Filter>
-    </ClCompile>
-    <ClCompile Include="GameXLib\ThirdParty\Sample\Mouse.cpp">
-      <Filter>GameXLib\ThirdParty\Sample</Filter>
-    </ClCompile>
-    <ClCompile Include="GameXLib\ThirdParty\Sample\Shader.cpp">
-      <Filter>GameXLib\ThirdParty\Sample</Filter>
-    </ClCompile>
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_impl_dx11.cpp">
       <Filter>GameXLib\ThirdParty\ImGui\imgui-docking</Filter>
     </ClCompile>
@@ -293,87 +86,11 @@
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_ja_gryph_ranges.cpp">
       <Filter>GameXLib\ThirdParty\ImGui\imgui-docking</Filter>
     </ClCompile>
-    <ClCompile Include="GameXLib\ThirdParty\Sample\Sources\skinned_mesh.cpp">
-      <Filter>GameXLib\ThirdParty\Sample\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="GameXLib\ThirdParty\Sample\Sources\skinned_mesh_model.cpp">
-      <Filter>GameXLib\ThirdParty\Sample\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="GameXLib\ThirdParty\Sample\Sources\SkinnedMesh.cpp">
-      <Filter>GameXLib\ThirdParty\Sample\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="GameXLib\ThirdParty\Sample\Sources\texture.cpp">
-      <Filter>GameXLib\ThirdParty\Sample\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="GameXLib\ThirdParty\Sample\FbxSdk\FbxFileImporter.cpp">
-      <Filter>GameXLib\ThirdParty\Sample\FbxSdk</Filter>
-    </ClCompile>
-    <ClCompile Include="GameXLib\ThirdParty\Sample\Sample.cpp">
-      <Filter>GameXLib\ThirdParty\Sample</Filter>
-    </ClCompile>
     <ClCompile Include="GameXLib\ThirdParty\DirectXTex\WICTextureLoader11.cpp">
       <Filter>GameXLib\ThirdParty\DirectXTex</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Scene\MainScene.cpp">
-      <Filter>ソース ファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Scene\TitleScene.cpp">
-      <Filter>ソース ファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="GameXLib\Runtime\Resource\ResourceManager.cpp">
-      <Filter>GameXLib\Runtime\Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Object\Player.cpp">
-      <Filter>ソース ファイル\Object</Filter>
     </ClCompile>
     <ClCompile Include="Source\System\WinMain.cpp">
       <Filter>ソース ファイル\System</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Scene\SceneManager.cpp">
-      <Filter>ソース ファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\Framework.cpp">
-      <Filter>ソース ファイル\System</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Object\Enemy.cpp">
-      <Filter>ソース ファイル\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Object\Bullet.cpp">
-      <Filter>ソース ファイル\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Memo.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="GameXLib\GameXLib.cpp">
-      <Filter>GameXLib</Filter>
-    </ClCompile>
-    <ClCompile Include="GameXLib\Runtime\Resource\Sprite.cpp">
-      <Filter>GameXLib\Runtime\Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="GameXLib\Runtime\Resource\StaticMesh.cpp">
-      <Filter>GameXLib\Runtime\Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="GameXLib\Runtime\Resource\SkeletalMesh.cpp">
-      <Filter>GameXLib\Runtime\Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="GameXLib\Runtime\Resource\TextureResource.cpp">
-      <Filter>GameXLib\Runtime\Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="GameXLib\Runtime\Resource\RenderState.cpp">
-      <Filter>GameXLib\Runtime\Resource</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="GameXLib\ThirdParty\Sample\Shaders\skinned_mesh.hlsli">
-      <Filter>GameXLib\ThirdParty\Sample\Shaders</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="GameXLib\ThirdParty\Sample\Shaders\skinned_mesh_ps.hlsl">
-      <Filter>GameXLib\ThirdParty\Sample\Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="GameXLib\ThirdParty\Sample\Shaders\skinned_mesh_vs.hlsl">
-      <Filter>GameXLib\ThirdParty\Sample\Shaders</Filter>
-    </FxCompile>
   </ItemGroup>
 </Project>

@@ -19,20 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameXLib\GameXLib.h" />
-    <ClInclude Include="GameXLib\Runtime\Graphics\GraphicsManager.h" />
-    <ClInclude Include="GameXLib\Runtime\Resource\Buffer.h" />
-    <ClInclude Include="GameXLib\Runtime\Resource\RenderState.h" />
-    <ClInclude Include="GameXLib\Runtime\Resource\ResourceManager.h" />
-    <ClInclude Include="GameXLib\Runtime\Resource\SkeletalMesh.h" />
-    <ClInclude Include="GameXLib\Runtime\Resource\Sprite.h" />
-    <ClInclude Include="GameXLib\Runtime\Resource\StaticMesh.h" />
-    <ClInclude Include="GameXLib\Runtime\Resource\TextureResource.h" />
-    <ClInclude Include="GameXLib\Runtime\Serialization\Cereal.h" />
-    <ClInclude Include="GameXLib\Runtime\System\Misc.h" />
-    <ClInclude Include="GameXLib\Runtime\Timer\HighResolutionTimer.h" />
-    <ClInclude Include="GameXLib\Runtime\UI\ImGui.h" />
-    <ClInclude Include="GameXLib\Runtime\UI\ImGuiManager.h" />
     <ClInclude Include="GameXLib\ThirdParty\DirectXTex\WICTextureLoader11.h" />
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imconfig.h" />
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui.h" />
@@ -42,43 +28,8 @@
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imstb_rectpack.h" />
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imstb_textedit.h" />
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imstb_truetype.h" />
-    <ClInclude Include="GameXLib\ThirdParty\Sample\Audio.h" />
-    <ClInclude Include="GameXLib\ThirdParty\Sample\AudioResource.h" />
-    <ClInclude Include="GameXLib\ThirdParty\Sample\AudioSource.h" />
-    <ClInclude Include="GameXLib\ThirdParty\Sample\Buffer.h" />
-    <ClInclude Include="GameXLib\ThirdParty\Sample\FbxSdk\FbxFileImporter.h" />
-    <ClInclude Include="GameXLib\ThirdParty\Sample\FbxSdk\FbxSdk.h" />
-    <ClInclude Include="GameXLib\ThirdParty\Sample\GamePad.h" />
-    <ClInclude Include="GameXLib\ThirdParty\Sample\Input.h" />
-    <ClInclude Include="GameXLib\ThirdParty\Sample\Math\BanchworkTimer.h" />
-    <ClInclude Include="GameXLib\ThirdParty\Sample\Math\ViewProjection.h" />
-    <ClInclude Include="GameXLib\ThirdParty\Sample\Mouse.h" />
-    <ClInclude Include="GameXLib\ThirdParty\Sample\Shader.h" />
-    <ClInclude Include="GameXLib\ThirdParty\Sample\Sources\SkinnedMesh.h" />
-    <ClInclude Include="GameXLib\ThirdParty\Sample\Sources\skinned_mesh.h" />
-    <ClInclude Include="GameXLib\ThirdParty\Sample\Sources\skinned_mesh_model.h" />
-    <ClInclude Include="GameXLib\ThirdParty\Sample\Sources\texture.h" />
-    <ClInclude Include="GameXLib\ThirdParty\Sample\Transform.h" />
-    <ClInclude Include="Source\Object\Bullet.h" />
-    <ClInclude Include="Source\Object\Enemy.h" />
-    <ClInclude Include="Source\Object\Player.h" />
-    <ClInclude Include="Source\Scene\MainScene.h" />
-    <ClInclude Include="Source\Scene\Scene.h" />
-    <ClInclude Include="Source\Scene\SceneManager.h" />
-    <ClInclude Include="Source\Scene\TitleScene.h" />
-    <ClInclude Include="Source\System\Framework.h" />
-    <ClInclude Include="Source\System\GameInstance.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameXLib\GameXLib.cpp" />
-    <ClCompile Include="GameXLib\Runtime\Graphics\GraphicsManager.cpp" />
-    <ClCompile Include="GameXLib\Runtime\Resource\RenderState.cpp" />
-    <ClCompile Include="GameXLib\Runtime\Resource\ResourceManager.cpp" />
-    <ClCompile Include="GameXLib\Runtime\Resource\SkeletalMesh.cpp" />
-    <ClCompile Include="GameXLib\Runtime\Resource\Sprite.cpp" />
-    <ClCompile Include="GameXLib\Runtime\Resource\StaticMesh.cpp" />
-    <ClCompile Include="GameXLib\Runtime\Resource\TextureResource.cpp" />
-    <ClCompile Include="GameXLib\Runtime\UI\ImGuiManager.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\DirectXTex\WICTextureLoader11.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_draw.cpp" />
@@ -86,45 +37,7 @@
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_impl_win32.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_ja_gryph_ranges.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_widgets.cpp" />
-    <ClCompile Include="GameXLib\ThirdParty\Sample\Audio.cpp" />
-    <ClCompile Include="GameXLib\ThirdParty\Sample\AudioResource.cpp" />
-    <ClCompile Include="GameXLib\ThirdParty\Sample\AudioSource.cpp" />
-    <ClCompile Include="GameXLib\ThirdParty\Sample\FbxSdk\FbxFileImporter.cpp" />
-    <ClCompile Include="GameXLib\ThirdParty\Sample\GamePad.cpp" />
-    <ClCompile Include="GameXLib\ThirdParty\Sample\Input.cpp" />
-    <ClCompile Include="GameXLib\ThirdParty\Sample\Mouse.cpp" />
-    <ClCompile Include="GameXLib\ThirdParty\Sample\Sample.cpp" />
-    <ClCompile Include="GameXLib\ThirdParty\Sample\Shader.cpp" />
-    <ClCompile Include="GameXLib\ThirdParty\Sample\Sources\SkinnedMesh.cpp" />
-    <ClCompile Include="GameXLib\ThirdParty\Sample\Sources\skinned_mesh.cpp" />
-    <ClCompile Include="GameXLib\ThirdParty\Sample\Sources\skinned_mesh_model.cpp" />
-    <ClCompile Include="GameXLib\ThirdParty\Sample\Sources\texture.cpp" />
-    <ClCompile Include="Source\Memo.cpp" />
-    <ClCompile Include="Source\Object\Bullet.cpp" />
-    <ClCompile Include="Source\Object\Enemy.cpp" />
-    <ClCompile Include="Source\Object\Player.cpp" />
-    <ClCompile Include="Source\Scene\MainScene.cpp" />
-    <ClCompile Include="Source\Scene\SceneManager.cpp" />
-    <ClCompile Include="Source\Scene\TitleScene.cpp" />
-    <ClCompile Include="Source\System\Framework.cpp" />
     <ClCompile Include="Source\System\WinMain.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="GameXLib\ThirdParty\Sample\Shaders\skinned_mesh.hlsli" />
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="GameXLib\ThirdParty\Sample\Shaders\skinned_mesh_ps.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-    </FxCompile>
-    <FxCompile Include="GameXLib\ThirdParty\Sample\Shaders\skinned_mesh_vs.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
-    </FxCompile>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -187,6 +100,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
