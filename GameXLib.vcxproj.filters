@@ -25,17 +25,23 @@
     <Filter Include="GameXLib\ThirdParty\ImGui\imgui-docking">
       <UniqueIdentifier>{2afce636-e3cf-409a-9e16-690beb18a5b6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameXLib\Shaders">
-      <UniqueIdentifier>{c3213003-7ea0-4b86-b451-c7d4a5cbb41a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameXLib\Runtime">
-      <UniqueIdentifier>{fc6fa613-a306-45b9-a1a4-22cb2f6d84d4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameXLib\ThirdParty\DirectXTex">
       <UniqueIdentifier>{8889ce2a-5bf7-475f-8024-6c10446a2b0e}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\System">
       <UniqueIdentifier>{d64e8e6b-dd3e-405b-a8ab-5b5e8713b89c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\System">
+      <UniqueIdentifier>{e77ec454-7ecd-4b6a-b0cc-5559689037f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameXLib\Editer">
+      <UniqueIdentifier>{f017d90c-2f4a-43cf-b4a0-f35c4ac90acf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameXLib\Misc">
+      <UniqueIdentifier>{80ff708e-6bbf-4b23-9f75-8b55a775ce1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameXLib\Graphics">
+      <UniqueIdentifier>{b41181c0-f8f9-46af-8c2b-c69720aacab2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +72,30 @@
     <ClInclude Include="GameXLib\ThirdParty\DirectXTex\WICTextureLoader11.h">
       <Filter>GameXLib\ThirdParty\DirectXTex</Filter>
     </ClInclude>
+    <ClInclude Include="Source\System\Framework.h">
+      <Filter>ヘッダー ファイル\System</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\Editer\ImGuiManager.h">
+      <Filter>GameXLib\Editer</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\Editer\ImGuiHelper.h">
+      <Filter>GameXLib\Editer</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\Misc\Debug.h">
+      <Filter>GameXLib\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\Misc\HighResolutionTimer.h">
+      <Filter>GameXLib\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\Misc\GameWindow.h">
+      <Filter>GameXLib\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\GameInstance.h">
+      <Filter>ヘッダー ファイル\System</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\Graphics\GraphicsManager.h">
+      <Filter>GameXLib\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui.cpp">
@@ -91,6 +121,21 @@
     </ClCompile>
     <ClCompile Include="Source\System\WinMain.cpp">
       <Filter>ソース ファイル\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Framework.cpp">
+      <Filter>ソース ファイル\System</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\Editer\ImGuiManager.cpp">
+      <Filter>GameXLib\Editer</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\Misc\GameWindow.cpp">
+      <Filter>GameXLib\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\GameInstance.cpp">
+      <Filter>ソース ファイル\System</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\Graphics\GraphicsManager.cpp">
+      <Filter>GameXLib\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -19,6 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameXLib\Editer\ImGuiHelper.h" />
+    <ClInclude Include="GameXLib\Editer\ImGuiManager.h" />
+    <ClInclude Include="GameXLib\Graphics\GraphicsManager.h" />
+    <ClInclude Include="GameXLib\Misc\Debug.h" />
+    <ClInclude Include="GameXLib\Misc\GameWindow.h" />
+    <ClInclude Include="GameXLib\Misc\HighResolutionTimer.h" />
     <ClInclude Include="GameXLib\ThirdParty\DirectXTex\WICTextureLoader11.h" />
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imconfig.h" />
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui.h" />
@@ -28,8 +34,13 @@
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imstb_rectpack.h" />
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imstb_textedit.h" />
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imstb_truetype.h" />
+    <ClInclude Include="Source\System\Framework.h" />
+    <ClInclude Include="Source\System\GameInstance.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GameXLib\Editer\ImGuiManager.cpp" />
+    <ClCompile Include="GameXLib\Graphics\GraphicsManager.cpp" />
+    <ClCompile Include="GameXLib\Misc\GameWindow.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\DirectXTex\WICTextureLoader11.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_draw.cpp" />
@@ -37,6 +48,8 @@
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_impl_win32.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_ja_gryph_ranges.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_widgets.cpp" />
+    <ClCompile Include="Source\System\Framework.cpp" />
+    <ClCompile Include="Source\System\GameInstance.cpp" />
     <ClCompile Include="Source\System\WinMain.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
