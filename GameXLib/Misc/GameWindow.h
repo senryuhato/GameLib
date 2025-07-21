@@ -17,6 +17,15 @@ public:
 	/// @param hwnd ウィンドウハンドル
 	static void DestroyGameWindow(HWND hwnd);
 
+	/// @brief ウィンドウメッセージをディスパッチ。
+    /// falseが返ってきたら、ゲーム終了。
+    /// @return 結果
+	static bool DispatchWindowMessage();
+
+	/// @brief マウスカーソルの表示非表示の設定
+	/// @param isShow true:表示,false:非表示
+	static void SetShowMouseCursor(bool isShow);
+
 private:
 	/// @brief デフォルト設定でウィンドウクラスを登録します。
 	/// 指定されたウィンドウプロシージャを持つ、標準的な設定のウィンドウクラスを登録します。

@@ -59,7 +59,6 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance,_In_opt_  HINSTANCE hPrevInstance,_I
 	HWND hwnd = GameWindow::CreateGameWindow(WINDOW_TITLE,SCREEN_WIDTH,SCREEN_HEIGHT,nShowCmd,WindowProcedure);
 	if(hwnd)
 	{
-
 		// インスタンス生成
 		framework = std::make_unique<Framework>();
 		// ウィンドウ終了処理

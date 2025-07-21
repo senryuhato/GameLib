@@ -43,6 +43,9 @@
     <Filter Include="GameXLib\Graphics">
       <UniqueIdentifier>{b41181c0-f8f9-46af-8c2b-c69720aacab2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameXLib\Input">
+      <UniqueIdentifier>{59eec236-188a-4434-9309-c895663c5a17}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imconfig.h">
@@ -96,6 +99,15 @@
     <ClInclude Include="GameXLib\Graphics\GraphicsManager.h">
       <Filter>GameXLib\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="GameXLib\Input\GamePad.h">
+      <Filter>GameXLib\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\Input\Input.h">
+      <Filter>GameXLib\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="GameXLib\Input\Mouse.h">
+      <Filter>GameXLib\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui.cpp">
@@ -136,6 +148,15 @@
     </ClCompile>
     <ClCompile Include="GameXLib\Graphics\GraphicsManager.cpp">
       <Filter>GameXLib\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\Input\GamePad.cpp">
+      <Filter>GameXLib\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\Input\Input.cpp">
+      <Filter>GameXLib\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="GameXLib\Input\Mouse.cpp">
+      <Filter>GameXLib\Input</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

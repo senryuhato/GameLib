@@ -44,6 +44,31 @@ void GameWindow::DestroyGameWindow(HWND hwnd)
 	UnregisterClass(CLASS_NAME,hInstance);
 }
 
+bool GameWindow::DispatchWindowMessage()
+{
+	MSG msg = {0};
+	//ウィンドウからのメッセージを受け取る。
+	while(PeekMessage(&msg,NULL,0U,0U,PM_REMOVE))
+	{
+		if(msg.message == WM_QUIT) return false;
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+
+	//ウィンドウメッセージが空になった。
+	return true;
+}
+
+void GameWindow::SetShowMouseCursor(bool isShow)
+{
+	// カーソルは、表示カウントが 0 以上の場合にのみ表示
+	int count = ShowCursor(isShow);
+	while(isShow ? count < 0 : count >= 0)
+	{
+		count = ShowCursor(isShow);
+	}
+}
+
 bool GameWindow::RegisterDefaultWindowClass(
 	_In_ HINSTANCE instance,
 	_In_ LPCWSTR applicationName,

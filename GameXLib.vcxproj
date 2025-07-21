@@ -22,6 +22,9 @@
     <ClInclude Include="GameXLib\Editer\ImGuiHelper.h" />
     <ClInclude Include="GameXLib\Editer\ImGuiManager.h" />
     <ClInclude Include="GameXLib\Graphics\GraphicsManager.h" />
+    <ClInclude Include="GameXLib\Input\GamePad.h" />
+    <ClInclude Include="GameXLib\Input\Input.h" />
+    <ClInclude Include="GameXLib\Input\Mouse.h" />
     <ClInclude Include="GameXLib\Misc\Debug.h" />
     <ClInclude Include="GameXLib\Misc\GameWindow.h" />
     <ClInclude Include="GameXLib\Misc\HighResolutionTimer.h" />
@@ -40,6 +43,9 @@
   <ItemGroup>
     <ClCompile Include="GameXLib\Editer\ImGuiManager.cpp" />
     <ClCompile Include="GameXLib\Graphics\GraphicsManager.cpp" />
+    <ClCompile Include="GameXLib\Input\GamePad.cpp" />
+    <ClCompile Include="GameXLib\Input\Input.cpp" />
+    <ClCompile Include="GameXLib\Input\Mouse.cpp" />
     <ClCompile Include="GameXLib\Misc\GameWindow.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\DirectXTex\WICTextureLoader11.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui.cpp" />
