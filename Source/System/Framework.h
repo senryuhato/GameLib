@@ -5,6 +5,7 @@
 #include "..\..\GameXLib\Misc\HighResolutionTimer.h"
 #include <Windows.h>
 #include <memory>
+#include "SceneManager.h"
 
 class Framework
 {
@@ -35,6 +36,8 @@ private:
 	GraphicsManager graphicsManager;
 	// IMGUI生成クラス
 	ImGuiManager imguiManager;
+	// シーン管理クラス
+	SceneManager sceneManager;
 	// 入力処理クラス
 	std::shared_ptr<Input> input = nullptr;
 	// 1フレーム当たりの最大秒数指定

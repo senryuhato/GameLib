@@ -15,6 +15,9 @@ void Framework::Excute(HWND hwnd)
 		// Imgui初期化
 		imguiManager.Initialize(hwnd,graphicsManager.GetDevice(),graphicsManager.GetDeviceContext());
 
+		// シーン初期化
+		sceneManager.Initialize();
+
 		// タイマーリセット
 		highResolutionTimer.Reset();
 
@@ -25,8 +28,13 @@ void Framework::Excute(HWND hwnd)
 			highResolutionTimer.Tick();
 			// ヘッダーにFPSを表示する
 			CalculateFrameStats(hwnd,highResolutionTimer.TimeStamp(),true);
-
+			// 入力更新
 			input->Update();
+			// シーン管理クラス更新処理
+			sceneManager.Update();
+
+			// GUI描画
+			imguiManager.RenderImGuiFrame();
 		}
 		// ImGui終了処理
 		imguiManager.Uninitialize();

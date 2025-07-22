@@ -37,8 +37,11 @@
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imstb_rectpack.h" />
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imstb_textedit.h" />
     <ClInclude Include="GameXLib\ThirdParty\ImGui\imgui-docking\imstb_truetype.h" />
+    <ClInclude Include="Source\MainScene.h" />
     <ClInclude Include="Source\System\Framework.h" />
     <ClInclude Include="Source\System\GameInstance.h" />
+    <ClInclude Include="Source\System\Scene.h" />
+    <ClInclude Include="Source\System\SceneManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameXLib\Editer\ImGuiManager.cpp" />
@@ -54,8 +57,10 @@
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_impl_win32.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_ja_gryph_ranges.cpp" />
     <ClCompile Include="GameXLib\ThirdParty\ImGui\imgui-docking\imgui_widgets.cpp" />
+    <ClCompile Include="Source\MainScene.cpp" />
     <ClCompile Include="Source\System\Framework.cpp" />
     <ClCompile Include="Source\System\GameInstance.cpp" />
+    <ClCompile Include="Source\System\SceneManager.cpp" />
     <ClCompile Include="Source\System\WinMain.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
